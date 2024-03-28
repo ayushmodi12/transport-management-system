@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Selection</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: azure;
+            justify-content: center;
+            /* margin: 5%; */
+            /* text-align: center; */
+            /* border: 2px solid black; */
+        }
+        h1, h2 {
+            justify-content: center;
+            text-align: center;
+            
+            /* border: 2px solid black; */
+
+        }
+        h2 {
+            font-size: large;
+        }
+        h1 {
+            /* border: 0.5px solid #007bff; */
+            margin: 20px;
+            font-style: italic;
+            /* text-decoration: underline; */
+            color: #ff0077;
+        }
+        #bus-layout {
+            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+             /* background-color: #f0f0f0; */
+            /* flex-wrap: wrap; */
+            margin-left: 29%;
+            /* padding-left: 40px; */
+            /* justify-content: center; */
+            /* margin-top: 20px; */
+            /* margin: 30px; */
+            margin-bottom: 10px;
+            background-color: rgb(235, 249, 249);
+            border: 3px solid rgb(0, 157, 255);
+            /* padding: 10px; */
+            padding-left: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            width: 40%;
+            border-radius: 20px;
+        }
+        #bus-layout2 {
+            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+             /* background-color: #f0f0f0; */
+            /* flex-wrap: wrap; */
+            margin-left: 35.5%;
+            /* padding-left: 40px; */
+            /* justify-content: center; */
+            /* margin-top: 20px; */
+            /* margin: 30px; */
+            margin-bottom: 10px;
+            background-color: rgb(235, 249, 249);
+            border: 3px solid rgb(0, 157, 255);
+            /* padding: 10px; */
+            padding-left: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            width: 26%;
+            border-radius: 20px;
+        }
+        .seat {
+            display: inline-block;
+            font-size: smaller;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            /* border: 1px solid black; */
+            border: 1px solid #555;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #fff;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .centseat {
+            display: inline-block;
+            font-size: smaller;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            /* border: 1px solid black; */
+            border: 1px solid #555;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #fff;
+            align-items: center;
+            margin-left: 75px;
+            justify-content: center;
+        }
+        .centseat2 {
+            display: inline-block;
+            font-size: smaller;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            /* border: 1px solid black; */
+            border: 1px solid #555;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #fff;
+            align-items: center;
+            margin-left: 122px;
+            justify-content: center;
+        }
+        .selected {
+            background-color: #ffc107; /* Change color to indicate selected seats */
+        }
+        .booked {
+            background-color: #3e79bd; /* Change color to indicate booked seats */
+        }
+        .gap {
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+            height: 30px;
+            margin: 5px;
+            /* border: 2px solid black; */
+
+        }
+
+        #book-button{
+            margin-left: 570px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #cancel-button{
+            /* margin-left: 550px; */
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff0077;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #book-button:hover,
+        #cancel-button:hover {
+            background-color: #00b34b;
+        }
+
+    </style>
+</head>
+<body>
+    <h1> Choose Your Seat</h1>
+    <h2 id="route-title">Select Your Seat</h2>
+    <h2 id="date-text"></h2>
+    <h2 id="capac"></h2>
+    <div id="bus-layout">
+        <!-- Bus layout will be generated dynamically here -->
+    </div>
+    <div id="bus-layout2">
+        <!-- Bus layout will be generated dynamically here -->
+    </div>
+    <button id="book-button">Book Selected Seat</button>
+    <button id="cancel-button">Cancel Booked Seat</button>
+
+    <script>
+        // Access logged-in user's email (username) from Flask session
+        var logged_in_user_email = "{{ logged_in_user_email }}";
+    </script>
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Function to extract URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Get route and date parameters from URL
+        var route = getUrlParameter('route_id');
+        var date = getUrlParameter('date');
+        c = route[0];
+
+        time = route.slice(4, 12);
+        route = route.slice(14,);
+        // c = route[1];
+
+        // Update HTML elements with route and date information
+        document.getElementById('route-title').textContent = 'Route: ' + route;
+        document.getElementById('date-text').textContent = 'Date: ' + date + ', Time: ' + time;
+        if (c==0){
+            document.getElementById('capac').textContent = "56 Seater Bus";
+            document.getElementById("bus-layout2").remove();
+        } else {
+            document.getElementById('capac').textContent = "29 Seater Bus";
+            document.getElementById("bus-layout").remove();
+        }
+    </script>
+
+</body>
+</html>

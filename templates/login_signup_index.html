@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup</title>
+    <link rel="stylesheet" href="../static/css/login_styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("../static/images/bg.jpg");
+            background-attachment: fixed;
+  background-size: cover;
+        }
+        .IITGNlogo {
+            height:200px;
+            /* justify-content: center; */
+            /* padding: auto; */
+            /* margin-left: 90px; */
+            margin-top: 10px;
+            margin-bottom: 20px;
+            /* margin-right: 60px; */
+            display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* width: 40%; */
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="../static/images/IITGNlogo.png" alt="Italian Trulli" class="IITGNlogo">
+        <h2>Welcome to IIT Gandhinagar Transport Management System</h2>
+        <form method="POST" action="/">
+            <label for="option">Choose an option:</label>
+            <select id="option" name="option">
+                <option value="login">Login</option>
+                <option value="signup">Signup</option>
+            </select>
+            <button type="submit">Continue</button>
+        </form>
+    </div>
+    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 150px; height: auto;">
+
+</body>
+</html>

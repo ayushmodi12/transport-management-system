@@ -1,0 +1,13 @@
+/* Styles for bus layout */
+.seat {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #ffcc00; /* Color for selected seats */
+}

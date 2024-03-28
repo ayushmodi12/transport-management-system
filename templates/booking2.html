@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Page</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Add custom styles -->
+    <style>
+        body {
+            /* background-repeat: no-repeat; */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-bottom: 100px; /* Add space at the bottom for the fixed logo */
+            position: relative; /* Ensure body is positioned relative for absolute positioning */
+            /* background-color: aqua; */
+        }
+        .container {
+            max-width: 500px; /* Adjust the width as needed */
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .map-image {
+            width: 100%; /* Make the map image fill the container */
+            max-height: 400px; /* Adjust the maximum height as needed */
+            object-fit: cover; /* Maintain aspect ratio while covering the container */
+            margin-bottom: 20px; /* Add space below the map image */
+        }
+        .company-logo {
+            position: absolute; /* Position the logo absolutely */
+            bottom: -125px; /* Adjust the distance from the bottom as needed */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Center horizontally */
+            width: 150px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+            z-index: 999; /* Ensure the logo stays on top of other content */
+            opacity: 1; /* Adjust the opacity as needed for a watermark effect */
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container">
+        <!-- First map image -->
+        <img src="../static/images/Screenshot (7).png" alt="Schedule" class="schedule-image">
+
+        <!-- Second map image -->
+        <img src="../static/images/Screenshot (8).png" alt="Map Image" class="map-image">
+
+        <!-- Booking form -->
+        <h1 class="text-3xl font-bold mb-4">Book a Bus</h1>
+        <form method="POST" action="/seat-selection" class="space-y-4">
+            <div>
+                <label for="date" class="block text-sm font-medium text-gray-700">Select date:</label>
+                <input type="text" id="date" name="date" required class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md datepicker" placeholder="Select date">
+                <script>
+                    var picker = new Pikaday({
+                        field: document.getElementById('date'),
+                        format: 'DD-MM-YYYY', // Format for the input value
+                        placeholder: 'Select date',
+                    });
+                </script>
+
+                
+            </div>
+            <div>
+                <label for="time_slot" class="block text-sm font-medium text-gray-700">Select Route & Time Slot:</label>
+                <select id="time_slot" name="time_slot" required class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                    <option value="" disabled selected>Select Route & Time Slot</option>
+                    <optgroup label="56-Seater Bus">
+                    <option value="0(V) 7:00AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 7:00AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN</option>
+                    <option value="0(V) 8:00AM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle">(V) 8:00AM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle </option>
+                    <option value="0(V) 8:45AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 8:45AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN</option>
+                    <option value="0(V) 5:15PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle">(V) 5:15PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle </option>
+                    <option value="0(V) 6:00PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 6:00PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN </option>
+                    <option value="0(V) 6:45PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle">(V) 6:45PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle </option>
+                    <option value="0(V) 7:30PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 7:30PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN </option>
+                    <option value="0(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan">(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                    <option value="0(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN </option>
+                    </optgroup>
+                    <optgroup label="29-Seater Bus">
+                    <option value="1(K) 6:45PM : IITGN―Rakshashakti Circle―Kudasan">(K) 6:45PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                    <option value="1(K) 7:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 7:30PM : Kudasan―Rakshashakti Circle―IITGN </option>
+                    <option value="1(K) 8:00PM : IITGN―Rakshashakti Circle―Kudasan">(K) 8:00PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                    <option value="1(K) 8:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 8:30PM : Kudasan―Rakshashakti Circle―IITGN </option>
+                    <option value="1(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan">(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                    <option value="1(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN </option>
+                    </optgroup>
+                </select>
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Book</button>
+        </form>
+    </div>
+    <!-- Company logo -->
+    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" class="company-logo">
+
+</body>
+</html>

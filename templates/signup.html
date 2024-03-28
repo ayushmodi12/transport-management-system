@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="../static/css/login_styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("../static/images/bg.jpg");
+            background-attachment: fixed;
+  background-size: cover;
+        }
+        .IITGNlogo {
+            height:200px;
+            /* justify-content: center; */
+            /* padding: auto; */
+            /* margin-left: 90px;
+            margin-top: 20px;
+            margin-bottom: 20px; */
+            /* margin-right: 60px; */
+            display: block;
+  margin-left: auto;
+  margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="../static/images/IITGNlogo.png" alt="Italian Trulli" class="IITGNlogo">
+
+        <h2>Signup</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="POST" action="/signup">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Signup</button>
+        </form>
+    </div>
+    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 150px; height: auto;">
+
+</body>
+</html>
