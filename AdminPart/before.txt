@@ -1,0 +1,14 @@
++----------------------+-------------+------------+--------------+---------------+
+|       email_id       |  first_name | last_name  | phone_number | guardian_name |
++----------------------+-------------+------------+--------------+---------------+
+| studentA@iitgn.ac.in | Stu_First_A | Stu_Last_A |  9876543220  |   Gua_Last_A  |
+| studentB@iitgn.ac.in | Stu_First_B | Stu_Last_B |  8765432119  |   Gua_Last_B  |
+| studentC@iitgn.ac.in | Stu_First_C | Stu_Last_C |  7654321108  |   Gua_Last_C  |
+| studentD@iitgn.ac.in | Stu_First_D | Stu_Last_D |  6543210997  |   Gua_Last_D  |
+| studentE@iitgn.ac.in | Stu_First_E | Stu_Last_E |  5432109886  |   Gua_Last_E  |
+| studentF@iitgn.ac.in | Stu_First_F | Stu_Last_F |  4321098775  |   Gua_Last_F  |
+| studentG@iitgn.ac.in | Stu_First_G | Stu_Last_G |  3210987664  |   Gua_Last_G  |
+| studentH@iitgn.ac.in | Stu_First_H | Stu_Last_H |  2109876553  |   Gua_Last_H  |
+| studentI@iitgn.ac.in | Stu_First_I | Stu_Last_I |  1098765442  |   Gua_Last_I  |
+| studentJ@iitgn.ac.in | Stu_First_J | Stu_Last_J |  2345678910  |   Gua_Last_J  |
++----------------------+-------------+------------+--------------+---------------+
