@@ -1,3 +1,23 @@
+{/* <optgroup label="56-Seater Bus">
+                    <option value="0(V) 7:00AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 7:00AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN</option>
+                    <option value="0(V) 8:00AM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle">(V) 8:00AM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle </option>
+                    <option value="0(V) 8:45AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 8:45AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN</option>
+                    <option value="0(V) 5:15PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle">(V) 5:15PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle </option>
+                    <option value="0(V) 6:00PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 6:00PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN </option>
+                    <option value="0(V) 6:45PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle">(V) 6:45PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle </option>
+                    <option value="0(V) 7:30PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 7:30PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN </option>
+                    <option value="0(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan">(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                    <option value="0(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN </option>
+                    </optgroup>
+                    <optgroup label="29-Seater Bus">
+                    <option value="1(K) 6:45PM : IITGN―Rakshashakti Circle―Kudasan">(K) 6:45PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                    <option value="1(K) 7:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 7:30PM : Kudasan―Rakshashakti Circle―IITGN </option>
+                    <option value="1(K) 8:00PM : IITGN―Rakshashakti Circle―Kudasan">(K) 8:00PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                    <option value="1(K) 8:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 8:30PM : Kudasan―Rakshashakti Circle―IITGN </option>
+                    <option value="1(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan">(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                    <option value="1(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN </option>
+                    </optgroup>
+
 document.addEventListener('DOMContentLoaded', function() {
     const busLayout = document.getElementById('bus-layout');
     const busLayout2 = document.getElementById('bus-layout2');
@@ -5,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const cancelButton = document.getElementById('cancel-button');
     const bdisplay = document.getElementById('bDisplay');
     const selectedSeats = new Set();
+    const bookedSeat1 = new Set();
     const timeSlotSelect = document.getElementById('time_slot');
-    var allow = true
 
     const urlParams = new URLSearchParams(window.location.search);
     // const userEmail = session['username'];
@@ -98,15 +118,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function displayBookedSeatNumber(bookedSeat){
+        const route = urlParams.get('route_id');
         if (bookedSeat.length>0){
-            console.log("PLUOUS")
-            allow = false
+            bookedSeat1.add(route);
             const bookedDisplay = document.createElement('div');
             bookedDisplay.textContent = `You have booked seat number: ${bookedSeat[0]}`;
             bdisplay.appendChild(bookedDisplay);
-        } else{
-            console.log("ilgaa")
-            allow = true
+        } else {
+            bookedSeat1.delete(route);
         }
     }
     // Function to mark booked seats on the UI
@@ -274,15 +293,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const row = seatElement.dataset.row;
         const seat = seatElement.dataset.seat;
         const seatKey = `${row}-${seat}`;
+
+        const route = urlParams.get('route_id');
         
         // Check if the seat is already selected
         if (selectedSeats.has(seatKey)) {
             selectedSeats.delete(seatKey);
             seatElement.classList.remove('selected');
         } else {
+            console.log(bookedSeat1)
+                console.log(bookedSeat1.size)
+                console.log(bookedSeat1.has(route))
             // Check if the user has already booked a ticket
-            console.log(allow)
-            if (selectedSeats.size === 0 && allow) {
+            if ((selectedSeats.size === 0) && (!bookedSeat1.has(route))) {
+                // console.log(bookedSeat1)
+                // console.log(bookedSeat1.size)
+                // console.log(bookedSeat1.has(route))
                 if (!seatElement.classList.contains('booked')) { // Check if the seat is not booked
                     selectedSeats.add(seatKey);
                     seatElement.classList.add('selected');
@@ -401,7 +427,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Update UI to mark cancelled seat as available
                 // You may need additional logic here to find the seat number associated with the user's booking
             } else {
-                console.log(response)
                 throw new Error('Failed to cancel booking');
             }
         })
@@ -423,21 +448,16 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error cancelling booking:', error.message);
-            console.log('Error cancelling booking:', error.message);
             // Optionally, display an error message to the user
         });
     }
 
     cancelButton.addEventListener('click', function() {
-        if (!allow){
-            cancelBooking();
-            fetchBookedSeats();
-            fetchUsersBookedSeat();
-            location.reload();
-            alert("Booking cancelled successfully");
-        } else {
-            alert("You have not booked any seat yet");
-        }
+        cancelBooking();
+        fetchBookedSeats();
+        fetchUsersBookedSeat();
+        location.reload();
+        alert("Booking cancelled successfully");
     });
 
-});
+}); */}
