@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const busLayout2 = document.getElementById('bus-layout2');
     const bookButton = document.getElementById('book-button');
     const cancelButton = document.getElementById('cancel-button');
+    const bdisplay = document.getElementById('bDisplay');
     const selectedSeats = new Set();
     const timeSlotSelect = document.getElementById('time_slot');
 
@@ -64,6 +65,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+
+    function fetchUsersBookedSeat() {
+        const _date = urlParams.get('date');
+        const route = urlParams.get('route_id');
+        const userEmail = logged_in_user_email;
+
+        fetch('/fetch-users-booked-seat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ _date: _date, route: route, userEmail: userEmail})
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Failed to fetch user's booked seat");
+            }
+        })
+        .then(data => {
+            // Process the fetched data (e.g., mark booked seats on the UI)
+            console.log("Your Name")
+            console.log('Booked seats:', data);
+            displayBookedSeatNumber(data.bookedSeats);
+        })
+        .catch(error => {
+            console.error('Error fetching booked seats:', error.message);
+        });
+    }
+
+    function displayBookedSeatNumber(bookedSeat){
+        if (bookedSeat.length>0){
+            const bookedDisplay = document.createElement('div');
+            bookedDisplay.textContent = `You have booked seat number: ${bookedSeat[0]}`;
+            bdisplay.appendChild(bookedDisplay);
+        }
+    }
     // Function to mark booked seats on the UI
     function markBookedSeats(bookedSeats) {
         console.log(bookedSeats)
@@ -136,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Call the fetchBookedSeats function when the page loads
     fetchBookedSeats();
+    fetchUsersBookedSeat();
 
 
     if (capacity==0){
@@ -306,6 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             });
             fetchBookedSeats();
+            fetchUsersBookedSeat();
             // location.reload();
         } else {
             console.log("OOHHH")
@@ -373,6 +414,7 @@ document.addEventListener('DOMContentLoaded', function() {
     cancelButton.addEventListener('click', function() {
         cancelBooking();
         fetchBookedSeats();
+        fetchUsersBookedSeat();
         location.reload();
         alert("Booking cancelled successfully");
     });

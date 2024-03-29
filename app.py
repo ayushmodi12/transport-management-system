@@ -1,11 +1,14 @@
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for
 from flask_mysqldb import MySQL
+from flask_mail import Mail, Message
 from datetime import datetime
 from uuid import uuid4
 import yaml
 
+
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+
 
 db = yaml.full_load(open('db.yaml'))
 
@@ -13,6 +16,15 @@ app.config['MYSQL_HOST'] = db['mysql_host']
 app.config['MYSQL_USER'] = db['mysql_user']
 app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT']= 465
+app.config['MAIL_USERNAME']= 'ayushtmodi@gmail.com'
+app.config['MAIL_PASSWORD']= 'xprz hncd pfwn ttgn'
+app.config['MAIL_USE_TLS']= False
+app.config['MAIL_USE_SSL']= True
+
+mail = Mail(app)
 
 mysql = MySQL(app)
 
@@ -127,6 +139,8 @@ def book_seats():
     # licence_plate_number = data.get('licencePlateNumber')
     date = data.get('_date')
     route = data.get('route')
+    c = route[0]
+    
     route = route[1:]
 
     # if not selected_seat or not licence_plate_number:
@@ -134,9 +148,8 @@ def book_seats():
 
     # user_email = 'exampsfle_email@example.com'
     user_email = data.get('userEmail')
-    c = route[0]
     capacity = 0
-    if (c == 0):
+    if (c == '0'):
         capacity = 56
     else:
         capacity = 29
@@ -155,19 +168,22 @@ def book_seats():
     booking_id = str(uuid4())
 
     # Insert booking details into the database
-    cur = mysql.connection.cursor()
     try:
+        cur = mysql.connection.cursor()
         cur.execute("INSERT INTO Booking (email_id, booking_id, booked_seat, booking_created, capacity, route, _date) VALUES (%s, %s, %s, %s, %s, %s, %s)",
                     (user_email, booking_id, selected_seat, date_time, capacity, route, date, ))
         mysql.connection.commit()
+        cur.close()
+        
+        msg = Message(subject='Booking Confirmed!', sender='ayushtmodi@gmail.com', recipients=[user_email])
+        msg.body = f"Hello, Your Booking has been confirmed. Here are the details: \n\nDate: {date}\nTime and Route: {route}\nBus Details: {capacity}-Seater Bus\nBooked Seat Number: {selected_seat}\n\nThank you!"
+        mail.send(msg)
+        
         return jsonify({'message': 'Booking successful'}), 200
     except Exception as e:
-        mysql.connection.rollback()
         print("ACHA")
         print(e)
         return jsonify({'error': str(e)}), 500
-    finally:
-        cur.close()
 
 
 @app.route('/fetch-booked-seats', methods=['GET', 'POST'])
@@ -176,11 +192,12 @@ def fetch_booked_seats():
         data = request.json
         date = data.get('_date')
         route = data.get('route')
+        c = route[0]
+        
         route = route[1:]
         # user_email = data.get('userEmail')
-        c = route[0]
         capacity = 0
-        if (c == 0):
+        if (c == '0'):
             capacity = 56
         else:
             capacity = 29
@@ -205,11 +222,12 @@ def cancel_booking():
     date = data.get('_date')
     route = data.get('route_id')
     # print(licence_plate_number)
+    c = route[0]
+    
     route = route[1:]
         # user_email = data.get('userEmail')
-    c = route[0]
     capacity = 0
-    if (c == 0):
+    if (c == '0'):
         capacity = 56
     else:
         capacity = 29
@@ -232,11 +250,44 @@ def cancel_booking():
         print("POPP2")
         mysql.connection.commit()
         cur.close()
+        
+        msg = Message(subject='Booking Cancelled', sender='ayushtmodi@gmail.com', recipients=[user_email])
+        msg.body = f"Hello, Your Booking for the bus on Date: {date}, Time and Route: {route}, {capacity}-Seater, and Seat Number: {canceled_seat[0][0]} has been cancelled succesfully."
+        mail.send(msg)
+        
         return jsonify({'canceledSeat': canceled_seat}), 200
     except Exception as e:
         print("LOCHA")
         return jsonify({'error': str(e)}), 500
 
+
+@app.route('/fetch-users-booked-seat', methods=['GET', 'POST'])
+def fetch_users_booked_seat():
+    if request.method == 'POST':    
+        data = request.json
+        date = data.get('_date')
+        route = data.get('route')
+        c = route[0]
+        
+        route = route[1:]
+        user_email = data.get('userEmail')
+        capacity = 0
+        if (c == '0'):
+            capacity = 56
+        else:
+            capacity = 29
+
+        # cursor = db.cursor(dictionary=True)
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT booked_seat FROM Booking WHERE _date = %s AND route = %s AND capacity = %s AND email_id = %s", (date, route, capacity, user_email))  # Adjust this query as per your database schema
+        booked_seats = cur.fetchall()
+        print("WORKKKKKKK")
+        print(booked_seats)
+        cur.close()
+        return jsonify({'bookedSeats': booked_seats})
+    else:
+        print("SEDDD")
+        return jsonify({'error': 'Method not allowed'}), 405
 
 @app.route('/seat-selection', methods=['GET', 'POST'])
 def seat_selection():
