@@ -100,9 +100,9 @@ def execute_and_display():
     query = request.form['sql_query']
     table_name = parse_query(query).pop()
     table_fields = get_field_names(conn, table_name)
-    before_path = r'transport-management-system\AdminPart\tmp\before.txt'
-    after_path = r'transport-management-system\AdminPart\tmp\after.txt'
-    diff_path = r'transport-management-system\AdminPart\templates\diff.html'
+    before_path = r'AdminPart\tmp\before.txt'
+    after_path = r'AdminPart\tmp\after.txt'
+    diff_path = r'AdminPart\templates\diff.html'
     before_query = after_query = f"SELECT * FROM {table_name}"
     before_result = execute_query(conn, before_query)
     if (before_result[0] == -1):

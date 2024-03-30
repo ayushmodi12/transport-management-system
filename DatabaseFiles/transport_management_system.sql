@@ -76,6 +76,7 @@ CREATE table if not exists Users
 (
   email  varchar(100)  NOT NULL,
   password  varchar(100)  NOT NULL UNIQUE,
+  admin_priveleges enum ('yes', 'no') not null default 'no',
   data_ JSON, -- here data_ becomes the user defined data type
   user_img blob,
   primary key (email)
@@ -494,8 +495,10 @@ VALUES
 
 
 -- Insert entries from Driver table
+INSERT INTO Users (email, password, admin_priveleges, data_, user_img) VALUES
+('kumaramit@iitgn.ac.in', MD5('Amit@123'), 'yes', '{"first_name": "Amit", "last_name": "Kumar", "driver_license_number": "1234567890123456"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"));
+
 INSERT INTO Users (email, password, data_, user_img) VALUES
-('kumaramit@iitgn.ac.in', MD5('Amit@123'), '{"first_name": "Amit", "last_name": "Kumar", "driver_license_number": "1234567890123456"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
 ('john_doe@iitgn.ac.in', MD5('John@123'), '{"first_name": "John", "last_name": "Doe", "driver_license_number": "2345678901234567"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
 ('max_verstappen@iitgn.ac.in', MD5('Alice@123'), '{"first_name": "Max", "last_name": "Verstappen", "driver_license_number": "3456789012345678"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
 ('koramassey@iitgn.ac.in', MD5('Michael@123'), '{"first_name": "Kora", "last_name": "Massey", "driver_license_number": "4567890123456789"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),

@@ -17,13 +17,14 @@
     </style>
 </head>
 <body>
-    <h1>SQL Query Executor</h1>
+    <h1>ADMIN TERMINAL</h1>
     <form action="/execute_query" method="post">
         <label for="sql_query">Enter your SQL query:</label><br>
         <textarea id="sql_query" name="sql_query" rows="5" cols="50" placeholder="Enter your query here..."></textarea><br><br>
         <input type="submit" value="Execute Query">
     </form>
     <p>To modify the admins, please write the following query:</p>
-    <p>INSERT INTO admins (username, password) VALUES ('new_admin', 'new_password');</p>
+    <p>Provide access: UPDATE Users SET admin_priveleges='yes' WHERE email=</p>
+    <p>Remove access: UPDATE Users SET admin_priveleges='no' WHERE email=</p>
 </body>
 </html>
