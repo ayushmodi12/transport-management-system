@@ -7,6 +7,8 @@
 ![Website Design](https://github.com/ayushmodi12/transport-management-system/assets/119656326/1b986b70-9f1b-4d21-a72c-ca8001444bf7)
 
 ## Running the project
+Cuurently this project is supported in Windows devices only.  
+
 ## Setting up the Server
 First change the wroking directory to `transport-management-system`.
 
