@@ -10,7 +10,8 @@
 Cuurently this project is supported in Windows devices only.  
 
 ## Setting up the Server
-First change the wroking directory to `transport-management-system`.
+First change the wroking directory to `transport-management-system` after cloning this repository.  
+``` git clone https://github.com/ayushmodi12/transport-management-system.git```
 
 ### Installing all the dependencies
 Please run the following command with the cloned repository as the current working directory to install all the required modules and packages.
