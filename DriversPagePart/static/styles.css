@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #beb9b953;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 275px;
+    margin-top: 20px;
+    /* margin-bottom: 20px; */
+}
+
+p {
+    color: #666;
+}
+
+.attribute{
+    margin-left: 660px;
+}
+
+.bank-item {
+    margin-left: 850px;
+}
+
+.value {
+    position: relative;
+    margin-left: 850px;
+}

@@ -3,3 +3,5 @@ flask-mysqldb
 sqlparse
 prettytable
 mysql-connector-python
+sqlalchemy
+pymysql
