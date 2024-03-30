@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <title>IITGN Transportation Portal</title>
+</head>
+
+<body>
+    <h1>Driver Details</h1>
+    <img src="/static/driver3.jpg" />
+    <p><strong class="attribute">Name:</strong> <span class="value">{{name}}</span></p>
+    <p><strong class="attribute">Phone Number:</strong> <span class="value">{{number}}</span></p>
+    <p><strong class="attribute">Email ID:</strong> <span class="value">{{email_id}}</span></p>
+    <p><strong class="attribute">Joining Date:</strong> <span class="value">{{join}}</span></p>
+    <p><strong class="attribute">License Number:</strong> <span class="value">{{license}}</span></p>
+    <p><strong class="attribute">Vehicles Driven:</strong> <span class="value">{{vehicles}}</span></p>
+    <p><strong class="attribute">Bank Details:</strong>
+        <span class="bank-item">{{acc}}</span>
+        <span class="bank-item">{{ifsc}}</span>
+        <span class="bank-item">{{branch}}</span>
+    </p>
+</body>
+
+</html>

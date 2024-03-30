@@ -5,3 +5,4 @@ prettytable
 mysql-connector-python
 sqlalchemy
 pymysql
+flask-mail
