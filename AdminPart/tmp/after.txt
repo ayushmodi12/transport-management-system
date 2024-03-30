@@ -1,0 +1,14 @@
++----------------------+----------------------+
+| license_plate_number |       email_id       |
++----------------------+----------------------+
+|      RJ07MN0245      | studentA@iitgn.ac.in |
+|      RJ07MN0245      | studentB@iitgn.ac.in |
+|      RJ07MN0245      | studentC@iitgn.ac.in |
+|      RJ07MN0245      | studentD@iitgn.ac.in |
+|      RJ07MN0245      | studentE@iitgn.ac.in |
+|      RJ07MN0245      | studentF@iitgn.ac.in |
+|      RJ07MN0245      | studentG@iitgn.ac.in |
+|      GJ09QT6969      | studentH@iitgn.ac.in |
+|      GJ09QT6969      | studentI@iitgn.ac.in |
+|      GJ09QT6969      | studentJ@iitgn.ac.in |
++----------------------+----------------------+

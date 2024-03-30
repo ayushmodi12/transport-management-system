@@ -27,10 +27,10 @@ def execute_query(conn, query):
         cursor.execute(query)
         result = cursor.fetchall()
         conn.commit()
-        return result
+        return 0,result
     except mysql.connector.Error as e:
         print(f"Error executing query: {e}")
-        return None
+        return -1,e
 
 def parse_query(query):
     try:
@@ -49,7 +49,7 @@ def parse_query(query):
         return table_names
     except Exception as e:
         print(f"Error parsing query: {e}")
-        return -1
+        return None
     
 # Function to get field names of a table
 def get_field_names(conn, table_name):
@@ -100,19 +100,27 @@ def execute_and_display():
     query = request.form['sql_query']
     table_name = parse_query(query).pop()
     table_fields = get_field_names(conn, table_name)
-    before_path = 'before.txt'
-    after_path = 'after.txt'
-    diff_path = './templates/diff.html'
+    before_path = r'transport-management-system\AdminPart\tmp\before.txt'
+    after_path = r'transport-management-system\AdminPart\tmp\after.txt'
+    diff_path = r'transport-management-system\AdminPart\templates\diff.html'
     before_query = after_query = f"SELECT * FROM {table_name}"
     before_result = execute_query(conn, before_query)
-    makeASCII(before_result, table_fields, before_path)
+    if (before_result[0] == -1):
+        return "ERROR IN EXECUTING QUERY TO FETCH STARTNG STATE OF THE TABLE --> " + str(before_result[1])
+    
+    makeASCII(before_result[1], table_fields, before_path)
     res = execute_query(conn, query)
-    if (res == -1):
-        return "ERRRO IN EXECUTING QUERY"
+
+    if (res[0] == -1):
+        return "ERROR IN EXECUTING QUERY --> " + str(res[1])
     
     after_result = execute_query(conn, after_query)
-    makeASCII(after_result, table_fields, after_path)
+    if (after_result[0] == -1):
+        return "ERROR IN EXECUTING QUERY TO FETCH CHANGED STATE OF THE TABLE --> " + str(after_result[1])
+    
+    makeASCII(after_result[1], table_fields, after_path)
     table_diff(before_path, after_path, diff_path)
+    conn.close()
     return render_template('diff.html')
         # Diff path now stores the path of the file containing the diffte query."
 
