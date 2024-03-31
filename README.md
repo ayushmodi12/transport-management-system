@@ -21,7 +21,7 @@ pip install -r requirements.txt
 
 ### Create Database & Launch Web Server
 Please run the `setup.py` to instantiate the database and launch the web server.  
-Make sure that you don't have the database before running `setup.py`. Else directly launch the web server by executing `transport_management_system.py`. 
+Make sure that you don't have the database before running `setup.py`. Else directly launch the web server by executing `tms.py`. 
 
 ## Setting up the Client
 ### Add DNS Entry
