@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Table</title>
+    <!-- Add CSS styles if needed -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .alert{
+            margin-top: 20px;
+            font-size: larger;
+        }
+    </style>
+</head>
+<body>
+    {% if error %}
+        <div class="alert" role="alert">
+            There is an Error in the query: <br><br>{{ error }}
+        <br>
+        <br>
+            No changes in the database:
+        </div>
+
+    {% endif %}
+    
+    {% if newTableName %}
+
+        <h1>New Table: {{ newTableName }}</h1>
+
+    {% else %} 
+
+        <h1>New Table: {{ table_name }}</h1>
+
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                {% for column in columns %}
+                <th>{{ column[0] }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in values %}
+            <tr>
+                {% for value in row %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if op != 'view' %}
+    <h1>Old Table: {{ table_name }}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                {% for column in oldcolumns2 %}
+                <th>{{ column[0] }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in oldvalues %}
+            <tr>
+                {% for value in row %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+
+</body>
+
+</html>

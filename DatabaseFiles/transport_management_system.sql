@@ -136,23 +136,24 @@ CREATE table if not exists TransportationLog
 
 CREATE table if not exists Booking
 (
-  license_plate_number  varchar(16)  NOT NULL,
   email_id varchar(50) NOT NULL,
   booking_id varchar(50) NOT NULL,
   booked_seat varchar(50) NOT NULL,
   booking_created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  route_id varchar(20)  NOT NULL,
+  capacity varchar(20) NOT NULL,
+  route varchar(100)  NOT NULL,
+  _date varchar(20)  NOT NULL,
   primary key (booking_id)
 );
 
 
-CREATE table if not exists Seats
-(
-  bus_license_plate_number  varchar(16)  NOT NULL,
-  seats_booked varchar(16)  DEFAULT NULL,
-  booking_created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  primary key (bus_license_plate_number, booking_created)
-);
+-- CREATE table if not exists Seats
+-- (
+--   bus_license_plate_number  varchar(16)  NOT NULL,
+--   seats_booked varchar(16)  DEFAULT NULL,
+--   booking_created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--   primary key (bus_license_plate_number, booking_created)
+-- );
 
 CREATE table if not exists ShopVehicles
 (
@@ -302,15 +303,15 @@ INSERT INTO Vehicle VALUES
 ('RJ07MN0245', 35, 'Max', 'Verstappen', 'Bus'),
 ('GJ09QT6969', 35, 'Lewis', 'Hamilton', 'Bus');
 
-INSERT INTO Booking(license_plate_number, email_id, booking_id, booked_seat, booking_created, route_id) VALUES
-('RJ07MN0245','studentA@iitgn.ac.in', '001', '1', '2021-10-16 22:15:13', '1'),
-('RJ07MN0245','studentB@iitgn.ac.in', '002', '5', '2021-10-17 23:15:13', '4'),
-('RJ07MN0245','studentD@iitgn.ac.in', '003', '9', '2021-10-19 05:15:13', '2');
+-- INSERT INTO Booking(license_plate_number, email_id, booking_id, booked_seat, booking_created, route_id) VALUES
+-- ('RJ07MN0245','studentA@iitgn.ac.in', '001', '1', '2021-10-16 22:15:13', '1'),
+-- ('RJ07MN0245','studentB@iitgn.ac.in', '002', '5', '2021-10-17 23:15:13', '4'),
+-- ('RJ07MN0245','studentD@iitgn.ac.in', '003', '9', '2021-10-19 05:15:13', '2');
 
-INSERT INTO Seats(bus_license_plate_number, seats_booked, booking_created) VALUES
-('GJ09QR6789', NULL, '2021-10-17 20:15:13'),
-('RJ07MN0245', '3', '2021-10-17 23:15:13'),
-('GJ09QT6969', '2,9,6,5', '2021-10-17 23:15:13');
+-- INSERT INTO Seats(bus_license_plate_number, seats_booked, booking_created) VALUES
+-- ('GJ09QR6789', NULL, '2021-10-17 20:15:13'),
+-- ('RJ07MN0245', '3', '2021-10-17 23:15:13'),
+-- ('GJ09QT6969', '2,9,6,5', '2021-10-17 23:15:13');
 
 
 INSERT INTO Students (email_id, first_name, last_name, phone_number, guardian_name)

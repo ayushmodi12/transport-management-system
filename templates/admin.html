@@ -18,13 +18,29 @@
 </head>
 <body>
     <h1>ADMIN TERMINAL</h1>
-    <form action="/execute_query" method="post">
+    <!-- <form action="/execute_query" method="post">
         <label for="sql_query">Enter your SQL query:</label><br>
         <textarea id="sql_query" name="sql_query" rows="5" cols="50" placeholder="Enter your query here..."></textarea><br><br>
         <input type="submit" value="Execute Query">
+    </form> -->
+
+    <p>Choose the operation to be performed:</p>
+    <form action="/operation" method="post">
+        <button type="submit" name="operation" value="view">View Tables</button>
+        <button type="submit" name="operation" value="insert">Insert New Values in Tables</button>
+        <button type="submit" name="operation" value="update">Update Values in Tables</button>
+        <button type="submit" name="operation" value="delete">Delete from Tables</button>
+        <button type="submit" name="operation" value="rename">Rename Tables</button>
     </form>
-    <p>To modify the admins, please write the following query:</p>
+
+    <br>
+
+    <form action="/custom-query" method="get">
+        <button type="submit" name="operation" value="write">Write Custom Query</button>
+    </form>
+
+    <!-- <p>To modify the admins, please write the following query:</p>
     <p>Provide access: UPDATE Users SET admin_priveleges='yes' WHERE email=</p>
-    <p>Remove access: UPDATE Users SET admin_priveleges='no' WHERE email=</p>
+    <p>Remove access: UPDATE Users SET admin_priveleges='no' WHERE email=</p> -->
 </body>
 </html>

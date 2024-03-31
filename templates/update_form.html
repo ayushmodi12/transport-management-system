@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Form</title>
+</head>
+<body>
+    <h1>Update Values in Table: {{ table_name }}</h1>
+    <h4> Fill the fields that you want to update. Leave the others empty.</h4>
+    <form action="/update-values2" method="post">
+        {% for column in columns %}
+        <div>
+            <label for="{{ column[0] }}">{{ column[0] }}:</label>
+            <input type="text" id="{{ column[0] }}" name="{{ column[0] }}">
+        </div>
+        {% endfor %}
+        <div>
+            <label for="whereCondition">WHERE condition:</label>
+            <input type="text" id="whereCondition" name="whereCondition">
+        </div>
+
+        <br>
+
+        <input type="hidden" name="tableName" value="{{ table_name }}">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

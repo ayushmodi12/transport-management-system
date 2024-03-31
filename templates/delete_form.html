@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Form</title>
+</head>
+<body>
+    <h1>Delete Values in Table: {{ table_name }}</h1>
+    <form action="/delete-values2" method="post">
+        <div>
+            <label for="whereCondition">WHERE condition:</label>
+            <input type="text" id="whereCondition" name="whereCondition">
+        </div>
+
+        <input type="hidden" name="tableName" value="{{ table_name }}">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

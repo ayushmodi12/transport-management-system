@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Form</title>
+</head>
+<body>
+    <h1>Rename Table: {{ table_name }}</h1>
+
+    <h4> Fill the fields that you want to rename. Leave the others empty.</h4>
+
+    <form action="/rename-table2" method="post">
+        <div>
+            <label for="newTableName">New Table Name:</label>
+            <input type="text" id="newTableName" name="newTableName">
+        </div>
+
+        <br>
+        
+
+        {% for column in columns %}
+        <div>
+            <label for="{{ column[0] }}">New column name for {{ column[0] }}:</label>
+            <input type="text" id="{{ column[0] }}" name="{{ column[0] }}">
+        </div>
+        {% endfor %}
+
+        <br>
+
+
+        <input type="hidden" name="tableName" value="{{ table_name }}">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

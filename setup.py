@@ -30,9 +30,9 @@ if not os.path.exists(sql_file):
     print(f"Error: The SQL file '{sql_file}' does not exist.")
     exit(1)
 
-# # Execute SQL commands from the file
-# if not execute_sql_file(host, user, password, sql_file):
-#     exit(1)
+# Execute SQL commands from the file
+if not execute_sql_file(host, user, password, sql_file):
+    exit(1)
 print("<<<<<<<<<<<<<<<<<<<<<<< DATABASE SETUP COMPLETE >>>>>>>>>>>>>>>>>>>>>")
 
 # Start the Flask application

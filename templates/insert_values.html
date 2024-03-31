@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Values into Table</title>
+</head>
+<body>
+    <h1>Insert Values into Table</h1>
+    <form action="/insert-values" method="post">
+        <label for="table-name">Select Table:</label>
+        <select id="table-name" name="table_name">
+            {% for table_name in table_names %}
+            <option value="{{ table_name[0] }}">{{ table_name[0] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        {% for column in columns %}
+        <label for="{{ column[0] }}">{{ column[0] }}:</label>
+        <input type="text" id="{{ column }}" name="{{ column }}" required>
+        <br><br>
+        {% endfor %}
+        <input type="submit" value="Insert">
+    </form>
+</body>
+</html>

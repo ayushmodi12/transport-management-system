@@ -18,8 +18,11 @@ app.secret_key = 'your_secret_key'
 
 def driver_details():
     email = session.get('emailID')
+    print("HI")
+    print(email)
     with engine.connect() as conn:
         query = text("SELECT * FROM driver WHERE email_id = :email")
+        # print(email)
         result = conn.execute(query, {'email': email})
         drivers = result.fetchall()
             
@@ -28,6 +31,7 @@ def driver_details():
             req_driver = dict(zip(columns, drivers[0]))
             return req_driver
         else:
+            print("NIMBA")
             return "No drivers found."
 
 
@@ -104,12 +108,12 @@ def login():
         cur.close()
         if (user):
             if user[2] == 'no':
-                if driver:
-                    flash('Welcome Driver', 'success')
-                    return redirect(url_for('driver'))
                 # User found, redirect to dashboard or profile page
                 flash('Login Successful', 'success')
                 session['emailID'] = username
+                if driver:
+                    flash('Welcome Driver', 'success')
+                    return redirect(url_for('driver'))
                 return redirect(url_for('landing'))  # Replace 'dashboard' with your dashboard route
             elif user[2] == 'yes':
                 flash('Welcome Admin', 'success')
@@ -132,7 +136,7 @@ def signup():
         cur = mysql.connection.cursor()
 
         # Execute query
-        cur.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (username, password))
+        cur.execute("INSERT INTO users (email, password) VALUES (%s, MD5(%s))", (username, password))
 
         # Commit to database
         mysql.connection.commit()
@@ -361,89 +365,649 @@ def seat_selection():
 def admin():
     return render_template('admin.html')
 
+@app.route('/operation', methods=['POST'])
+def handle_operation():
+    operation = request.form['operation']
+    
+    # Render HTML form for inserting values into tables
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='transportmanagement'")  # Adjust this query as per your database schema
+    table_names = cur.fetchall()
+    print("WORKKKKKKK")
+    print(table_names)
+    cur.close()
+    # return jsonify({'table_names': table_names})
+    # print(j)
+    return render_template('view_tables.html', table_names=table_names, op = operation)
+    
+    if operation == 'view':
+        # Redirect to view tables page or perform necessary action
+        return redirect('/view-tables')
+    elif operation == 'insert':
+        # Redirect to insert values page or perform necessary action
+        return redirect('/insert-values')
+    elif operation == 'update':
+        # Redirect to update values page or perform necessary action
+        return redirect('/update-values')
+    elif operation == 'delete':
+        # Redirect to delete from tables page or perform necessary action
+        return redirect('/delete-from-tables')
+    elif operation == 'write':
+        # Redirect to write custom query page or perform necessary action
+        return redirect('/write-custom-query')
+    else:
+        # Handle invalid operation
+        return "Invalid operation"
+    
+@app.route('/view-tables', methods=['GET', 'POST'])
+def view_tables():
+    print("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
+    if request.method == 'POST':
+        table_name = request.form['tableName']
+        # Query the database to fetch the data for the selected table
+        # You can use your database access methods here
+        # Example: data = query_database(table_name)
+        # Pass the data to the template and render it
+        cur = mysql.connection.cursor()
+        print("A")
+        cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        columns = cur.fetchall()
+        # print("WORKKKKKKK")
+        # print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTINGGGGGGGGGOAOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+        print(columns)
+        print("B")
+        # cur.close()
+        # cur = mysql.connection.cursor()
+        cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        values = cur.fetchall()
+        print("WORKKKKKKK")
+        print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTINGGGGGGGGGOAOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+        print(values)
+        
+        cur.execute(f"select ORDINAL_POSITION from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        ORDINAL_POSITION = cur.fetchall()
+        
+        combined = list(zip(columns, ORDINAL_POSITION))
+
+        # Sort the combined list based on the values in ORDINAL_POSITION
+        sorted_combined = sorted(combined, key=lambda x: x[1])
+
+        # Extract the sorted columns2 from the sorted_combined list
+        columns = [item[0] for item in sorted_combined]
+        
+        oldcolumns2=columns
+        
+        cur.close()
+        return render_template('display_table.html', columns = columns, oldcolumns2=oldcolumns2, values=values, table_name = table_name, op='view')
+    # else:
+    #     # Render HTML form for inserting values into tables
+    #     cur = mysql.connection.cursor()
+    #     cur.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='transportmanagement'")  # Adjust this query as per your database schema
+    #     table_names = cur.fetchall()
+    #     print("WORKKKKKKK")
+    #     print(table_names)
+    #     cur.close()
+    #     # return jsonify({'table_names': table_names})
+    #     # print(j)
+    #     return render_template('view_tables.html', table_names=table_names, op = 'view')
+
+
+@app.route('/insert-values', methods=['GET', 'POST'])
+def insert_values():
+    if request.method == 'POST':
+        table_name = request.form['tableName']
+        cur = mysql.connection.cursor()
+        print("A")
+        cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        columns = cur.fetchall()
+        
+        cur.execute(f"select ORDINAL_POSITION from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        ORDINAL_POSITION = cur.fetchall()
+        
+        combined = list(zip(columns, ORDINAL_POSITION))
+
+        # Sort the combined list based on the values in ORDINAL_POSITION
+        sorted_combined = sorted(combined, key=lambda x: x[1])
+
+        # Extract the sorted columns from the sorted_combined list
+        columns = [item[0] for item in sorted_combined]
+        
+        return render_template('insert_form.html', columns=columns, table_name=table_name)
+        
+        
+        # values = {column: request.form[column] for column in columns}
+        # # Construct INSERT query
+        # query = f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES ({', '.join(['%s'] * len(columns))})"
+        # # Execute INSERT query
+        # cur = mysql.connection.cursor()
+        # cur.execute(query, tuple(values.values()))
+        # mysql.connection.commit()
+        # cur.close()
+        # # Fetch updated table data
+        # cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        # values = cur.fetchall()
+        # print("WORKKKKKKK")
+        # print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTINGGGGGGGGGOAOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+        # print(values)
+        # return render_template('display_table.html', columns=columns, values=values)
+    # else:
+        
+    #     # Render HTML form for inserting values into tables
+    #     cur = mysql.connection.cursor()
+    #     cur.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='transportmanagement'")  # Adjust this query as per your database schema
+    #     table_names = cur.fetchall()
+    #     print("WORKKKKKKK")
+    #     print(table_names)
+    #     cur.close()
+    #     # return jsonify({'table_names': table_names})
+    #     # print(j)
+    #     return render_template('view_tables.html', table_names=table_names, op = 'insert')
+        
+    #     cur = mysql.connection.cursor()
+    #     cur.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='transportmanagement'")  # Adjust this query as per your database schema
+    #     table_names = cur.fetchall()
+    #     print("WORKKKKKKK")
+    #     print(table_names)
+    #     cur.close()
+    #     return render_template('insert_values.html', table_names=table_names)
+
+@app.route('/submit-values', methods=['POST'])
+def submit_values():
+    print("00000000000000000000000000000000000000000000000")
+    if request.method == 'POST':
+        table_name = request.form['tableName']
+        
+        cur = mysql.connection.cursor()
+        cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        oldvalues = cur.fetchall()
+        cur.close()
+        
+        
+        cur = mysql.connection.cursor()
+        print("00000000000000000000000000000000000000000000000")
+        print(table_name)
+        print("1111111111111111111111111111111111111111111111111")
+        values = {key: request.form[key] for key in request.form if key != 'tableName'}
+        
+        # Prepare the SQL query for insertion
+        placeholders = ', '.join(['%s'] * len(values))
+        columns = ', '.join(values.keys())
+        print(columns)
+        print(values)
+        u = tuple(values.values())
+        print(u)
+        sql = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
+        print(sql)
+        error = None
+        try:
+            cur.execute(sql, u)
+            mysql.connection.commit()
+            print("HORAAHH")
+            flash('Values successfully inserted into the database!', 'success')
+        except Exception as e:
+            mysql.connection.rollback()
+            print("NAHHHHHHHHHHH")
+            print(str(e))
+            error = str(e)
+            flash(f'Error inserting values: {str(e)}', 'error')
+        # Execute the query
+        cur.close()
+        
+        
+        print("A")
+        
+        cur = mysql.connection.cursor()
+        
+        cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        columns2 = cur.fetchall()
+        
+        cur.execute(f"select ORDINAL_POSITION from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        ORDINAL_POSITION = cur.fetchall()
+        
+        combined = list(zip(columns2, ORDINAL_POSITION))
+
+        # Sort the combined list based on the values in ORDINAL_POSITION
+        sorted_combined = sorted(combined, key=lambda x: x[1])
+
+        # Extract the sorted columns2 from the sorted_combined list
+        columns2 = [item[0] for item in sorted_combined]
+        
+        cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        values = cur.fetchall()
+        print("WORKKKKKKK")
+        print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTINGGGGGGGGGOAOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+        print(values)
+        # try:
+        #     cur.execute(sql, u)
+        #     mysql.connection.commit()
+        #     print("HORAAHH")
+        #     flash('Values successfully inserted into the database!', 'success')
+        # except Exception as e:
+        #     mysql.connection.rollback()
+        #     print("NAHHHHHHHHHHH")
+        #     print(str(e))
+        #     flash(f'Error inserting values: {str(e)}', 'error')
+        cur.close()
+        
+        oldcolumns2=columns2,
+        
+        # Redirect to the view-tables page to display the updated table
+        return render_template('display_table.html', table_name=table_name, columns=columns2, oldcolumns2=oldcolumns2, values=values, oldvalues=oldvalues, error = error, op='insert')
+
+@app.route('/update-values', methods=['GET', 'POST'])
+def update_values():
+    if request.method == 'POST':
+        table_name = request.form['tableName']
+        cur = mysql.connection.cursor()
+        print("A")
+        cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        columns = cur.fetchall()
+        
+        cur.execute(f"select ORDINAL_POSITION from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        ORDINAL_POSITION = cur.fetchall()
+        
+        combined = list(zip(columns, ORDINAL_POSITION))
+
+        # Sort the combined list based on the values in ORDINAL_POSITION
+        sorted_combined = sorted(combined, key=lambda x: x[1])
+
+        # Extract the sorted columns from the sorted_combined list
+        columns = [item[0] for item in sorted_combined]
+        
+        return render_template('update_form.html', columns=columns, table_name=table_name)
+    
+@app.route('/update-values2', methods=['GET', 'POST'])
+def update_values2():
+    if request.method == 'POST':
+        table_name = request.form['tableName']
+        # columns = request.form.getlist('columns')
+        # values = request.form.getlist('values')
+        cur = mysql.connection.cursor()
+        cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        oldvalues = cur.fetchall()
+        cur.close()
+        
+        values = {key: request.form[key] for key in request.form if (key != 'tableName' and key != 'whereCondition' and request.form[key]!='')}
+        
+        
+        where_condition = request.form['whereCondition']
+        print(values)
+        print(where_condition)
+        
+        # columns = ', '.join(values.keys())
+        
+        # print(columns)
+        
+
+        # Construct the SET part of the SQL query
+        set_clause = ", ".join([f"{col} = %s" for col in values.keys()])
+        
+        print(set_clause)
+
+        # Construct the UPDATE query
+        sql = f"UPDATE {table_name} SET {set_clause} WHERE {where_condition}"
+        
+        print(sql)
+        
+
+        # Prepare the values for the SET clause
+        set_values = values
+        
+        u = tuple(values.values())
+        print(u)
+        
+        print(set_values)
+        error = None
+        try:
+            # Execute the UPDATE query
+            cur = mysql.connection.cursor()
+            cur.execute(sql, u)
+            mysql.connection.commit()
+
+            flash('Update operation successful', 'success')
+            # return render_template('display_table.html', table_name=table_name, columns=columns2, values=values, oldvalues=oldvalues, error = error)
+        
+            # return redirect(url_for('some_route'))  # Redirect to some route after successful update
+
+        except Exception as e:
+            mysql.connection.rollback()
+            error = str(e)
+            flash(f'Error updating values: {str(e)}', 'error')
+            # return redirect(url_for('some_route'))  # Redirect to some route after error
+        
+        cur = mysql.connection.cursor()
+        
+        cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        columns2 = cur.fetchall()
+        
+        cur.execute(f"select ORDINAL_POSITION from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        ORDINAL_POSITION = cur.fetchall()
+        
+        combined = list(zip(columns2, ORDINAL_POSITION))
+
+        # Sort the combined list based on the values in ORDINAL_POSITION
+        sorted_combined = sorted(combined, key=lambda x: x[1])
+
+        # Extract the sorted columns2 from the sorted_combined list
+        columns2 = [item[0] for item in sorted_combined]
+        
+        cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        values = cur.fetchall()
+        
+        oldcolumns2=columns2
+
+
+        return render_template('display_table.html', table_name=table_name, columns=columns2, oldcolumns2=oldcolumns2, values=values, oldvalues=oldvalues, error = error, op='update')
+
+
+        table_name = request.form['tableName']
+        cur=mysql.connect.cursor()
+        values = {key: request.form[key] for key in request.form if (key != 'tableName' and key != 'whereCondition' and request.form[key] != '')}
+        # Prepare the SQL query for insertion
+        placeholders = ', '.join(['%s'] * len(values))
+        columns = ', '.join(values.keys())
+        print(columns)
+        print(values)
+        u = tuple(values.values())
+        print(u)
+        
+        set_clause = ", ".join([f"{column} = %s" for column in values.keys()])
+        print(set_clause)
+
+        # Construct the UPDATE query with the SET clause and optional WHERE condition
+        sql = f"UPDATE {table_name} SET {set_clause}"
+        print(sql)
+
+        # If a WHERE condition is provided, append it to the query
+        if request.form['whereCondition']!='':
+            sql += f" WHERE {request.form['whereCondition']}"
+
+        print(sql)
+        error = None
+        try:
+            cur.execute(sql, u)
+            mysql.connection.commit()
+            print("HORAAHH")
+            flash('Values successfully inserted into the database!', 'success')
+        except Exception as e:
+            mysql.connection.rollback()
+            print("NAHHHHHHHHHHH")
+            print(str(e))
+            error = str(e)
+            flash(f'Error inserting values: {str(e)}', 'error')
+        # Execute the query
+        cur.close()
+        
+        
+@app.route('/delete-values', methods=['GET', 'POST'])
+def delete_values():
+    if request.method == 'POST':
+        table_name = request.form['tableName']
+        cur = mysql.connection.cursor()
+        print("A")
+        cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        columns = cur.fetchall()
+        
+        cur.execute(f"select ORDINAL_POSITION from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        ORDINAL_POSITION = cur.fetchall()
+        
+        combined = list(zip(columns, ORDINAL_POSITION))
+
+        # Sort the combined list based on the values in ORDINAL_POSITION
+        sorted_combined = sorted(combined, key=lambda x: x[1])
+
+        # Extract the sorted columns from the sorted_combined list
+        columns = [item[0] for item in sorted_combined]
+        
+        return render_template('delete_form.html', columns=columns, table_name=table_name)
+
+@app.route('/delete-values2', methods=['GET', 'POST'])
+def delete_values2():
+    if request.method == 'POST':
+        table_name = request.form['tableName']
+        cur = mysql.connection.cursor()
+        cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        oldvalues = cur.fetchall()
+        cur.close()
+        
+        where_condition = request.form['whereCondition']
+        print(where_condition)
+        
+        # Construct the UPDATE query
+        sql = f"DELETE FROM {table_name} WHERE {where_condition}"
+        
+        print(sql)
+        
+        error = None
+        try:
+            # Execute the UPDATE query
+            cur = mysql.connection.cursor()
+            cur.execute(sql)
+            mysql.connection.commit()
+
+            flash('Delete operation successful', 'success')
+            # return render_template('display_table.html', table_name=table_name, columns=columns2, values=values, oldvalues=oldvalues, error = error)
+        
+            # return redirect(url_for('some_route'))  # Redirect to some route after successful update
+
+        except Exception as e:
+            mysql.connection.rollback()
+            error = str(e)
+            flash(f'Error updating values: {str(e)}', 'error')
+            # return redirect(url_for('some_route'))  # Redirect to some route after error
+        
+        cur = mysql.connection.cursor()
+        
+        cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        columns2 = cur.fetchall()
+        
+        cur.execute(f"select ORDINAL_POSITION from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        ORDINAL_POSITION = cur.fetchall()
+        
+        combined = list(zip(columns2, ORDINAL_POSITION))
+
+        # Sort the combined list based on the values in ORDINAL_POSITION
+        sorted_combined = sorted(combined, key=lambda x: x[1])
+
+        # Extract the sorted columns2 from the sorted_combined list
+        columns2 = [item[0] for item in sorted_combined]
+        
+        cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        values = cur.fetchall()
+        
+        oldcolumns2=columns2
+
+
+        return render_template('display_table.html', table_name=table_name, columns=columns2, oldcolumns2=oldcolumns2, values=values, oldvalues=oldvalues, error = error, op='update')
+
+@app.route('/rename-table', methods=['GET', 'POST'])
+def rename_table():
+    if request.method == 'POST':
+        table_name = request.form['tableName']
+        cur = mysql.connection.cursor()
+        print("A")
+        cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        columns = cur.fetchall()
+        
+        cur.execute(f"select ORDINAL_POSITION from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        ORDINAL_POSITION = cur.fetchall()
+        
+        combined = list(zip(columns, ORDINAL_POSITION))
+
+        # Sort the combined list based on the values in ORDINAL_POSITION
+        sorted_combined = sorted(combined, key=lambda x: x[1])
+
+        # Extract the sorted columns from the sorted_combined list
+        columns = [item[0] for item in sorted_combined]
+        
+        return render_template('rename_form.html', columns=columns, table_name=table_name)
+
+
+@app.route('/rename-table2', methods=['GET', 'POST'])
+def rename_table2():
+    if request.method == 'POST':
+        table_name = request.form['tableName']
+        cur = mysql.connection.cursor()
+        cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        
+        newTableName = table_name
+        
+        oldvalues = cur.fetchall()
+        
+        cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{newTableName}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        oldcolumns2 = cur.fetchall()
+        
+        cur.execute(f"select ORDINAL_POSITION from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{newTableName}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        ORDINAL_POSITION = cur.fetchall()
+        
+        combined = list(zip(oldcolumns2, ORDINAL_POSITION))
+
+        # Sort the combined list based on the values in ORDINAL_POSITION
+        sorted_combined = sorted(combined, key=lambda x: x[1])
+
+        # Extract the sorted oldcolumns2 from the sorted_combined list
+        oldcolumns2 = [item[0] for item in sorted_combined]
+        
+        cur.close()
+        
+        
+        if (request.form['newTableName']!=''): 
+            newTableName = request.form['newTableName']
+            
+        print(newTableName)
+        
+        values = {key: request.form[key] for key in request.form if (key != 'newTableName' and key != 'tableName' and request.form[key]!='')}
+        print(values)
+        for key, value in values.items():
+            cur = mysql.connection.cursor()
+            sql = f"ALTER TABLE {table_name} RENAME COLUMN {key} TO {value}"
+            cur.execute(sql)
+            mysql.connection.commit()
+        
+        # Construct the UPDATE query
+        error = None
+    
+        if (request.form['newTableName']!=''): 
+            sql = f"ALTER TABLE {table_name} RENAME TO {newTableName}"
+            print(sql)
+            
+            try:
+                # Execute the UPDATE query
+                cur = mysql.connection.cursor()
+                cur.execute(sql)
+                mysql.connection.commit()
+
+                flash('Delete operation successful', 'success')
+
+            except Exception as e:
+                mysql.connection.rollback()
+                error = str(e)
+                flash(f'Error updating values: {str(e)}', 'error')
+        
+        cur = mysql.connection.cursor()
+        
+        cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{newTableName}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        columns2 = cur.fetchall()
+        
+        cur.execute(f"select ORDINAL_POSITION from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{newTableName}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
+        ORDINAL_POSITION = cur.fetchall()
+        
+        combined = list(zip(columns2, ORDINAL_POSITION))
+
+        # Sort the combined list based on the values in ORDINAL_POSITION
+        sorted_combined = sorted(combined, key=lambda x: x[1])
+
+        # Extract the sorted columns2 from the sorted_combined list
+        columns2 = [item[0] for item in sorted_combined]
+        
+        cur.execute(f"SELECT * FROM {newTableName}")  # Adjust this query as per your database schema
+        values = cur.fetchall()
+
+
+        return render_template('display_table.html', newTableName = newTableName, table_name=table_name, oldcolumns2=oldcolumns2, columns=columns2, values=values, oldvalues=oldvalues, error = error, op='update')
+
+@app.route('/custom-query', methods=['GET'])
+def custom_query():
+    return render_template('custom_query.html')
+
 @app.route('/execute_query', methods=['POST'])
 def execute_and_display():
-    conn = connect_to_database(host, user, passwd, 'transportmanagement')
+    # conn = connect_to_database(host, user, passwd, 'transportmanagement')
     query = request.form['sql_query']
-    table_name = parse_query(query).pop()
-    table_fields = get_field_names(conn, table_name)
+    table_name = parse_query(query)
+    if (table_name == "Query is not supported"):
+        return "Query is not supported"
+    
+    # table_fields = get_field_names(conn, table_name)
+    table_fields = get_field_names(table_name)
     before_path = r'tmp\before.txt'
     after_path = r'tmp\after.txt'
     diff_path = r'templates\diff.html'
     before_query = after_query = f"SELECT * FROM {table_name}"
-    before_result = execute_query(conn, before_query)
+    before_result = execute_query(before_query)
     if (before_result[0] == -1):
         return "ERROR IN EXECUTING QUERY TO FETCH STARTNG STATE OF THE TABLE --> " + str(before_result[1])
     
     makeASCII(before_result[1], table_fields, before_path)
-    res = execute_query(conn, query)
+    res = execute_query(query)
 
     if (res[0] == -1):
         return "ERROR IN EXECUTING QUERY --> " + str(res[1])
     
-    after_result = execute_query(conn, after_query)
+    after_result = execute_query(after_query)
     if (after_result[0] == -1):
         return "ERROR IN EXECUTING QUERY TO FETCH CHANGED STATE OF THE TABLE --> " + str(after_result[1])
     
     makeASCII(after_result[1], table_fields, after_path)
     table_diff(before_path, after_path, diff_path)
-    conn.close()
+    # conn.close()
     return render_template('diff.html')
         # Diff path now stores the path of the file containing the diffte query."
     
-def connect_to_database(host, user, password, database):
-    try:
-        conn = mconn.connect(
-            host=host,
-            user=user,
-            password=password,
-            database=database
-        )
-        return conn
-    except mconn.Error as e:
-        print(f"Error connecting to database: {e}")
-        return None
-
 # Function to execute a MySQL query and return results
-def execute_query(conn, query):
+def execute_query(query):
     try:
-        cursor = conn.cursor()
+        # cursor = conn.cursor()
+        cursor = mysql.connection.cursor()
         cursor.execute(query)
         result = cursor.fetchall()
-        conn.commit()
+        # conn.commit()
+        mysql.connection.commit()
+        cursor.close()
         return 0,result
     except mysql.connector.Error as e:
         print(f"Error executing query: {e}")
         return -1,e
 
 def parse_query(query):
-    try:
-        # Parse the SQL query
-        parsed_query = sqlparse.parse(query)
-
-        # Extract table names from the parsed query
-        table_names = set()
-        for stmt in parsed_query:
-            for token in stmt.tokens:
-                if isinstance(token, sqlparse.sql.IdentifierList):
-                    for identifier in token.get_identifiers():
-                        table_names.add(str(identifier))
-                elif isinstance(token, sqlparse.sql.Identifier):
-                    table_names.add(str(token))
-        return table_names
-    except Exception as e:
-        print(f"Error parsing query: {e}")
-        return None
+    tokens = query.split()
+    if (tokens[0].lower() == 'select'):
+        for i in range(len(tokens)):
+            if (tokens[i].lower() == 'from'):
+                return tokens[i+1]
+    
+    elif (tokens[0].lower() == 'update'):
+        return tokens[1]
+    
+    elif (tokens[0].lower() == 'delete'):
+        return tokens[2]
+    
+    elif (tokens[0].lower() == 'insert'):
+        return tokens[2]
+    else:
+        return "Query is not supported"
     
 # Function to get field names of a table
-def get_field_names(conn, table_name):
+def get_field_names(table_name):
     try:
         query = f"SHOW COLUMNS FROM {table_name}"
-        cursor = conn.cursor()
+        # cursor = conn.cursor()
+        cursor = mysql.connection.cursor()
         cursor.execute(query)
         field_names = [row[0] for row in cursor.fetchall()]
+        cursor.close()
         return field_names
-    except mysql.connector.Error as e:
+    except mconn.Error as e:
         print(f"Error getting field names: {e}")
         return None
 
