@@ -1,4 +1,7 @@
 import argparse
+import subprocess
+import sys
+import webbrowser
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for
 from flask_mysqldb import MySQL
 from flask_mail import Mail, Message
@@ -937,12 +940,23 @@ def execute_and_display():
     table_name = parse_query(query)
     if (table_name == "Query is not supported"):
         return "Query is not supported"
-    
+
     # table_fields = get_field_names(conn, table_name)
     table_fields = get_field_names(table_name)
     before_path = r'tmp\before.txt'
     after_path = r'tmp\after.txt'
-    diff_path = r'templates\diff.html'
+    if (query.split()[0].lower() == 'select'):
+        before_result = execute_query(query)
+        if (before_result[0] == -1):
+            return "ERROR IN EXECUTING QUERY --> " + str(before_result[1])
+        makeASCII(before_result[1], table_fields, before_path)
+        py_path = sys.executable
+        subprocess.run([py_path, "diff2HtmlCompare\orgTable.py", before_path, before_path], check=True) 
+        # open the html file in the browser in a new tab
+        # get full path of the file using os.path.abspath
+        # return "Query executed successfully"
+        return render_template('diff.html')
+
     before_query = after_query = f"SELECT * FROM {table_name}"
     before_result = execute_query(before_query)
     if (before_result[0] == -1):
@@ -959,11 +973,11 @@ def execute_and_display():
         return "ERROR IN EXECUTING QUERY TO FETCH CHANGED STATE OF THE TABLE --> " + str(after_result[1])
     
     makeASCII(after_result[1], table_fields, after_path)
-    table_diff(before_path, after_path, diff_path)
-    # conn.close()
+    py_path = sys.executable
+    subprocess.run([py_path, "diff2HtmlCompare\diff.py", before_path, after_path], check=True) 
+    # return "Query executed successfully"
     return render_template('diff.html')
-        # Diff path now stores the path of the file containing the diffte query."
-    
+
 # Function to execute a MySQL query and return results
 def execute_query(query):
     try:
@@ -975,9 +989,9 @@ def execute_query(query):
         mysql.connection.commit()
         cursor.close()
         return 0,result
-    except mysql.connector.Error as e:
-        print(f"Error executing query: {e}")
-        return -1,e
+    except:
+        return -1, "Error in executing query"
+    
 
 def parse_query(query):
     tokens = query.split()
@@ -1007,8 +1021,8 @@ def get_field_names(table_name):
         field_names = [row[0] for row in cursor.fetchall()]
         cursor.close()
         return field_names
-    except mconn.Error as e:
-        print(f"Error getting field names: {e}")
+    except:
+        print(f"Error getting field names")
         return None
 
 def table_diff(before_file_path, after_file_path, diff_file_path):
@@ -1018,10 +1032,28 @@ def table_diff(before_file_path, after_file_path, diff_file_path):
     with open(after_file_path, 'r') as after_file:
         after_content = after_file.read().splitlines()
 
-    diff = difflib.HtmlDiff().make_file(before_content, after_content,"BEFORE THE QUERY WAS EXECUTED", "AFTER THE QUERY WAS EXECUTED")
+    # diff = difflib.HtmlDiff().make_file(before_content, after_content,"BEFORE THE QUERY WAS EXECUTED", "AFTER THE QUERY WAS EXECUTED")
 
+    # with open(diff_file_path, 'w') as diff_file:
+    #     diff_file.write(diff)
+    custom_html_diff = make_custom_html_diff(before_content, after_content)
     with open(diff_file_path, 'w') as diff_file:
-        diff_file.write(diff)
+        diff_file.write('<html><body>')
+        diff_file.write(custom_html_diff)
+        diff_file.write('</body></html>')
+
+
+def make_custom_html_diff(before_content, after_content):
+    diff = difflib.ndiff(before_content, after_content)
+    
+    result = []
+    for line in diff:
+        if line.startswith('-'):
+            result.append(f'<span style="color:red; text-decoration:line-through;">{line[2:]}</span>')
+        elif line.startswith('+'):
+            result.append(f'<span style="color:green;">{line[2:]}</span>')
+    
+    return '\n'.join(result)
 
 def makeASCII(query_result, field_names, file_path):
     if not query_result:

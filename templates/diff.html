@@ -1,65 +1,108 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <!-- 
+          html_title:    browser tab title
+          reset_css:     relative path to reset css file
+          pygments_css:  relative path to pygments css file
+          diff_css:      relative path to diff layout css file
+          page_title:    title shown at the top of the page. This should be the filename of the files being diff'd
+          original_code: full html contents of original file
+          modified_code: full html contents of modified file
+          jquery_js:     path to jquery.min.js
+          diff_js:       path to diff.js
+        -->
+        <meta charset="utf-8">
+        <title>
+            tmp\after.txt
+        </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="static/deps/reset.css" type="text/css">
+        <link rel="stylesheet" href="static/deps/diff.css" type="text/css">
+        <link class="syntaxdef" rel="stylesheet" href="static/deps/codeformats/vs.css" type="text/css">
+    </head>
+    <body>
+        <div class="" id="topbar">
+          <div id="filetitle"> 
+            tmp\after.txt
+          </div>
+          <div class="switches">
+            <div class="switch">
+              <input id="showoriginal" class="toggle toggle-yes-no menuoption" type="checkbox" checked>
+              <label for="showoriginal" data-on="&#10004; Original" data-off="Original"></label>
+            </div>
+            <div class="switch">
+              <input id="showmodified" class="toggle toggle-yes-no menuoption" type="checkbox" checked>
+              <label for="showmodified" data-on="&#10004; Modified" data-off="Modified"></label>
+            </div>
+            <div class="switch">
+              <input id="highlight" class="toggle toggle-yes-no menuoption" type="checkbox" checked>
+              <label for="highlight" data-on="&#10004; Highlight" data-off="Highlight"></label>
+            </div>
+            <div class="switch">
+              <input id="codeprintmargin" class="toggle toggle-yes-no menuoption" type="checkbox" checked>
+              <label for="codeprintmargin" data-on="&#10004; Margin" data-off="Margin"></label>
+            </div>
+            <div class="switch">
+              <input id="dosyntaxhighlight" class="toggle toggle-yes-no menuoption" type="checkbox" checked>
+              <label for="dosyntaxhighlight" data-on="&#10004; Syntax" data-off="Syntax"></label>
+            </div>
+          </div>
+        </div>
+        <div id="maincontainer" class="page-full-width">
+            <div id="leftcode" class="left-inner-shadow codebox divider-outside-bottom">
+                <div class="codefiletab">
+                    &#10092; Original
+                </div>
+                <div class="printmargin">
+                    01234567890123456789012345678901234567890123456789012345678901234567890123456789
+                </div>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="lineno_q">1</span><span class="lineno_q">2</span><span class="lineno_q">3</span><span class="lineno_q lineno_leftdel">4</span><span class="lineno_q">5</span><span class="lineno_q">6</span><span class="lineno_q">7</span><span class="lineno_q">8</span><span class="lineno_q">9</span><span class="lineno_q">10</span><span class="lineno_q">11</span><span class="lineno_q">12</span><span class="lineno_q">13</span></pre></div></td><td class="code"><pre>+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
+|            email            |             password             | admin_priveleges |                                             data_                                              | user_img |
++-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
+<span class="left_diff_del">|  bryson_greene@iitgn.ac.in  | 889211b122daa7f9f917d3d3b3475514 |        no        |  {&quot;last_name&quot;: &quot;Greene&quot;, &quot;first_name&quot;: &quot;Bryson&quot;, &quot;driver_license_number&quot;: &quot;6789012345678901&quot;}  |   None   |
+</span>|  daniel_wilson@iitgn.ac.in  | e7f84ff145ced31368756c41af7fef9c |        no        |  {&quot;last_name&quot;: &quot;Wilson&quot;, &quot;first_name&quot;: &quot;Daniel&quot;, &quot;driver_license_number&quot;: &quot;8901234567890123&quot;}  |   None   |
+|   emily_brown@iitgn.ac.in   | f6244d2fc24ec05bedfbf7a84a42ddd4 |        no        |   {&quot;last_name&quot;: &quot;Brown&quot;, &quot;first_name&quot;: &quot;Emily&quot;, &quot;driver_license_number&quot;: &quot;5678901234567890&quot;}   |   None   |
+|     john_doe@iitgn.ac.in    | 6d40e095b7f43848dc76ec017592da29 |        no        |    {&quot;last_name&quot;: &quot;Doe&quot;, &quot;first_name&quot;: &quot;John&quot;, &quot;driver_license_number&quot;: &quot;2345678901234567&quot;}     |   None   |
+|    koramassey@iitgn.ac.in   | fdec10f5e0fc93e0dadc8c53b9802623 |        no        |   {&quot;last_name&quot;: &quot;Massey&quot;, &quot;first_name&quot;: &quot;Kora&quot;, &quot;driver_license_number&quot;: &quot;4567890123456789&quot;}   |   None   |
+|    kumaramit@iitgn.ac.in    | f039eb446cc0bd7c5ad12b7a0e2a1dae |       yes        |   {&quot;last_name&quot;: &quot;Kumar&quot;, &quot;first_name&quot;: &quot;Amit&quot;, &quot;driver_license_number&quot;: &quot;1234567890123456&quot;}    |   None   |
+|  max_verstappen@iitgn.ac.in | f5f75389bdbeddbbd70ac31c0245e42e |        no        | {&quot;last_name&quot;: &quot;Verstappen&quot;, &quot;first_name&quot;: &quot;Max&quot;, &quot;driver_license_number&quot;: &quot;3456789012345678&quot;}  |   None   |
+| olivia_anderson@iitgn.ac.in | 6fe76ed19c9386c1389512a53aaaa6c6 |        no        | {&quot;last_name&quot;: &quot;Anderson&quot;, &quot;first_name&quot;: &quot;Olivia&quot;, &quot;driver_license_number&quot;: &quot;9012345678901234&quot;} |   None   |
+|  sophia_taylor@iitgn.ac.in  | 4d4cc5ce3071ce7dbb117a1e5503a3be |        no        |  {&quot;last_name&quot;: &quot;Taylor&quot;, &quot;first_name&quot;: &quot;Sophia&quot;, &quot;driver_license_number&quot;: &quot;0123456789012345&quot;}  |   None   |
++-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
 
-<html>
+</pre></td></tr></table></div>
 
-<head>
-    <meta http-equiv="Content-Type"
-          content="text/html; charset=utf-8" />
-    <title></title>
-    <style type="text/css">
-        table.diff {font-family:Courier; border:medium;}
-        .diff_header {background-color:#e0e0e0}
-        td.diff_header {text-align:right}
-        .diff_next {background-color:#c0c0c0}
-        .diff_add {background-color:#aaffaa}
-        .diff_chg {background-color:#ffff77}
-        .diff_sub {background-color:#ffaaaa}
-    </style>
-</head>
+            </div>
+            <div id="rightcode" class="left-inner-shadow codebox divider-outside-bottom">
+                <div class="codefiletab">
+                    &#10093; Modified
+                </div>
+                <div class="printmargin">
+                    01234567890123456789012345678901234567890123456789012345678901234567890123456789
+                </div>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="lineno_q">1</span><span class="lineno_q">2</span><span class="lineno_q">3</span><span class="lineno_q lineno_rightdel">  </span><span class="lineno_q">4</span><span class="lineno_q">5</span><span class="lineno_q">6</span><span class="lineno_q">7</span><span class="lineno_q">8</span><span class="lineno_q">9</span><span class="lineno_q">10</span><span class="lineno_q">11</span><span class="lineno_q">12</span></pre></div></td><td class="code"><pre>+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
+|            email            |             password             | admin_priveleges |                                             data_                                              | user_img |
++-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
+<span class="right_diff_del">
+</span>|  daniel_wilson@iitgn.ac.in  | e7f84ff145ced31368756c41af7fef9c |        no        |  {&quot;last_name&quot;: &quot;Wilson&quot;, &quot;first_name&quot;: &quot;Daniel&quot;, &quot;driver_license_number&quot;: &quot;8901234567890123&quot;}  |   None   |
+|   emily_brown@iitgn.ac.in   | f6244d2fc24ec05bedfbf7a84a42ddd4 |        no        |   {&quot;last_name&quot;: &quot;Brown&quot;, &quot;first_name&quot;: &quot;Emily&quot;, &quot;driver_license_number&quot;: &quot;5678901234567890&quot;}   |   None   |
+|     john_doe@iitgn.ac.in    | 6d40e095b7f43848dc76ec017592da29 |        no        |    {&quot;last_name&quot;: &quot;Doe&quot;, &quot;first_name&quot;: &quot;John&quot;, &quot;driver_license_number&quot;: &quot;2345678901234567&quot;}     |   None   |
+|    koramassey@iitgn.ac.in   | fdec10f5e0fc93e0dadc8c53b9802623 |        no        |   {&quot;last_name&quot;: &quot;Massey&quot;, &quot;first_name&quot;: &quot;Kora&quot;, &quot;driver_license_number&quot;: &quot;4567890123456789&quot;}   |   None   |
+|    kumaramit@iitgn.ac.in    | f039eb446cc0bd7c5ad12b7a0e2a1dae |       yes        |   {&quot;last_name&quot;: &quot;Kumar&quot;, &quot;first_name&quot;: &quot;Amit&quot;, &quot;driver_license_number&quot;: &quot;1234567890123456&quot;}    |   None   |
+|  max_verstappen@iitgn.ac.in | f5f75389bdbeddbbd70ac31c0245e42e |        no        | {&quot;last_name&quot;: &quot;Verstappen&quot;, &quot;first_name&quot;: &quot;Max&quot;, &quot;driver_license_number&quot;: &quot;3456789012345678&quot;}  |   None   |
+| olivia_anderson@iitgn.ac.in | 6fe76ed19c9386c1389512a53aaaa6c6 |        no        | {&quot;last_name&quot;: &quot;Anderson&quot;, &quot;first_name&quot;: &quot;Olivia&quot;, &quot;driver_license_number&quot;: &quot;9012345678901234&quot;} |   None   |
+|  sophia_taylor@iitgn.ac.in  | 4d4cc5ce3071ce7dbb117a1e5503a3be |        no        |  {&quot;last_name&quot;: &quot;Taylor&quot;, &quot;first_name&quot;: &quot;Sophia&quot;, &quot;driver_license_number&quot;: &quot;0123456789012345&quot;}  |   None   |
++-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
 
-<body>
-    
-    <table class="diff" id="difflib_chg_to3__top"
-           cellspacing="0" cellpadding="0" rules="groups" >
-        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
-        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
-        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">BEFORE THE QUERY WAS EXECUTED</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">AFTER THE QUERY WAS EXECUTED</th></tr></thead>
-        <tbody>
-            <tr><td class="diff_next" id="difflib_chg_to3__0"><a href="#difflib_chg_to3__0">f</a></td><td class="diff_header" id="from3_1">1</td><td nowrap="nowrap">+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+</td><td class="diff_next"><a href="#difflib_chg_to3__0">f</a></td><td class="diff_header" id="to3_1">1</td><td nowrap="nowrap">+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_2">2</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;admin_priveleges&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;user_img&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to3_2">2</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;admin_priveleges&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;user_img&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_3">3</td><td nowrap="nowrap">+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+</td><td class="diff_next"></td><td class="diff_header" id="to3_3">3</td><td nowrap="nowrap">+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+</td></tr>
-            <tr><td class="diff_next"><a href="#difflib_chg_to3__top">t</a></td><td class="diff_header" id="from3_4">4</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;anish&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<span class="diff_sub">&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;123<span class="diff_chg">&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"><a href="#difflib_chg_to3__top">t</a></td><td class="diff_header" id="to3_4">4</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;anish&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;123<span class="diff_chg">45</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_5">5</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ayush@gmail.com&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;827ccb0eea8a706c4c34a16891f84e7b&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to3_5">5</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ayush@gmail.com&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;827ccb0eea8a706c4c34a16891f84e7b&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_6">6</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;briana_kirk@iitgn.ac.in&nbsp;&nbsp;&nbsp;|&nbsp;3bbd1873056226d83e6371a24d340340&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{"last_name":&nbsp;"Kirk",&nbsp;"first_name":&nbsp;"Briana",&nbsp;"driver_license_number":&nbsp;"7890123456789012"}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to3_6">6</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;briana_kirk@iitgn.ac.in&nbsp;&nbsp;&nbsp;|&nbsp;3bbd1873056226d83e6371a24d340340&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{"last_name":&nbsp;"Kirk",&nbsp;"first_name":&nbsp;"Briana",&nbsp;"driver_license_number":&nbsp;"7890123456789012"}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_7">7</td><td nowrap="nowrap">|&nbsp;&nbsp;bryson_greene@iitgn.ac.in&nbsp;&nbsp;|&nbsp;889211b122daa7f9f917d3d3b3475514&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;{"last_name":&nbsp;"Greene",&nbsp;"first_name":&nbsp;"Bryson",&nbsp;"driver_license_number":&nbsp;"6789012345678901"}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to3_7">7</td><td nowrap="nowrap">|&nbsp;&nbsp;bryson_greene@iitgn.ac.in&nbsp;&nbsp;|&nbsp;889211b122daa7f9f917d3d3b3475514&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;{"last_name":&nbsp;"Greene",&nbsp;"first_name":&nbsp;"Bryson",&nbsp;"driver_license_number":&nbsp;"6789012345678901"}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_8">8</td><td nowrap="nowrap">|&nbsp;&nbsp;daniel_wilson@iitgn.ac.in&nbsp;&nbsp;|&nbsp;e7f84ff145ced31368756c41af7fef9c&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;{"last_name":&nbsp;"Wilson",&nbsp;"first_name":&nbsp;"Daniel",&nbsp;"driver_license_number":&nbsp;"8901234567890123"}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to3_8">8</td><td nowrap="nowrap">|&nbsp;&nbsp;daniel_wilson@iitgn.ac.in&nbsp;&nbsp;|&nbsp;e7f84ff145ced31368756c41af7fef9c&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;{"last_name":&nbsp;"Wilson",&nbsp;"first_name":&nbsp;"Daniel",&nbsp;"driver_license_number":&nbsp;"8901234567890123"}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_9">9</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;emily_brown@iitgn.ac.in&nbsp;&nbsp;&nbsp;|&nbsp;f6244d2fc24ec05bedfbf7a84a42ddd4&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{"last_name":&nbsp;"Brown",&nbsp;"first_name":&nbsp;"Emily",&nbsp;"driver_license_number":&nbsp;"5678901234567890"}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to3_9">9</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;emily_brown@iitgn.ac.in&nbsp;&nbsp;&nbsp;|&nbsp;f6244d2fc24ec05bedfbf7a84a42ddd4&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{"last_name":&nbsp;"Brown",&nbsp;"first_name":&nbsp;"Emily",&nbsp;"driver_license_number":&nbsp;"5678901234567890"}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_10">10</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;john_doe@iitgn.ac.in&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;6d40e095b7f43848dc76ec017592da29&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"last_name":&nbsp;"Doe",&nbsp;"first_name":&nbsp;"John",&nbsp;"driver_license_number":&nbsp;"2345678901234567"}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to3_10">10</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;john_doe@iitgn.ac.in&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;6d40e095b7f43848dc76ec017592da29&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"last_name":&nbsp;"Doe",&nbsp;"first_name":&nbsp;"John",&nbsp;"driver_license_number":&nbsp;"2345678901234567"}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_11">11</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;koramassey@iitgn.ac.in&nbsp;&nbsp;&nbsp;|&nbsp;fdec10f5e0fc93e0dadc8c53b9802623&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{"last_name":&nbsp;"Massey",&nbsp;"first_name":&nbsp;"Kora",&nbsp;"driver_license_number":&nbsp;"4567890123456789"}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to3_11">11</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;koramassey@iitgn.ac.in&nbsp;&nbsp;&nbsp;|&nbsp;fdec10f5e0fc93e0dadc8c53b9802623&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{"last_name":&nbsp;"Massey",&nbsp;"first_name":&nbsp;"Kora",&nbsp;"driver_license_number":&nbsp;"4567890123456789"}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_12">12</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;kumaramit@iitgn.ac.in&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;f039eb446cc0bd7c5ad12b7a0e2a1dae&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{"last_name":&nbsp;"Kumar",&nbsp;"first_name":&nbsp;"Amit",&nbsp;"driver_license_number":&nbsp;"1234567890123456"}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to3_12">12</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;kumaramit@iitgn.ac.in&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;f039eb446cc0bd7c5ad12b7a0e2a1dae&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{"last_name":&nbsp;"Kumar",&nbsp;"first_name":&nbsp;"Amit",&nbsp;"driver_license_number":&nbsp;"1234567890123456"}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_13">13</td><td nowrap="nowrap">|&nbsp;&nbsp;max_verstappen@iitgn.ac.in&nbsp;|&nbsp;f5f75389bdbeddbbd70ac31c0245e42e&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;{"last_name":&nbsp;"Verstappen",&nbsp;"first_name":&nbsp;"Max",&nbsp;"driver_license_number":&nbsp;"3456789012345678"}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to3_13">13</td><td nowrap="nowrap">|&nbsp;&nbsp;max_verstappen@iitgn.ac.in&nbsp;|&nbsp;f5f75389bdbeddbbd70ac31c0245e42e&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;{"last_name":&nbsp;"Verstappen",&nbsp;"first_name":&nbsp;"Max",&nbsp;"driver_license_number":&nbsp;"3456789012345678"}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_14">14</td><td nowrap="nowrap">|&nbsp;olivia_anderson@iitgn.ac.in&nbsp;|&nbsp;6fe76ed19c9386c1389512a53aaaa6c6&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;{"last_name":&nbsp;"Anderson",&nbsp;"first_name":&nbsp;"Olivia",&nbsp;"driver_license_number":&nbsp;"9012345678901234"}&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to3_14">14</td><td nowrap="nowrap">|&nbsp;olivia_anderson@iitgn.ac.in&nbsp;|&nbsp;6fe76ed19c9386c1389512a53aaaa6c6&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;{"last_name":&nbsp;"Anderson",&nbsp;"first_name":&nbsp;"Olivia",&nbsp;"driver_license_number":&nbsp;"9012345678901234"}&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_15">15</td><td nowrap="nowrap">|&nbsp;&nbsp;sophia_taylor@iitgn.ac.in&nbsp;&nbsp;|&nbsp;4d4cc5ce3071ce7dbb117a1e5503a3be&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;{"last_name":&nbsp;"Taylor",&nbsp;"first_name":&nbsp;"Sophia",&nbsp;"driver_license_number":&nbsp;"0123456789012345"}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to3_15">15</td><td nowrap="nowrap">|&nbsp;&nbsp;sophia_taylor@iitgn.ac.in&nbsp;&nbsp;|&nbsp;4d4cc5ce3071ce7dbb117a1e5503a3be&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;{"last_name":&nbsp;"Taylor",&nbsp;"first_name":&nbsp;"Sophia",&nbsp;"driver_license_number":&nbsp;"0123456789012345"}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;None&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from3_16">16</td><td nowrap="nowrap">+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+</td><td class="diff_next"></td><td class="diff_header" id="to3_16">16</td><td nowrap="nowrap">+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+</td></tr>
-        </tbody>
-    </table>
-    <table class="diff" summary="Legends">
-        <tr> <th colspan="2"> Legends </th> </tr>
-        <tr> <td> <table border="" summary="Colors">
-                      <tr><th> Colors </th> </tr>
-                      <tr><td class="diff_add">&nbsp;Added&nbsp;</td></tr>
-                      <tr><td class="diff_chg">Changed</td> </tr>
-                      <tr><td class="diff_sub">Deleted</td> </tr>
-                  </table></td>
-             <td> <table border="" summary="Links">
-                      <tr><th colspan="2"> Links </th> </tr>
-                      <tr><td>(f)irst change</td> </tr>
-                      <tr><td>(n)ext change</td> </tr>
-                      <tr><td>(t)op</td> </tr>
-                  </table></td> </tr>
-    </table>
-</body>
+</pre></td></tr></table></div>
 
+            </div>
+        </div>
+<script src="static/deps/jquery.min.js" type="text/javascript"></script>
+<script src="static/deps/diff.js" type="text/javascript"></script>
+    </body>
 </html>

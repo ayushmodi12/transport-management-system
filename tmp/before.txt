@@ -1,9 +1,6 @@
 +-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
 |            email            |             password             | admin_priveleges |                                             data_                                              | user_img |
 +-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
-|            anish            |               123                |        no        |                                              None                                              |   None   |
-|       ayush@gmail.com       | 827ccb0eea8a706c4c34a16891f84e7b |        no        |                                              None                                              |   None   |
-|   briana_kirk@iitgn.ac.in   | 3bbd1873056226d83e6371a24d340340 |        no        |   {"last_name": "Kirk", "first_name": "Briana", "driver_license_number": "7890123456789012"}   |   None   |
 |  bryson_greene@iitgn.ac.in  | 889211b122daa7f9f917d3d3b3475514 |        no        |  {"last_name": "Greene", "first_name": "Bryson", "driver_license_number": "6789012345678901"}  |   None   |
 |  daniel_wilson@iitgn.ac.in  | e7f84ff145ced31368756c41af7fef9c |        no        |  {"last_name": "Wilson", "first_name": "Daniel", "driver_license_number": "8901234567890123"}  |   None   |
 |   emily_brown@iitgn.ac.in   | f6244d2fc24ec05bedfbf7a84a42ddd4 |        no        |   {"last_name": "Brown", "first_name": "Emily", "driver_license_number": "5678901234567890"}   |   None   |

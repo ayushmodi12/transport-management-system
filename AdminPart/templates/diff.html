@@ -1,63 +1,43 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type"
-          content="text/html; charset=utf-8" />
-    <title></title>
-    <style type="text/css">
-        table.diff {font-family:Courier; border:medium;}
-        .diff_header {background-color:#e0e0e0}
-        td.diff_header {text-align:right}
-        .diff_next {background-color:#c0c0c0}
-        .diff_add {background-color:#aaffaa}
-        .diff_chg {background-color:#ffff77}
-        .diff_sub {background-color:#ffaaaa}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Difference</title>
+    <style>
+        .table-diff {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .table-diff th, .table-diff td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .table-diff th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
-
 <body>
-    
-    <table class="diff" id="difflib_chg_to0__top"
-           cellspacing="0" cellpadding="0" rules="groups" >
-        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
-        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
-        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">BEFORE THE QUERY WAS EXECUTED</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">AFTER THE QUERY WAS EXECUTED</th></tr></thead>
+    <table class="table-diff">
+        <thead>
+            <tr>
+                {% for field in table_fields %}
+                <th>{{ field }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
         <tbody>
-            <tr><td class="diff_next"><a href="#difflib_chg_to0__top">t</a></td><td class="diff_header" id="from0_1">1</td><td nowrap="nowrap">+-----------------------+-----------------------------+------------+------------+--------------+-----------------+---------------------------------------------------------------------------------------------------------+</td><td class="diff_next"><a href="#difflib_chg_to0__top">t</a></td><td class="diff_header" id="to0_1">1</td><td nowrap="nowrap">+-----------------------+-----------------------------+------------+------------+--------------+-----------------+---------------------------------------------------------------------------------------------------------+</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_2">2</td><td nowrap="nowrap">|&nbsp;driver_license_number&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;first_name&nbsp;|&nbsp;last_name&nbsp;&nbsp;|&nbsp;phone_number&nbsp;|&nbsp;date_of_joining&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bank_details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to0_2">2</td><td nowrap="nowrap">|&nbsp;driver_license_number&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;first_name&nbsp;|&nbsp;last_name&nbsp;&nbsp;|&nbsp;phone_number&nbsp;|&nbsp;date_of_joining&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bank_details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_3">3</td><td nowrap="nowrap">+-----------------------+-----------------------------+------------+------------+--------------+-----------------+---------------------------------------------------------------------------------------------------------+</td><td class="diff_next"></td><td class="diff_header" id="to0_3">3</td><td nowrap="nowrap">+-----------------------+-----------------------------+------------+------------+--------------+-----------------+---------------------------------------------------------------------------------------------------------+</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_4">4</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;0123456789012345&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;sophia_taylor@iitgn.ac.in&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Sophia&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Taylor&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;2345678901&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2021-05-20&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"0123456785487890",&nbsp;"branch_name":&nbsp;"Houston",&nbsp;"account_number":&nbsp;"0123456780534647"}&nbsp;&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to0_4">4</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;0123456789012345&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;sophia_taylor@iitgn.ac.in&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Sophia&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Taylor&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;2345678901&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2021-05-20&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"0123456785487890",&nbsp;"branch_name":&nbsp;"Houston",&nbsp;"account_number":&nbsp;"0123456780534647"}&nbsp;&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_5">5</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;1234567890123456&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;kumaramit@iitgn.ac.in&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Amit&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Kumar&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;9876543210&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2017-01-05&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"1456239875487890",&nbsp;"branch_name":&nbsp;"Bangalore",&nbsp;"account_number":&nbsp;"1234567890534647"}&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to0_5">5</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;1234567890123456&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;kumaramit@iitgn.ac.in&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Amit&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Kumar&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;9876543210&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2017-01-05&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"1456239875487890",&nbsp;"branch_name":&nbsp;"Bangalore",&nbsp;"account_number":&nbsp;"1234567890534647"}&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_6">6</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;2345678901234567&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;john_doe@iitgn.ac.in&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;John&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Doe&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;8765432109&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2018-02-15&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"2345678905487890",&nbsp;"branch_name":&nbsp;"New&nbsp;York",&nbsp;"account_number":&nbsp;"2345678900534647"}&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to0_6">6</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;2345678901234567&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;john_doe@iitgn.ac.in&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;John&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Doe&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;8765432109&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2018-02-15&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"2345678905487890",&nbsp;"branch_name":&nbsp;"New&nbsp;York",&nbsp;"account_number":&nbsp;"2345678900534647"}&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_7">7</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;3456789012345678&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;max_verstappen@iitgn.ac.in&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Max&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Verstappen&nbsp;|&nbsp;&nbsp;7654321098&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2019-03-25&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;{"ifsc_code":&nbsp;"3456789015487890",&nbsp;"branch_name":&nbsp;"Los&nbsp;Angeles",&nbsp;"account_number":&nbsp;"3456789010534647"}&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to0_7">7</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;3456789012345678&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;max_verstappen@iitgn.ac.in&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Max&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Verstappen&nbsp;|&nbsp;&nbsp;7654321098&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2019-03-25&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;{"ifsc_code":&nbsp;"3456789015487890",&nbsp;"branch_name":&nbsp;"Los&nbsp;Angeles",&nbsp;"account_number":&nbsp;"3456789010534647"}&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_8">8</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;4567890123456789&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;koramassey@iitgn.ac.in&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Kora&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Massey&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;6543210987&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2020-04-10&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"4567890125487890",&nbsp;"branch_name":&nbsp;"Chicago",&nbsp;"account_number":&nbsp;"4567890120534647"}&nbsp;&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to0_8">8</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;4567890123456789&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;koramassey@iitgn.ac.in&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Kora&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Massey&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;6543210987&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2020-04-10&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"4567890125487890",&nbsp;"branch_name":&nbsp;"Chicago",&nbsp;"account_number":&nbsp;"4567890120534647"}&nbsp;&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_9">9</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;5678901234567890&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;emily_brown@iitgn.ac.in&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Emily&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Brown&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;5432109876&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2021-05-20&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"5678901235487890",&nbsp;"branch_name":&nbsp;"Houston",&nbsp;"account_number":&nbsp;"5678901230534647"}&nbsp;&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to0_9">9</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;5678901234567890&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;emily_brown@iitgn.ac.in&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Emily&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Brown&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;5432109876&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2021-05-20&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"5678901235487890",&nbsp;"branch_name":&nbsp;"Houston",&nbsp;"account_number":&nbsp;"5678901230534647"}&nbsp;&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_10">10</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;6789012345678901&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;bryson_greene@iitgn.ac.in&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Bryson&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Greene&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;4321098765&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2022-06-30&nbsp;&nbsp;&nbsp;|&nbsp;{"ifsc_code":&nbsp;"6789012345487890",&nbsp;"branch_name":&nbsp;"San&nbsp;Francisco",&nbsp;"account_number":&nbsp;"6789012340534647"}&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to0_10">10</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;6789012345678901&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;bryson_greene@iitgn.ac.in&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Bryson&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Greene&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;4321098765&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2022-06-30&nbsp;&nbsp;&nbsp;|&nbsp;{"ifsc_code":&nbsp;"6789012345487890",&nbsp;"branch_name":&nbsp;"San&nbsp;Francisco",&nbsp;"account_number":&nbsp;"6789012340534647"}&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_11">11</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;7890123456789012&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;briana_kirk@iitgn.ac.in&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Briana&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Kirk&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;3210987654&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2018-02-15&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"7890123455487890",&nbsp;"branch_name":&nbsp;"New&nbsp;York",&nbsp;"account_number":&nbsp;"7890123450534647"}&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to0_11">11</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;7890123456789012&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;briana_kirk@iitgn.ac.in&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Briana&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Kirk&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;3210987654&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2018-02-15&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"7890123455487890",&nbsp;"branch_name":&nbsp;"New&nbsp;York",&nbsp;"account_number":&nbsp;"7890123450534647"}&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_12">12</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;8901234567890123&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;daniel_wilson@iitgn.ac.in&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Daniel&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Wilson&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;2109876543&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2019-03-25&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;{"ifsc_code":&nbsp;"8901234565487890",&nbsp;"branch_name":&nbsp;"Los&nbsp;Angeles",&nbsp;"account_number":&nbsp;"8901234560534647"}&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to0_12">12</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;8901234567890123&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;daniel_wilson@iitgn.ac.in&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Daniel&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Wilson&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;2109876543&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2019-03-25&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;{"ifsc_code":&nbsp;"8901234565487890",&nbsp;"branch_name":&nbsp;"Los&nbsp;Angeles",&nbsp;"account_number":&nbsp;"8901234560534647"}&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_13">13</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;9012345678901234&nbsp;&nbsp;&nbsp;|&nbsp;olivia_anderson@iitgn.ac.in&nbsp;|&nbsp;&nbsp;&nbsp;Olivia&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;Anderson&nbsp;&nbsp;|&nbsp;&nbsp;1234567890&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2020-04-10&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"9012345675487890",&nbsp;"branch_name":&nbsp;"Chicago",&nbsp;"account_number":&nbsp;"9012345670534647"}&nbsp;&nbsp;&nbsp;&nbsp;|</td><td class="diff_next"></td><td class="diff_header" id="to0_13">13</td><td nowrap="nowrap">|&nbsp;&nbsp;&nbsp;&nbsp;9012345678901234&nbsp;&nbsp;&nbsp;|&nbsp;olivia_anderson@iitgn.ac.in&nbsp;|&nbsp;&nbsp;&nbsp;Olivia&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;Anderson&nbsp;&nbsp;|&nbsp;&nbsp;1234567890&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2020-04-10&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;{"ifsc_code":&nbsp;"9012345675487890",&nbsp;"branch_name":&nbsp;"Chicago",&nbsp;"account_number":&nbsp;"9012345670534647"}&nbsp;&nbsp;&nbsp;&nbsp;|</td></tr>
-            <tr><td class="diff_next"></td><td class="diff_header" id="from0_14">14</td><td nowrap="nowrap">+-----------------------+-----------------------------+------------+------------+--------------+-----------------+---------------------------------------------------------------------------------------------------------+</td><td class="diff_next"></td><td class="diff_header" id="to0_14">14</td><td nowrap="nowrap">+-----------------------+-----------------------------+------------+------------+--------------+-----------------+---------------------------------------------------------------------------------------------------------+</td></tr>
+            {% for row in table_diff %}
+            <tr>
+                {% for column in row %}
+                <td>{{ column }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
-    <table class="diff" summary="Legends">
-        <tr> <th colspan="2"> Legends </th> </tr>
-        <tr> <td> <table border="" summary="Colors">
-                      <tr><th> Colors </th> </tr>
-                      <tr><td class="diff_add">&nbsp;Added&nbsp;</td></tr>
-                      <tr><td class="diff_chg">Changed</td> </tr>
-                      <tr><td class="diff_sub">Deleted</td> </tr>
-                  </table></td>
-             <td> <table border="" summary="Links">
-                      <tr><th colspan="2"> Links </th> </tr>
-                      <tr><td>(f)irst change</td> </tr>
-                      <tr><td>(n)ext change</td> </tr>
-                      <tr><td>(t)op</td> </tr>
-                  </table></td> </tr>
-    </table>
 </body>
-
 </html>
