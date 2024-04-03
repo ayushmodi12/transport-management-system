@@ -1,7 +1,6 @@
 +-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
 |            email            |             password             | admin_priveleges |                                             data_                                              | user_img |
 +-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
-|  daniel_wilson@iitgn.ac.in  | e7f84ff145ced31368756c41af7fef9c |        no        |  {"last_name": "Wilson", "first_name": "Daniel", "driver_license_number": "8901234567890123"}  |   None   |
 |   emily_brown@iitgn.ac.in   | f6244d2fc24ec05bedfbf7a84a42ddd4 |        no        |   {"last_name": "Brown", "first_name": "Emily", "driver_license_number": "5678901234567890"}   |   None   |
 |     john_doe@iitgn.ac.in    | 6d40e095b7f43848dc76ec017592da29 |        no        |    {"last_name": "Doe", "first_name": "John", "driver_license_number": "2345678901234567"}     |   None   |
 |    koramassey@iitgn.ac.in   | fdec10f5e0fc93e0dadc8c53b9802623 |        no        |   {"last_name": "Massey", "first_name": "Kora", "driver_license_number": "4567890123456789"}   |   None   |

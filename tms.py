@@ -1,7 +1,6 @@
 import argparse
 import subprocess
 import sys
-import webbrowser
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for
 from flask_mysqldb import MySQL
 from flask_mail import Mail, Message
@@ -215,12 +214,13 @@ def book_seats():
         capacity = 29
 
     cur = mysql.connection.cursor()
-    cur.execute("SELECT COUNT(*) FROM Booking WHERE _date = %s AND email_id = %s AND route = %s", (date, user_email, route))
+    cur.execute("SELECT COUNT(*) FROM Booking WHERE _date = %s AND capacity = %s AND email_id = %s AND route = %s", (date, capacity, user_email, route))
     booking_count = cur.fetchone()[0]
     print(booking_count)
     cur.close()
 
     if booking_count > 0:
+        print("bdoneeee")
         return jsonify({'error': 'You have already booked a ticket for this bus'}), 400
 
     # Get current date and time
@@ -267,6 +267,7 @@ def fetch_booked_seats():
         cur.execute("SELECT booked_seat FROM Booking WHERE _date = %s AND route = %s AND capacity = %s", (date, route, capacity))  # Adjust this query as per your database schema
         booked_seats = cur.fetchall()
         print("WORKKKKKKK")
+        print("CRAYYYYY")
         print(booked_seats)
         cur.close()
         return jsonify({'bookedSeats': booked_seats})
@@ -370,7 +371,7 @@ def admin():
 
 @app.route('/operation', methods=['POST'])
 def handle_operation():
-    operation = request.form['operation']
+    # operation = request.form['operation']
     
     # Render HTML form for inserting values into tables
     cur = mysql.connection.cursor()
@@ -381,7 +382,7 @@ def handle_operation():
     cur.close()
     # return jsonify({'table_names': table_names})
     # print(j)
-    return render_template('view_tables.html', table_names=table_names, op = operation)
+    return render_template('view_tables.html', table_names=table_names)
     
     if operation == 'view':
         # Redirect to view tables page or perform necessary action
@@ -407,6 +408,7 @@ def view_tables():
     print("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
     if request.method == 'POST':
         table_name = request.form['tableName']
+        print(table_name)
         # Query the database to fetch the data for the selected table
         # You can use your database access methods here
         # Example: data = query_database(table_name)
@@ -441,7 +443,7 @@ def view_tables():
         oldcolumns2=columns
         
         cur.close()
-        return render_template('display_table.html', columns = columns, oldcolumns2=oldcolumns2, values=values, table_name = table_name, op='view')
+        return render_template('display_table.html', columns = columns, oldcolumns2=oldcolumns2, values=values, table_name = table_name, op='view', buttons=True)
     # else:
     #     # Render HTML form for inserting values into tables
     #     cur = mysql.connection.cursor()
@@ -475,7 +477,12 @@ def insert_values():
         # Extract the sorted columns from the sorted_combined list
         columns = [item[0] for item in sorted_combined]
         
-        return render_template('insert_form.html', columns=columns, table_name=table_name)
+        cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        values = cur.fetchall()
+        
+        cur.close()
+        
+        return render_template('insert_form.html', columns=columns, table_name=table_name, values = values)
         
         
         # values = {column: request.form[column] for column in columns}
@@ -530,7 +537,7 @@ def submit_values():
         print("00000000000000000000000000000000000000000000000")
         print(table_name)
         print("1111111111111111111111111111111111111111111111111")
-        values = {key: request.form[key] for key in request.form if key != 'tableName'}
+        values = {key: request.form[key] for key in request.form if (key != 'tableName' and request.form[key]!='')}
         
         # Prepare the SQL query for insertion
         placeholders = ', '.join(['%s'] * len(values))
@@ -592,7 +599,7 @@ def submit_values():
         #     flash(f'Error inserting values: {str(e)}', 'error')
         cur.close()
         
-        oldcolumns2=columns2,
+        oldcolumns2=columns2
         
         # Redirect to the view-tables page to display the updated table
         return render_template('display_table.html', table_name=table_name, columns=columns2, oldcolumns2=oldcolumns2, values=values, oldvalues=oldvalues, error = error, op='insert')
@@ -617,7 +624,13 @@ def update_values():
         # Extract the sorted columns from the sorted_combined list
         columns = [item[0] for item in sorted_combined]
         
-        return render_template('update_form.html', columns=columns, table_name=table_name)
+        cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        values = cur.fetchall()
+        print(values)
+        
+        cur.close()
+        
+        return render_template('update_form.html', columns=columns, table_name=table_name, values = values)
     
 @app.route('/update-values2', methods=['GET', 'POST'])
 def update_values2():
@@ -632,8 +645,13 @@ def update_values2():
         
         values = {key: request.form[key] for key in request.form if (key != 'tableName' and key != 'whereCondition' and request.form[key]!='')}
         
+        where_condition = ''
         
-        where_condition = request.form['whereCondition']
+        
+        
+        if (request.form['whereCondition']!=''):
+            where_condition = request.form['whereCondition']
+        
         print(values)
         print(where_condition)
         
@@ -648,8 +666,14 @@ def update_values2():
         print(set_clause)
 
         # Construct the UPDATE query
-        sql = f"UPDATE {table_name} SET {set_clause} WHERE {where_condition}"
         
+        sql = ''
+        
+        if (where_condition!=''):
+            sql = f"UPDATE {table_name} SET {set_clause} WHERE {where_condition}"
+        else:
+            sql = f"UPDATE {table_name} SET {set_clause}"
+            
         print(sql)
         
 
@@ -762,7 +786,13 @@ def delete_values():
         # Extract the sorted columns from the sorted_combined list
         columns = [item[0] for item in sorted_combined]
         
-        return render_template('delete_form.html', columns=columns, table_name=table_name)
+        cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        values = cur.fetchall()
+        print(values)
+        
+        cur.close()
+        
+        return render_template('delete_form.html', columns=columns, table_name=table_name, values = values)
 
 @app.route('/delete-values2', methods=['GET', 'POST'])
 def delete_values2():
@@ -773,11 +803,23 @@ def delete_values2():
         oldvalues = cur.fetchall()
         cur.close()
         
-        where_condition = request.form['whereCondition']
+        where_condition = ''
+        
+        
+        
+        if (request.form['whereCondition']!=''):
+            where_condition = request.form['whereCondition']
+        
         print(where_condition)
         
         # Construct the UPDATE query
-        sql = f"DELETE FROM {table_name} WHERE {where_condition}"
+        
+        sql = ''
+        
+        if (where_condition!=''):    
+            sql = f"DELETE FROM {table_name} WHERE {where_condition}"
+        else:
+            sql = f"DELETE FROM {table_name}"
         
         print(sql)
         
@@ -843,7 +885,13 @@ def rename_table():
         # Extract the sorted columns from the sorted_combined list
         columns = [item[0] for item in sorted_combined]
         
-        return render_template('rename_form.html', columns=columns, table_name=table_name)
+        cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
+        values = cur.fetchall()
+        print(values)
+        
+        cur.close()
+        
+        return render_template('rename_form.html', columns=columns, table_name=table_name, values= values)
 
 
 @app.route('/rename-table2', methods=['GET', 'POST'])
@@ -949,6 +997,15 @@ def execute_and_display():
         before_result = execute_query(query)
         if (before_result[0] == -1):
             return "ERROR IN EXECUTING QUERY --> " + str(before_result[1])
+        tokens = query.split()
+        if (tokens[1].lower() == '*'):
+            table_fields = get_field_names(table_name)
+            
+        else:
+            # GET the table fields from the query
+            table_fields = tokens[1].split(',')
+            table_fields = [field.strip() for field in table_fields]
+
         makeASCII(before_result[1], table_fields, before_path)
         py_path = sys.executable
         subprocess.run([py_path, "diff2HtmlCompare\orgTable.py", before_path, before_path], check=True) 

@@ -4,46 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Table</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+        }
+        
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card h2 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+        
+        .heading {
+            text-align: center;
+            justify-content: center;
+            font-size: 30px;
+            /* margin-top: 40px; */
+            padding-top: 30px;
+            background-color: #385170;
+            height: 60px;
+            color: #fff;
+            /* border-radius: 10px; */
+            box-shadow: 200px 200px 200px 200px rgba(0, 204, 255, 0.1);
+        }
+
+        /* #footer { */
+            /* background-color: #385170; */
+            /* height: 170px; */
+            /* margin-top: 20px; */
+        /* } */
+    </style>
 </head>
 <body>
-    <h1>Select a Table</h1>
-    <form id="selectTableForm" method="post">
-        <label for="tableSelect">Choose a table:</label>
-        <select id="tableSelect" name="tableName">
-            {% for table_name in table_names %}
-                <option value="{{ table_name[0] }}">{{ table_name[0] }}</option>
-            {% endfor %}
-        </select>
-        <input type="hidden" name="tableName" id="selectedTable" value=""> <!-- Hidden input field to store the selected table name -->
-        {% if op == 'view' %}
-            <button type="submit" formaction="/view-tables" formmethod="post" onclick="setSelectedTable()">View Table</button>
-        {% elif op == 'insert' %}
-            <button type="submit" formaction="/insert-values" formmethod="post" onclick="setSelectedTable()">Insert Values</button>
-        {% elif op == 'update' %}
-            <button type="submit" formaction="/update-values" formmethod="post" onclick="setSelectedTable()">Update Values</button>
-        {% elif op == 'delete' %}
-            <button type="submit" formaction="/delete-values" formmethod="post" onclick="setSelectedTable()">Delete Values</button>
-        {% elif op == 'rename' %}
-            <button type="submit" formaction="/rename-table" formmethod="post" onclick="setSelectedTable()">Rename Tables</button>
-        {% endif %}
-    </form>
+    <h1 class="heading">Select a Table</h1>
+    <div class="container">
+        {% for table_name in table_names %}
+        <div class="card" onclick="handleCardClick('{{ table_name[0] }}')">
+            <h2>{{ table_name[0] }}</h2>
+            <!-- You can add more content here if needed -->
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id = "footer">
+        <!-- <h1>HIII</h1> -->
+        <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" style="position: relative; left: 50%; transform: translateX(-50%); width: 170px; height: auto;">
+    </div>
     
     <script>
-        function setSelectedTable() {
-            var selectedTable = document.getElementById("tableSelect").value;
-            document.getElementById("selectedTable").value = selectedTable;
+        function handleCardClick(tableName) {
+            document.getElementById("selectedTable").value = tableName;
+            document.getElementById("selectTableForm").submit();
         }
-    </script>    
-
-    <!-- <script>
-        // // Redirect to view-tables API when a table is selected
-        document.getElementById('selectTableForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting normally
-            var tableName = document.getElementById('tableSelect').value;
-            window.location.href = '/view-tables?tableName=' + tableName; // Redirect to view-tables API
-        });
-    </script> -->
-
-
+    </script>
+    
+    <form id="selectTableForm" method="post" action="/view-tables">
+        <input type="hidden" name="tableName" id="selectedTable">
+    </form>
 </body>
 </html>

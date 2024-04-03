@@ -4,90 +4,208 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display Table</title>
-    <!-- Add CSS styles if needed -->
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+
+        }
+        .container {
+            overflow: auto;
+
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
+            /* margin-bottom: 10px;
+            margin-top: 5px; */
+            /* border-radius: 100px; */
+            /* overflow: hidden; Ensure borders are rounded */
+            /* border: 1px solid #000000; */
+            /* overflow: hidden; Ensure borders are rounded */
+            border: 1px solid #ddd;
         }
         th, td {
-            padding: 8px;
+            padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #e8e7e7;
+            background-color: #d6d6d6;
+            /* background-color: #f2f2f2; */
         }
-        .alert{
+        .alert {
             margin-top: 20px;
-            font-size: larger;
+            padding: 15px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            border-radius: 4px;
         }
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .btn {
+            background-color: #53a8b6;
+            background-color: #0056b3;
+            background-color: #1b78dc;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            margin-top: 10px;
+            margin-right: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            background-color: #53a8b6;
+
+        }
+        .btn:active {
+            transform: translateY(2px); /* Add press effect */
+        }
+        #tablecontainer{
+            max-height: 500px; /* Set the maximum height */
+            overflow: auto;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 15px;
+        }
+        /* Style the scrollbar track */
+        #tablecontainer::-webkit-scrollbar {
+            width: 8px; /* Width of the scrollbar */
+        }
+
+        /* Style the scrollbar thumb */
+        #tablecontainer::-webkit-scrollbar-thumb {
+            background-color: #3399a9; /* Color of the scrollbar thumb */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        /* Style the scrollbar track when mouse is hovering over it */
+        #tablecontainer::-webkit-scrollbar-track:hover {
+            background-color: #ddd; /* Change color on hover */
+        }
+
     </style>
 </head>
 <body>
-    {% if error %}
-        <div class="alert" role="alert">
-            There is an Error in the query: <br><br>{{ error }}
-        <br>
-        <br>
-            No changes in the database:
+    <div class="container">
+        {% if error %}
+            <div class="alert" role="alert">
+                
+                You have executed an invalid query: <br><br>{{ error }}<br><br>
+                No changes in the database.
+            </div>
+        {% endif %}
+
+        {% if op == 'view' %}
+
+            <h1>{{ table_name }}</h1>
+
+        {% else %}
+        
+            {% if newTableName %}
+
+                <h1>Updated: {{ newTableName }}</h1>
+
+            {% else %} 
+
+                <h1>Updated: {{ table_name }}</h1>
+
+            {% endif %}
+
+        {% endif %}
+
+
+        <div id="tablecontainer">
+            <table>
+                <thead>
+                    <tr>
+                        {% for column in columns %}
+                            <th>{{ column[0] }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in values %}
+                        <tr>
+                            {% for value in row %}
+                                <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
 
-    {% endif %}
+        {% if op != 'view' %}
+        
+        <h1>Before: {{ table_name }}</h1>
     
-    {% if newTableName %}
+        <div id="tablecontainer">
+            <table>
+                <thead>
+                    <tr>
+                        {% for column in oldcolumns2 %}
+                        <th>{{ column[0] }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in oldvalues %}
+                    <tr>
+                        {% for value in row %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-        <h1>New Table: {{ newTableName }}</h1>
+    
+        {% endif %}
+    
 
-    {% else %} 
+        {% if buttons %}
+        <div class="btn-container">
+            <form id="selectOperationForm" method="post">
+                <button type="submit" formaction="/insert-values" formmethod="post" class="btn">Insert Values</button>
+                <button type="submit" formaction="/update-values" formmethod="post" class="btn">Update Values</button>
+                <button type="submit" formaction="/delete-values" formmethod="post" class="btn">Delete Values</button>
+                <button type="submit" formaction="/rename-table" formmethod="post" class="btn">Rename Tables</button>
+                <input type="hidden" name="tableName" value="{{ table_name }}">
+            </form>
+        </div>
+        {% endif %}
+    </div>
 
-        <h1>New Table: {{ table_name }}</h1>
+    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" style="position: relative; left: 50%; transform: translateX(-50%); width: 170px; height: auto;">
 
-    {% endif %}
 
-    <table>
-        <thead>
-            <tr>
-                {% for column in columns %}
-                <th>{{ column[0] }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in values %}
-            <tr>
-                {% for value in row %}
-                <td>{{ value }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    {% if op != 'view' %}
-    <h1>Old Table: {{ table_name }}</h1>
-
-    <table>
-        <thead>
-            <tr>
-                {% for column in oldcolumns2 %}
-                <th>{{ column[0] }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in oldvalues %}
-            <tr>
-                {% for value in row %}
-                <td>{{ value }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    {% endif %}
-
+    <script>
+        function setSelectedTable() {
+            document.getElementById("selectedTable").value = "{{ table_name }}";
+        }
+    </script>
 </body>
-
 </html>

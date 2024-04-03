@@ -1,13 +1,11 @@
-+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
-|            email            |             password             | admin_priveleges |                                             data_                                              | user_img |
-+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
-|  bryson_greene@iitgn.ac.in  | 889211b122daa7f9f917d3d3b3475514 |        no        |  {"last_name": "Greene", "first_name": "Bryson", "driver_license_number": "6789012345678901"}  |   None   |
-|  daniel_wilson@iitgn.ac.in  | e7f84ff145ced31368756c41af7fef9c |        no        |  {"last_name": "Wilson", "first_name": "Daniel", "driver_license_number": "8901234567890123"}  |   None   |
-|   emily_brown@iitgn.ac.in   | f6244d2fc24ec05bedfbf7a84a42ddd4 |        no        |   {"last_name": "Brown", "first_name": "Emily", "driver_license_number": "5678901234567890"}   |   None   |
-|     john_doe@iitgn.ac.in    | 6d40e095b7f43848dc76ec017592da29 |        no        |    {"last_name": "Doe", "first_name": "John", "driver_license_number": "2345678901234567"}     |   None   |
-|    koramassey@iitgn.ac.in   | fdec10f5e0fc93e0dadc8c53b9802623 |        no        |   {"last_name": "Massey", "first_name": "Kora", "driver_license_number": "4567890123456789"}   |   None   |
-|    kumaramit@iitgn.ac.in    | f039eb446cc0bd7c5ad12b7a0e2a1dae |       yes        |   {"last_name": "Kumar", "first_name": "Amit", "driver_license_number": "1234567890123456"}    |   None   |
-|  max_verstappen@iitgn.ac.in | f5f75389bdbeddbbd70ac31c0245e42e |        no        | {"last_name": "Verstappen", "first_name": "Max", "driver_license_number": "3456789012345678"}  |   None   |
-| olivia_anderson@iitgn.ac.in | 6fe76ed19c9386c1389512a53aaaa6c6 |        no        | {"last_name": "Anderson", "first_name": "Olivia", "driver_license_number": "9012345678901234"} |   None   |
-|  sophia_taylor@iitgn.ac.in  | 4d4cc5ce3071ce7dbb117a1e5503a3be |        no        |  {"last_name": "Taylor", "first_name": "Sophia", "driver_license_number": "0123456789012345"}  |   None   |
-+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+----------+
++-----------------------------+----------------------------------+-----------------------------+------------------------------------------------------------------------------------------------+
+|           a.email           |            a.password            |           b.email           |                                            b.data_                                             |
++-----------------------------+----------------------------------+-----------------------------+------------------------------------------------------------------------------------------------+
+|  sophia_taylor@iitgn.ac.in  | 4d4cc5ce3071ce7dbb117a1e5503a3be |  sophia_taylor@iitgn.ac.in  |  {"last_name": "Taylor", "first_name": "Sophia", "driver_license_number": "0123456789012345"}  |
+|     john_doe@iitgn.ac.in    | 6d40e095b7f43848dc76ec017592da29 |     john_doe@iitgn.ac.in    |    {"last_name": "Doe", "first_name": "John", "driver_license_number": "2345678901234567"}     |
+| olivia_anderson@iitgn.ac.in | 6fe76ed19c9386c1389512a53aaaa6c6 | olivia_anderson@iitgn.ac.in | {"last_name": "Anderson", "first_name": "Olivia", "driver_license_number": "9012345678901234"} |
+|    kumaramit@iitgn.ac.in    | f039eb446cc0bd7c5ad12b7a0e2a1dae |    kumaramit@iitgn.ac.in    |   {"last_name": "Kumar", "first_name": "Amit", "driver_license_number": "1234567890123456"}    |
+|  max_verstappen@iitgn.ac.in | f5f75389bdbeddbbd70ac31c0245e42e |  max_verstappen@iitgn.ac.in | {"last_name": "Verstappen", "first_name": "Max", "driver_license_number": "3456789012345678"}  |
+|   emily_brown@iitgn.ac.in   | f6244d2fc24ec05bedfbf7a84a42ddd4 |   emily_brown@iitgn.ac.in   |   {"last_name": "Brown", "first_name": "Emily", "driver_license_number": "5678901234567890"}   |
+|    koramassey@iitgn.ac.in   | fdec10f5e0fc93e0dadc8c53b9802623 |    koramassey@iitgn.ac.in   |   {"last_name": "Massey", "first_name": "Kora", "driver_license_number": "4567890123456789"}   |
++-----------------------------+----------------------------------+-----------------------------+------------------------------------------------------------------------------------------------+

@@ -5,17 +5,145 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SQL Query Executor</title>
     <style>
-        #query-form {
-            width: 50%;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        h4 {
+            font-size: smaller;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #e8e7e7;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            margin-right: 10px;
+            display: inline-block;
+            width: 15%; /* Adjust width as needed */
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+        .form-group input[type="text"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        .form-group:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .alert {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            border-radius: 4px;
+        }
+        #tablecontainer{
+            max-height: 500px; /* Set the maximum height */
+            overflow: auto;
+            /* padding: 5px; */
+            border: 1px solid black;
+            border-radius: 15px;
+
+            max-width: 1300px;
             margin: 0 auto;
             padding: 20px;
-            border: 1px solid #ccc;
+        }
+        /* Style the scrollbar track */
+        #tablecontainer::-webkit-scrollbar {
+            width: 8px; /* Width of the scrollbar */
+        }
+
+        /* Style the scrollbar thumb */
+        #tablecontainer::-webkit-scrollbar-thumb {
+            background-color: #3399a9; /* Color of the scrollbar thumb */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        /* Style the scrollbar track when mouse is hovering over it */
+        #tablecontainer::-webkit-scrollbar-track:hover {
+            background-color: #ddd; /* Change color on hover */
+        }
+        .btn {
+            background-color: #1b78dc;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+            margin-left: 10px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn:active {
+            transform: translateY(1px);
+            box-shadow: none;
+        }
+        .query-form {
             margin-bottom: 20px;
+        }
+        .query-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        .query-form input[type="submit"] {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .query-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .query-form input[type="submit"]:active {
+            transform: translateY(1px);
+            box-shadow: none;
         }
         #output {
             width: 100%;
-            height: 400px;
+            height: 500px;
             border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -32,6 +160,4 @@
         <p>Provide access: UPDATE Users SET admin_priveleges='yes' WHERE email=</p>
         <p>Remove access: UPDATE Users SET admin_priveleges='no' WHERE email=</p>
     </div>
-    <!-- <iframe id="output" name="output" src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik"></iframe> -->
-</body>
 </html>
