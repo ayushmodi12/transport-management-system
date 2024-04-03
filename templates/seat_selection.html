@@ -6,9 +6,17 @@
     <title>Seat Selection</title>
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> -->
     <style>
-        body {
+        * {
+            margin: 0;
+            padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+
+        }
+        #bigb {
             background-color: azure;
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-top: 30px;
             /* background-color: aliceblue; */
             /* background-color: bisque; */
             /* background-color: cornflowerblue; */
@@ -18,7 +26,7 @@
             /* border: 10px solid rgb(51, 189, 244); */
             border-radius: 10px;
             box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.1);
-            
+            padding-top: 20px;
 
         }
         h1, h2 {
@@ -33,8 +41,8 @@
         }
         h1 {
             /* border: 0.5px solid #007bff; */
-            margin: 20px;
-            padding: 5px;
+            /* margin: 20px; */
+            padding-top: 10px;
             font-style: italic;
             box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.1);
 
@@ -43,10 +51,17 @@
             color: #ffffff;
             background-color: antiquewhite;
             background-color: teal;
-            border-radius: 5px;
+            background-color: #385170;
+
+            box-shadow: 200px 200px 200px 200px rgba(0, 147, 147, 0.186);
+            
+            height: 60px;
+
+            /* border-radius: 5px; */
         }
         #capac {
             margin-top: 40px;
+            margin-bottom: 15px;
         }
         #bDisplay {
             margin-top: 10px;
@@ -62,6 +77,7 @@
             /* justify-content: center; */
             /* margin-top: 20px; */
             /* margin: 30px; */
+            padding-right: 15px;
             margin-bottom: 10px;
             background-color: rgb(211, 250, 250);
             border: 3px solid rgb(0, 157, 255);
@@ -84,6 +100,7 @@
             /* margin-top: 20px; */
             /* margin: 30px; */
             margin-bottom: 10px;
+            padding-right: 15px;
             /* background-color: rgb(235, 249, 249); */
             background-color: rgb(211, 250, 250);
 
@@ -172,7 +189,7 @@
         }
 
         #book-button{
-            margin-left: 560px;
+            margin-left: 545px;
             margin-top: 30px;
             margin-bottom: 40px;
             margin-right: 5px;
@@ -215,6 +232,8 @@
 </head>
 <body>
     <h1> Choose Your Seat</h1>
+
+    <div id="bigb">
     <h2 id="route-title">Select Your Seat</h2>
     <h2 id="date-text"></h2>
     <h2 id="capac"></h2>
@@ -229,6 +248,10 @@
     </div>
     <button id="book-button">Book Selected Seat</button>
     <button id="cancel-button">Cancel Booked Seat</button>
+    </div>
+
+    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" style="position: relative; left: 50%; transform: translateX(-50%); width: 170px; height: auto;">
+
 
     <script>
         // Access logged-in user's email (username) from Flask session

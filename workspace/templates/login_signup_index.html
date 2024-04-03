@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to Transport Management System</h2>
+        <form method="POST" action="/">
+            <label for="option">Choose an option:</label>
+            <select id="option" name="option">
+                <option value="login">Login</option>
+                <option value="signup">Signup</option>
+            </select>
+            <button type="submit">Continue</button>
+        </form>
+    </div>
+    <img src="https://images2.imgbox.com/60/76/5MPW7a65_o.png" alt="Moon Macrosystems Logo" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 150px; height: auto;">
+
+</body>
+</html>

@@ -9,30 +9,34 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-image: url("../static/images/b.jpg");
-            /* opacity: 2; */
             background-attachment: fixed;
-  background-size: cover;
-  background-size: contain;
+            background-size: cover;
+            background-size: contain;
 
         }
         .container {
-            /* background-color: white; */
-            /* background-color: azure; */
-            /* background-color: ; */
     box-shadow: 0px 0px 30px 20px rgba(0, 0, 0, 0.1);
             /* border: 2px solid rgb(55, 55, 57) */
+            transform: translate(0px,-35px);
         }
         .IITGNlogo {
             height:200px;
-            /* justify-content: center; */
-            /* padding: auto; */
-            /* margin-left: 90px;
-            margin-top: 20px;
-            margin-bottom: 20px; */
-            /* margin-right: 60px; */
             display: block;
-  margin-left: auto;
-  margin-right: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .upload-img{
+            /* padding-left:  auto; */
+            transform: translate(90px,-28px);
+        }
+        #logo {
+            position: fixed;
+            margin-top: 50px;
+            bottom: 0px;
+            left: 50%;
+            transform: translate(-75px,50px);
+            width: 150px;
+            height: auto;
         }
     </style>
 </head>
@@ -50,15 +54,39 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <form method="POST" action="/signup">
+        <form method="POST" action="/signup" enctype="multipart/form-data">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
+            
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
+            
+            <label for="re_password">Re-enter Password:</label>
+            <input type="password" id="re_password" name="re_password" required>
+            
+            <label for="user_image">User Image:</label>
+            <input type="file" id="user_image" name="user_image" accept="image/*" class="upload-img">
+            
             <button type="submit">Signup</button>
         </form>
+        
     </div>
-    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 150px; height: auto;">
-
+    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" id = "logo">
+    <script>
+        function validateForm() {
+            var password = document.getElementById("password").value;
+            var re_password = document.getElementById("re_password").value;
+            var error_message = document.getElementById("error_message");
+    
+            if (password !== re_password) {
+                error_message.textContent = "Passwords do not match";
+                alert("Passwords do not match");
+                return false;
+            } else {
+                error_message.textContent = "";
+                return true;
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #beb9b953;
+    margin: 0;
+    padding: 0;
+    background-image: url("/static/background.avif");
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    color: rgba(95, 29, 70, 0.884);
+    margin-top: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 40px 40px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+}
+
+img {
+    height: 400px;
+    margin-right: 20px;
+    border-radius: 8px;
+    width: 400px;
+}
+
+p {
+    color: #666;
+    margin: 5px 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.attribute {
+    font-weight: bold;
+}
+
+.value {
+    margin-left: auto;
+    /* Align value to the right */
+}
+
+.bank-item {
+    margin-left: auto;
+    /* Align bank item to the right */
+}
+
+.text{
+    font-size: large;
+    vertical-align: middle;
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home_styles.css') }}">
+    <style>
+        /* Add custom styles here */
+        body {
+            font-family: Arial, sans-serif;
+            position: relative; /* Ensure proper positioning for footer elements */
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative; /* Ensure proper positioning for absolute elements */
+            padding-bottom: 80px; /* Increase padding to prevent overlap with footer */
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            margin-top: 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            color: #0056b3;
+        }
+        section {
+            margin-bottom: 40px; /* Adjust margin to create space between sections */
+        }
+        footer {
+            text-align: center;
+            color: #777;
+            position: absolute;
+            bottom: 0; /* Adjust vertical position */
+            width: 100%;
+            padding: 20px 0; /* Add padding for better spacing */
+        }
+        .dev-info,
+        .dev-contact {
+            position: absolute;
+            bottom: 20px; /* Adjust vertical position */
+            width: 50%; /* Set width for both sections */
+        }
+        .dev-info {
+            left: 20px;
+            text-align: left; /* Align developer info to the left */
+        }
+        .dev-contact {
+            right: 20px;
+            text-align: right; /* Align contact info to the right */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://images2.imgbox.com/60/76/5MPW7a65_o.png" alt="Moon Macrosystems Logo">
+            <h1>Welcome to Transport Management System</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Signup</a></li>
+                <!-- Add more options as needed -->
+            </ul>
+        </nav>
+        <section>
+            <h2>About Us</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula tortor et risus fringilla, 
+                id fermentum ipsum gravida. Nulla facilisi. Phasellus vulputate odio nec metus efficitur, et consequat odio eleifend. 
+                Nam et dui at felis egestas hendrerit. Integer consectetur varius ipsum, nec pretium nulla luctus ac. 
+                Phasellus scelerisque varius velit. Donec fringilla efficitur libero, at commodo neque mattis id. 
+                Nullam commodo ex arcu, a lacinia mauris placerat id.
+            </p>
+        </section>
+    </div>
+    <footer>
+        <div class="dev-info">
+            <p>Developed by: John Doe</p>
+        </div>
+        <div class="dev-contact">
+            <p>Contact: john@example.com</p>
+        </div>
+        <p>Contact us: example@example.com</p>
+        <p>&copy; 2024 Transport Management System</p>
+    </footer>
+</body>
+</html>

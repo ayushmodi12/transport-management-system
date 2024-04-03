@@ -1,4 +1,5 @@
 import argparse
+import imghdr
 import subprocess
 import sys
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for
@@ -10,7 +11,7 @@ import difflib
 from prettytable import PrettyTable
 from sqlalchemy import text,create_engine
 import json
-
+import base64
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -25,10 +26,12 @@ def driver_details():
         # print(email)
         result = conn.execute(query, {'email': email})
         drivers = result.fetchall()
-            
+        query2 = text("SELECT user_img FROM users WHERE email = :email")
+        image = conn.execute(query2, {'email': email}).fetchall()
         if drivers:
             columns = result.keys()  # Fetch column names
             req_driver = dict(zip(columns, drivers[0]))
+            req_driver['user_img'] = image
             return req_driver
         else:
             print("NIMBA")
@@ -66,15 +69,25 @@ def vehicles_driven():
 @app.route('/driver')
 def driver():
     info = driver_details()
-    vehicle_type, license_plate_number = vehicles_driven()
+    try:
+        vehicle_type, license_plate_number = vehicles_driven()
+    except:
+        vehicle_type = "No vehicles found."
+        license_plate_number = "No vehicles found."
+
     bank=json.loads(info['bank_details'])
     ifsc = bank['ifsc_code']
     acc_no = bank['account_number']
     branch = bank['branch_name']
+    # print(info['user_img'][0][0])
+    image_format = imghdr.what(None, info['user_img'][0][0])
+    # image_format = 'png'
+    image = base64.b64encode(info['user_img'][0][0]).decode('utf-8')
     return render_template('driver.html', name = info['first_name']+' '+info['last_name'],number=info['phone_number'],
                            email_id = info['email_id'], join = info['date_of_joining'], license = info['driver_license_number'],
                            vehicles = vehicle_type+' '+'('+license_plate_number+')',
-                           ifsc = 'IFSC Code: '+ifsc,acc='Account Number: '+acc_no,branch='Branch: '+branch)
+                           ifsc = 'IFSC Code: '+ifsc,acc='Account Number: '+acc_no,branch='Branch: '+branch,
+                           image =image, image_format = image_format)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -131,18 +144,30 @@ def signup():
         # Fetch form data
         username = request.form['username']
         password = request.form['password']
-
+        image = request.files['user_image'] if 'user_image' in request.files else None
+        print(request.files)
         # Cursor creation
-        cur = mysql.connection.cursor()
+        cursor = mysql.connection.cursor()
+
+        if image:
+            # If an image is uploaded, store it in the database
+            image_data = image.read()
+            cursor.execute("INSERT INTO users (email, password, user_img) VALUES (%s, MD5(%s), %s);",
+                           (username, password,image_data))
+        else:
+            # If no image is uploaded, set iimage column as NULL
+            cursor.execute("INSERT INTO users (email, password, user_img) VALUES (%s, MD5(%s), %s);",
+                           (username, password,None))
+
 
         # Execute query
-        cur.execute("INSERT INTO users (email, password) VALUES (%s, MD5(%s))", (username, password))
+        # cur.execute("INSERT INTO users (email, password,user_img) VALUES (%s, MD5(%s))", (username, password))
 
         # Commit to database
         mysql.connection.commit()
 
         # Close cursor
-        cur.close()
+        cursor.close()
 
         flash('Signup Successful', 'success')
         return redirect(url_for('login'))
@@ -879,24 +904,36 @@ def execute_and_display():
     before_path = r'tmp\before.txt'
     after_path = r'tmp\after.txt'
     if (query.split()[0].lower() == 'select'):
-        before_result = execute_query(query)
-        if (before_result[0] == -1):
-            return "ERROR IN EXECUTING QUERY --> " + str(before_result[1])
+        before_query = query
         tokens = query.split()
         if (tokens[1].lower() == '*'):
             table_fields = get_field_names(table_name)
+            if (table_name.lower() == "users"):
+                table_fields.remove('user_img')
+                before_query = after_query = f"SELECT email, password, admin_priveleges, data_ from {table_name}"
+                print(table_fields)
             
         else:
             # GET the table fields from the query
             table_fields = tokens[1].split(',')
             table_fields = [field.strip() for field in table_fields]
-
+        
+        before_result = execute_query(before_query)
+        if (before_result[0] == -1):
+            return "ERROR IN EXECUTING QUERY --> " + str(before_result[1])
         makeASCII(before_result[1], table_fields, before_path)
+        # print(before_result[1])
         py_path = sys.executable
         subprocess.run([py_path, "diff2HtmlCompare\orgTable.py", before_path, before_path], check=True) 
         return render_template('diff.html')
 
-    before_query = after_query = f"SELECT * FROM {table_name}"
+
+    if (table_name.lower() == "users"):
+        table_fields.remove('user_img')
+        before_query = after_query = f"SELECT email, password, admin_priveleges, data_ from {table_name}"
+    else:
+        before_query = after_query = f"SELECT * FROM {table_name}" 
+
     before_result = execute_query(before_query)
     if (before_result[0] == -1):
         return "ERROR IN EXECUTING QUERY TO FETCH STARTNG STATE OF THE TABLE --> " + str(before_result[1])
@@ -971,10 +1008,6 @@ def table_diff(before_file_path, after_file_path, diff_file_path):
     with open(after_file_path, 'r') as after_file:
         after_content = after_file.read().splitlines()
 
-    # diff = difflib.HtmlDiff().make_file(before_content, after_content,"BEFORE THE QUERY WAS EXECUTED", "AFTER THE QUERY WAS EXECUTED")
-
-    # with open(diff_file_path, 'w') as diff_file:
-    #     diff_file.write(diff)
     custom_html_diff = make_custom_html_diff(before_content, after_content)
     with open(diff_file_path, 'w') as diff_file:
         diff_file.write('<html><body>')
@@ -996,7 +1029,7 @@ def make_custom_html_diff(before_content, after_content):
 
 def makeASCII(query_result, field_names, file_path):
     if not query_result:
-        return None
+        query_result = [('No data',) * len(field_names)]
 
     table = PrettyTable()
     table.field_names = field_names

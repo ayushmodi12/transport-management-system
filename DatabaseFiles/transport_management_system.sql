@@ -78,7 +78,7 @@ CREATE table if not exists Users
   password  varchar(100)  NOT NULL UNIQUE,
   admin_priveleges enum ('yes', 'no') not null default 'no',
   data_ JSON, -- here data_ becomes the user defined data type
-  user_img blob,
+  user_img mediumblob,
   primary key (email)
 );
 

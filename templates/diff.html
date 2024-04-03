@@ -15,7 +15,7 @@
         -->
         <meta charset="utf-8">
         <title>
-            tmp\before.txt
+            tmp\after.txt
         </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,12 +27,28 @@
     <body>
         <div class="" id="topbar">
           <div id="filetitle"> 
-            tmp\before.txt
+            tmp\after.txt
           </div>
           <div class="switches">
             <div class="switch">
               <input id="showoriginal" class="toggle toggle-yes-no menuoption" type="checkbox" checked>
               <label for="showoriginal" data-on="&#10004; Original" data-off="Original"></label>
+            </div>
+            <div class="switch">
+              <input id="showmodified" class="toggle toggle-yes-no menuoption" type="checkbox" checked>
+              <label for="showmodified" data-on="&#10004; Modified" data-off="Modified"></label>
+            </div>
+            <div class="switch">
+              <input id="highlight" class="toggle toggle-yes-no menuoption" type="checkbox" checked>
+              <label for="highlight" data-on="&#10004; Highlight" data-off="Highlight"></label>
+            </div>
+            <div class="switch">
+              <input id="codeprintmargin" class="toggle toggle-yes-no menuoption" type="checkbox" checked>
+              <label for="codeprintmargin" data-on="&#10004; Margin" data-off="Margin"></label>
+            </div>
+            <div class="switch">
+              <input id="dosyntaxhighlight" class="toggle toggle-yes-no menuoption" type="checkbox" checked>
+              <label for="dosyntaxhighlight" data-on="&#10004; Syntax" data-off="Syntax"></label>
             </div>
           </div>
         </div>
@@ -44,20 +60,43 @@
                 <div class="printmargin">
                     01234567890123456789012345678901234567890123456789012345678901234567890123456789
                 </div>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="lineno_q">1</span><span class="lineno_q">2</span><span class="lineno_q">3</span><span class="lineno_q">4</span><span class="lineno_q">5</span><span class="lineno_q">6</span><span class="lineno_q">7</span><span class="lineno_q">8</span><span class="lineno_q">9</span><span class="lineno_q">10</span><span class="lineno_q">11</span><span class="lineno_q">12</span><span class="lineno_q">13</span><span class="lineno_q">14</span></pre></div></td><td class="code"><pre>+--------------------+---------------+--------------+--------------+
-|      email_id      |   first_name  |  last_name   | phone_number |
-+--------------------+---------------+--------------+--------------+
-| staffA@iitgn.ac.in | Staff_First_A | Staff_Last_A |  9876543201  |
-| staffB@iitgn.ac.in | Staff_First_B | Staff_Last_B |  8765432102  |
-| staffC@iitgn.ac.in | Staff_First_C | Staff_Last_C |  7654321093  |
-| staffD@iitgn.ac.in | Staff_First_D | Staff_Last_D |  6543210984  |
-| staffE@iitgn.ac.in | Staff_First_E | Staff_Last_E |  5432109875  |
-| staffF@iitgn.ac.in | Staff_First_F | Staff_Last_F |  4321098766  |
-| staffG@iitgn.ac.in | Staff_First_G | Staff_Last_G |  3210987657  |
-| staffH@iitgn.ac.in | Staff_First_H | Staff_Last_H |  2109876548  |
-| staffI@iitgn.ac.in | Staff_First_I | Staff_Last_I |  1098765439  |
-| staffJ@iitgn.ac.in | Staff_First_J | Staff_Last_J |  2345678901  |
-+--------------------+---------------+--------------+--------------+
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="lineno_q">1</span><span class="lineno_q">2</span><span class="lineno_q">3</span><span class="lineno_q">4</span><span class="lineno_q">5</span><span class="lineno_q">6</span><span class="lineno_q">7</span><span class="lineno_q">8</span><span class="lineno_q">9</span><span class="lineno_q">10</span><span class="lineno_q">11</span><span class="lineno_q lineno_leftadd">  </span><span class="lineno_q">12</span></pre></div></td><td class="code"><pre>+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+
+|            email            |             password             | admin_priveleges |                                             data_                                              |
++-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+
+|   emily_brown@iitgn.ac.in   | f6244d2fc24ec05bedfbf7a84a42ddd4 |        no        |   {&quot;last_name&quot;: &quot;Brown&quot;, &quot;first_name&quot;: &quot;Emily&quot;, &quot;driver_license_number&quot;: &quot;5678901234567890&quot;}   |
+|     john_doe@iitgn.ac.in    | 6d40e095b7f43848dc76ec017592da29 |        no        |    {&quot;last_name&quot;: &quot;Doe&quot;, &quot;first_name&quot;: &quot;John&quot;, &quot;driver_license_number&quot;: &quot;2345678901234567&quot;}     |
+|    koramassey@iitgn.ac.in   | fdec10f5e0fc93e0dadc8c53b9802623 |        no        |   {&quot;last_name&quot;: &quot;Massey&quot;, &quot;first_name&quot;: &quot;Kora&quot;, &quot;driver_license_number&quot;: &quot;4567890123456789&quot;}   |
+|    kumaramit@iitgn.ac.in    | f039eb446cc0bd7c5ad12b7a0e2a1dae |       yes        |   {&quot;last_name&quot;: &quot;Kumar&quot;, &quot;first_name&quot;: &quot;Amit&quot;, &quot;driver_license_number&quot;: &quot;1234567890123456&quot;}    |
+|  kumbharvedant@iitgn.ac.in  | c1320a4c86655826f33a2caa80070c65 |        no        |                                              None                                              |
+|  max_verstappen@iitgn.ac.in | f5f75389bdbeddbbd70ac31c0245e42e |        no        | {&quot;last_name&quot;: &quot;Verstappen&quot;, &quot;first_name&quot;: &quot;Max&quot;, &quot;driver_license_number&quot;: &quot;3456789012345678&quot;}  |
+| olivia_anderson@iitgn.ac.in | 6fe76ed19c9386c1389512a53aaaa6c6 |        no        | {&quot;last_name&quot;: &quot;Anderson&quot;, &quot;first_name&quot;: &quot;Olivia&quot;, &quot;driver_license_number&quot;: &quot;9012345678901234&quot;} |
+|  sophia_taylor@iitgn.ac.in  | 4d4cc5ce3071ce7dbb117a1e5503a3be |        no        |  {&quot;last_name&quot;: &quot;Taylor&quot;, &quot;first_name&quot;: &quot;Sophia&quot;, &quot;driver_license_number&quot;: &quot;0123456789012345&quot;}  |
+<span class="left_diff_add">
+</span>+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+
+
+</pre></td></tr></table></div>
+
+            </div>
+            <div id="rightcode" class="left-inner-shadow codebox divider-outside-bottom">
+                <div class="codefiletab">
+                    &#10093; Modified
+                </div>
+                <div class="printmargin">
+                    01234567890123456789012345678901234567890123456789012345678901234567890123456789
+                </div>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="lineno_q">1</span><span class="lineno_q">2</span><span class="lineno_q">3</span><span class="lineno_q">4</span><span class="lineno_q">5</span><span class="lineno_q">6</span><span class="lineno_q">7</span><span class="lineno_q">8</span><span class="lineno_q">9</span><span class="lineno_q">10</span><span class="lineno_q">11</span><span class="lineno_q lineno_rightadd">12</span><span class="lineno_q">13</span></pre></div></td><td class="code"><pre>+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+
+|            email            |             password             | admin_priveleges |                                             data_                                              |
++-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+
+|   emily_brown@iitgn.ac.in   | f6244d2fc24ec05bedfbf7a84a42ddd4 |        no        |   {&quot;last_name&quot;: &quot;Brown&quot;, &quot;first_name&quot;: &quot;Emily&quot;, &quot;driver_license_number&quot;: &quot;5678901234567890&quot;}   |
+|     john_doe@iitgn.ac.in    | 6d40e095b7f43848dc76ec017592da29 |        no        |    {&quot;last_name&quot;: &quot;Doe&quot;, &quot;first_name&quot;: &quot;John&quot;, &quot;driver_license_number&quot;: &quot;2345678901234567&quot;}     |
+|    koramassey@iitgn.ac.in   | fdec10f5e0fc93e0dadc8c53b9802623 |        no        |   {&quot;last_name&quot;: &quot;Massey&quot;, &quot;first_name&quot;: &quot;Kora&quot;, &quot;driver_license_number&quot;: &quot;4567890123456789&quot;}   |
+|    kumaramit@iitgn.ac.in    | f039eb446cc0bd7c5ad12b7a0e2a1dae |       yes        |   {&quot;last_name&quot;: &quot;Kumar&quot;, &quot;first_name&quot;: &quot;Amit&quot;, &quot;driver_license_number&quot;: &quot;1234567890123456&quot;}    |
+|  kumbharvedant@iitgn.ac.in  | c1320a4c86655826f33a2caa80070c65 |        no        |                                              None                                              |
+|  max_verstappen@iitgn.ac.in | f5f75389bdbeddbbd70ac31c0245e42e |        no        | {&quot;last_name&quot;: &quot;Verstappen&quot;, &quot;first_name&quot;: &quot;Max&quot;, &quot;driver_license_number&quot;: &quot;3456789012345678&quot;}  |
+| olivia_anderson@iitgn.ac.in | 6fe76ed19c9386c1389512a53aaaa6c6 |        no        | {&quot;last_name&quot;: &quot;Anderson&quot;, &quot;first_name&quot;: &quot;Olivia&quot;, &quot;driver_license_number&quot;: &quot;9012345678901234&quot;} |
+|  sophia_taylor@iitgn.ac.in  | 4d4cc5ce3071ce7dbb117a1e5503a3be |        no        |  {&quot;last_name&quot;: &quot;Taylor&quot;, &quot;first_name&quot;: &quot;Sophia&quot;, &quot;driver_license_number&quot;: &quot;0123456789012345&quot;}  |
+<span class="right_diff_add">|         tobedeleted         | 2e8d6dbf9112a879d4ceb15403d10a78 |        no        |                                              None                                              |
+</span>+-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+
 
 </pre></td></tr></table></div>
 
