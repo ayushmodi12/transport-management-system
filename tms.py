@@ -242,6 +242,7 @@ def book_seats():
 
     # Get current date and time
     date_time = datetime.now()
+    print(date_time)
     booking_id = str(uuid4())
 
     # Insert booking details into the database
@@ -893,67 +894,79 @@ def custom_query():
     
 @app.route('/execute_query', methods=['POST'])
 def execute_and_display():
-    # conn = connect_to_database(host, user, passwd, 'transportmanagement')
-    query = request.form['sql_query']
-    table_name = parse_query(query)
-    if (table_name == "Query is not supported"):
-        return "Query is not supported"
+    try:
+        # conn = connect_to_database(host, user, passwd, 'transportmanagement')
+        query = request.form['sql_query']
+        table_name = parse_query(query)
+        if (table_name == "Query is not supported"):
+            return "Query is not supported"
 
-    # table_fields = get_field_names(conn, table_name)
-    table_fields = get_field_names(table_name)
-    before_path = r'tmp\before.txt'
-    after_path = r'tmp\after.txt'
-    if (query.split()[0].lower() == 'select'):
-        before_query = query
-        tokens = query.split()
-        if (tokens[1].lower() == '*'):
-            table_fields = get_field_names(table_name)
-            if (table_name.lower() == "users"):
-                table_fields.remove('user_img')
-                before_query = after_query = f"SELECT email, password, admin_priveleges, data_ from {table_name}"
-                print(table_fields)
+        # table_fields = get_field_names(conn, table_name)
+        table_fields = get_field_names(table_name)
+        before_path = r'tmp\before.txt'
+        after_path = r'tmp\after.txt'
+        if (query.split()[0].lower() == 'select'):
+            before_query = query
+            tokens = query.split()
+            if (tokens[1].lower() == '*'):
+                table_fields = get_field_names(table_name)
+                if (table_name.lower() == "users"):
+                    table_fields.remove('user_img')
+                    before_query = after_query = f"SELECT email, password, admin_priveleges, data_ from {table_name}"
+                    print(table_fields)
+                
+            else:
+                # GET the table fields from the query
+                table_fields = tokens[1].split(',')
+                table_fields = [field.strip() for field in table_fields]
             
+            before_result = execute_query(before_query)
+            if (before_result[0] == -1):
+                return "ERROR IN EXECUTING QUERY --> " + str(before_result[1])
+            makeASCII(before_result[1], table_fields, before_path)
+            # print(before_result[1])
+            py_path = sys.executable
+            subprocess.run([py_path, "diff2HtmlCompare\orgTable.py", before_path, before_path], check=True) 
+            return render_template('diff.html')
+
+
+        if (table_name.lower() == "users"):
+            table_fields.remove('user_img')
+            before_query = after_query = f"SELECT email, password, admin_priveleges, data_ from {table_name}"
         else:
-            # GET the table fields from the query
-            table_fields = tokens[1].split(',')
-            table_fields = [field.strip() for field in table_fields]
-        
+            before_query = after_query = f"SELECT * FROM {table_name}" 
+
         before_result = execute_query(before_query)
         if (before_result[0] == -1):
-            return "ERROR IN EXECUTING QUERY --> " + str(before_result[1])
+            return "ERROR IN EXECUTING QUERY TO FETCH STARTNG STATE OF THE TABLE --> " + str(before_result[1])
+        
         makeASCII(before_result[1], table_fields, before_path)
-        # print(before_result[1])
+        res = execute_query(query)
+
+        if (res[0] == -1):
+            return "ERROR IN EXECUTING QUERY --> " + str(res[1])
+        
+        after_result = execute_query(after_query)
+        if (after_result[0] == -1):
+            return "ERROR IN EXECUTING QUERY TO FETCH CHANGED STATE OF THE TABLE --> " + str(after_result[1])
+        
+        makeASCII(after_result[1], table_fields, after_path)
         py_path = sys.executable
-        subprocess.run([py_path, "diff2HtmlCompare\orgTable.py", before_path, before_path], check=True) 
+        subprocess.run([py_path, "diff2HtmlCompare\diff.py", before_path, after_path], check=True) 
+        # return "Query executed successfully"
         return render_template('diff.html')
+    except:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='transportmanagement'")  # Adjust this query as per your database schema
+        table_names = cur.fetchall()
+        print("WORKKKKKKK")
+        print(table_names)
+        cur.close()
+        # return jsonify({'table_names': table_names})
+        # print(j)
+        return render_template('view_tables.html', table_names=table_names)
 
-
-    if (table_name.lower() == "users"):
-        table_fields.remove('user_img')
-        before_query = after_query = f"SELECT email, password, admin_priveleges, data_ from {table_name}"
-    else:
-        before_query = after_query = f"SELECT * FROM {table_name}" 
-
-    before_result = execute_query(before_query)
-    if (before_result[0] == -1):
-        return "ERROR IN EXECUTING QUERY TO FETCH STARTNG STATE OF THE TABLE --> " + str(before_result[1])
     
-    makeASCII(before_result[1], table_fields, before_path)
-    res = execute_query(query)
-
-    if (res[0] == -1):
-        return "ERROR IN EXECUTING QUERY --> " + str(res[1])
-    
-    after_result = execute_query(after_query)
-    if (after_result[0] == -1):
-        return "ERROR IN EXECUTING QUERY TO FETCH CHANGED STATE OF THE TABLE --> " + str(after_result[1])
-    
-    makeASCII(after_result[1], table_fields, after_path)
-    py_path = sys.executable
-    subprocess.run([py_path, "diff2HtmlCompare\diff.py", before_path, after_path], check=True) 
-    # return "Query executed successfully"
-    return render_template('diff.html')
-
 # Function to execute a MySQL query and return results
 def execute_query(query):
     try:
