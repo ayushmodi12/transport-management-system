@@ -1,11 +1,14 @@
-+-----------------------------+----------------------------------+-----------------------------+------------------------------------------------------------------------------------------------+
-|           a.email           |            a.password            |           b.email           |                                            b.data_                                             |
-+-----------------------------+----------------------------------+-----------------------------+------------------------------------------------------------------------------------------------+
-|  sophia_taylor@iitgn.ac.in  | 4d4cc5ce3071ce7dbb117a1e5503a3be |  sophia_taylor@iitgn.ac.in  |  {"last_name": "Taylor", "first_name": "Sophia", "driver_license_number": "0123456789012345"}  |
-|     john_doe@iitgn.ac.in    | 6d40e095b7f43848dc76ec017592da29 |     john_doe@iitgn.ac.in    |    {"last_name": "Doe", "first_name": "John", "driver_license_number": "2345678901234567"}     |
-| olivia_anderson@iitgn.ac.in | 6fe76ed19c9386c1389512a53aaaa6c6 | olivia_anderson@iitgn.ac.in | {"last_name": "Anderson", "first_name": "Olivia", "driver_license_number": "9012345678901234"} |
-|    kumaramit@iitgn.ac.in    | f039eb446cc0bd7c5ad12b7a0e2a1dae |    kumaramit@iitgn.ac.in    |   {"last_name": "Kumar", "first_name": "Amit", "driver_license_number": "1234567890123456"}    |
-|  max_verstappen@iitgn.ac.in | f5f75389bdbeddbbd70ac31c0245e42e |  max_verstappen@iitgn.ac.in | {"last_name": "Verstappen", "first_name": "Max", "driver_license_number": "3456789012345678"}  |
-|   emily_brown@iitgn.ac.in   | f6244d2fc24ec05bedfbf7a84a42ddd4 |   emily_brown@iitgn.ac.in   |   {"last_name": "Brown", "first_name": "Emily", "driver_license_number": "5678901234567890"}   |
-|    koramassey@iitgn.ac.in   | fdec10f5e0fc93e0dadc8c53b9802623 |    koramassey@iitgn.ac.in   |   {"last_name": "Massey", "first_name": "Kora", "driver_license_number": "4567890123456789"}   |
-+-----------------------------+----------------------------------+-----------------------------+------------------------------------------------------------------------------------------------+
++--------------------+---------------+--------------+--------------+
+|      email_id      |   first_name  |  last_name   | phone_number |
++--------------------+---------------+--------------+--------------+
+| staffA@iitgn.ac.in | Staff_First_A | Staff_Last_A |  9876543201  |
+| staffB@iitgn.ac.in | Staff_First_B | Staff_Last_B |  8765432102  |
+| staffC@iitgn.ac.in | Staff_First_C | Staff_Last_C |  7654321093  |
+| staffD@iitgn.ac.in | Staff_First_D | Staff_Last_D |  6543210984  |
+| staffE@iitgn.ac.in | Staff_First_E | Staff_Last_E |  5432109875  |
+| staffF@iitgn.ac.in | Staff_First_F | Staff_Last_F |  4321098766  |
+| staffG@iitgn.ac.in | Staff_First_G | Staff_Last_G |  3210987657  |
+| staffH@iitgn.ac.in | Staff_First_H | Staff_Last_H |  2109876548  |
+| staffI@iitgn.ac.in | Staff_First_I | Staff_Last_I |  1098765439  |
+| staffJ@iitgn.ac.in | Staff_First_J | Staff_Last_J |  2345678901  |
++--------------------+---------------+--------------+--------------+

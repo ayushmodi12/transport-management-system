@@ -8,8 +8,6 @@ from datetime import datetime
 from uuid import uuid4
 import difflib
 from prettytable import PrettyTable
-import sqlparse
-import mysql.connector as mconn
 from sqlalchemy import text,create_engine
 import json
 
@@ -162,12 +160,6 @@ def booking2():
         date = request.form['date']
         time_slot = request.form['time_slot']
 
-        # Check if the selected time slot is available
-        # Perform database query to check availability
-        # If available, book the slot and update the database
-        # If not available, display a warning message
-        # This logic will be implemented in detail later
-
         flash('Booking successful!', 'success')
         return redirect(url_for('landing'))
 
@@ -294,9 +286,6 @@ def cancel_booking():
         capacity = 29
     print(user_email)
 
-    # if not licence_plate_number or not user_email:
-    #     return jsonify({'error': 'Invalid request data'}), 400
-
     try:
         cur = mysql.connection.cursor()
         cur.execute("SELECT booked_seat FROM Booking WHERE _date = %s AND email_id = %s AND route = %s AND capacity = %s", (date, user_email, route, capacity))
@@ -383,26 +372,7 @@ def handle_operation():
     # return jsonify({'table_names': table_names})
     # print(j)
     return render_template('view_tables.html', table_names=table_names)
-    
-    if operation == 'view':
-        # Redirect to view tables page or perform necessary action
-        return redirect('/view-tables')
-    elif operation == 'insert':
-        # Redirect to insert values page or perform necessary action
-        return redirect('/insert-values')
-    elif operation == 'update':
-        # Redirect to update values page or perform necessary action
-        return redirect('/update-values')
-    elif operation == 'delete':
-        # Redirect to delete from tables page or perform necessary action
-        return redirect('/delete-from-tables')
-    elif operation == 'write':
-        # Redirect to write custom query page or perform necessary action
-        return redirect('/write-custom-query')
-    else:
-        # Handle invalid operation
-        return "Invalid operation"
-    
+
 @app.route('/view-tables', methods=['GET', 'POST'])
 def view_tables():
     print("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
@@ -444,17 +414,6 @@ def view_tables():
         
         cur.close()
         return render_template('display_table.html', columns = columns, oldcolumns2=oldcolumns2, values=values, table_name = table_name, op='view', buttons=True)
-    # else:
-    #     # Render HTML form for inserting values into tables
-    #     cur = mysql.connection.cursor()
-    #     cur.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='transportmanagement'")  # Adjust this query as per your database schema
-    #     table_names = cur.fetchall()
-    #     print("WORKKKKKKK")
-    #     print(table_names)
-    #     cur.close()
-    #     # return jsonify({'table_names': table_names})
-    #     # print(j)
-    #     return render_template('view_tables.html', table_names=table_names, op = 'view')
 
 
 @app.route('/insert-values', methods=['GET', 'POST'])
@@ -462,7 +421,6 @@ def insert_values():
     if request.method == 'POST':
         table_name = request.form['tableName']
         cur = mysql.connection.cursor()
-        print("A")
         cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
         columns = cur.fetchall()
         
@@ -484,42 +442,6 @@ def insert_values():
         
         return render_template('insert_form.html', columns=columns, table_name=table_name, values = values)
         
-        
-        # values = {column: request.form[column] for column in columns}
-        # # Construct INSERT query
-        # query = f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES ({', '.join(['%s'] * len(columns))})"
-        # # Execute INSERT query
-        # cur = mysql.connection.cursor()
-        # cur.execute(query, tuple(values.values()))
-        # mysql.connection.commit()
-        # cur.close()
-        # # Fetch updated table data
-        # cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
-        # values = cur.fetchall()
-        # print("WORKKKKKKK")
-        # print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTINGGGGGGGGGOAOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
-        # print(values)
-        # return render_template('display_table.html', columns=columns, values=values)
-    # else:
-        
-    #     # Render HTML form for inserting values into tables
-    #     cur = mysql.connection.cursor()
-    #     cur.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='transportmanagement'")  # Adjust this query as per your database schema
-    #     table_names = cur.fetchall()
-    #     print("WORKKKKKKK")
-    #     print(table_names)
-    #     cur.close()
-    #     # return jsonify({'table_names': table_names})
-    #     # print(j)
-    #     return render_template('view_tables.html', table_names=table_names, op = 'insert')
-        
-    #     cur = mysql.connection.cursor()
-    #     cur.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='transportmanagement'")  # Adjust this query as per your database schema
-    #     table_names = cur.fetchall()
-    #     print("WORKKKKKKK")
-    #     print(table_names)
-    #     cur.close()
-    #     return render_template('insert_values.html', table_names=table_names)
 
 @app.route('/submit-values', methods=['POST'])
 def submit_values():
@@ -546,6 +468,9 @@ def submit_values():
         print(values)
         u = tuple(values.values())
         print(u)
+        if table_name.lower() == 'users':
+            values['password'] = f"MD5('{values['password']}')"
+            
         sql = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
         print(sql)
         error = None
@@ -725,46 +650,6 @@ def update_values2():
 
 
         return render_template('display_table.html', table_name=table_name, columns=columns2, oldcolumns2=oldcolumns2, values=values, oldvalues=oldvalues, error = error, op='update')
-
-
-        table_name = request.form['tableName']
-        cur=mysql.connect.cursor()
-        values = {key: request.form[key] for key in request.form if (key != 'tableName' and key != 'whereCondition' and request.form[key] != '')}
-        # Prepare the SQL query for insertion
-        placeholders = ', '.join(['%s'] * len(values))
-        columns = ', '.join(values.keys())
-        print(columns)
-        print(values)
-        u = tuple(values.values())
-        print(u)
-        
-        set_clause = ", ".join([f"{column} = %s" for column in values.keys()])
-        print(set_clause)
-
-        # Construct the UPDATE query with the SET clause and optional WHERE condition
-        sql = f"UPDATE {table_name} SET {set_clause}"
-        print(sql)
-
-        # If a WHERE condition is provided, append it to the query
-        if request.form['whereCondition']!='':
-            sql += f" WHERE {request.form['whereCondition']}"
-
-        print(sql)
-        error = None
-        try:
-            cur.execute(sql, u)
-            mysql.connection.commit()
-            print("HORAAHH")
-            flash('Values successfully inserted into the database!', 'success')
-        except Exception as e:
-            mysql.connection.rollback()
-            print("NAHHHHHHHHHHH")
-            print(str(e))
-            error = str(e)
-            flash(f'Error inserting values: {str(e)}', 'error')
-        # Execute the query
-        cur.close()
-        
         
 @app.route('/delete-values', methods=['GET', 'POST'])
 def delete_values():
@@ -980,7 +865,7 @@ def rename_table2():
 @app.route('/custom-query', methods=['GET'])
 def custom_query():
     return render_template('custom_query.html')
-
+    
 @app.route('/execute_query', methods=['POST'])
 def execute_and_display():
     # conn = connect_to_database(host, user, passwd, 'transportmanagement')
@@ -1009,9 +894,6 @@ def execute_and_display():
         makeASCII(before_result[1], table_fields, before_path)
         py_path = sys.executable
         subprocess.run([py_path, "diff2HtmlCompare\orgTable.py", before_path, before_path], check=True) 
-        # open the html file in the browser in a new tab
-        # get full path of the file using os.path.abspath
-        # return "Query executed successfully"
         return render_template('diff.html')
 
     before_query = after_query = f"SELECT * FROM {table_name}"

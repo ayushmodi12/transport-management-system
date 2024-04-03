@@ -3,161 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQL Query Executor</title>
+    <title>Execute Custom Query</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
             padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
         }
-        h1 {
-            font-size: 24px;
+        
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .card h2 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+        
+        .heading {
+            text-align: center;
+            justify-content: center;
+            font-size: 30px;
+            padding-top: 30px;
+            background-color: #385170;
+            height: 60px;
+            color: #fff;
+            box-shadow: 200px 200px 200px 200px rgba(0, 204, 255, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        textarea {
+            width: 80%;
+            padding: 10px;
             margin-bottom: 20px;
-            color: #333;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
-        h4 {
-            font-size: smaller;
+
+        input[type="submit"] {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: darkblue;
+        }
+        textarea {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            margin-top: 20px; /* Add this line */
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
+
         th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #e8e7e7;
-        }
-        .form-group {
-            margin-bottom: 15px;
-            margin-right: 10px;
-            display: inline-block;
-            width: 15%; /* Adjust width as needed */
-        }
-        .form-group label {
-            display: block;
-            font-weight: bold;
-        }
-        .form-group input[type="text"] {
-            width: calc(100% - 10px);
+            border: 1px solid #ddd;
             padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 5px;
-        }
-        .form-group:after {
-            content: '';
-            display: block;
-            clear: both;
-        }
-        .alert {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-            border-radius: 4px;
-        }
-        #tablecontainer{
-            max-height: 500px; /* Set the maximum height */
-            overflow: auto;
-            /* padding: 5px; */
-            border: 1px solid black;
-            border-radius: 15px;
-
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        /* Style the scrollbar track */
-        #tablecontainer::-webkit-scrollbar {
-            width: 8px; /* Width of the scrollbar */
+            text-align: left;
         }
 
-        /* Style the scrollbar thumb */
-        #tablecontainer::-webkit-scrollbar-thumb {
-            background-color: #3399a9; /* Color of the scrollbar thumb */
-            border-radius: 5px; /* Rounded corners */
+        th {
+            background-color: rgb(14, 102, 203);
+            color: white;
         }
 
-        /* Style the scrollbar track when mouse is hovering over it */
-        #tablecontainer::-webkit-scrollbar-track:hover {
-            background-color: #ddd; /* Change color on hover */
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
-        .btn {
-            background-color: #1b78dc;
-            color: #fff;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .sql-query {
+            font-family: monospace;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-right: 10px;
-            margin-left: 10px;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-        .btn:active {
-            transform: translateY(1px);
-            box-shadow: none;
-        }
-        .query-form {
-            margin-bottom: 20px;
-        }
-        .query-form textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 5px;
-        }
-        .query-form input[type="submit"] {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .query-form input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-        .query-form input[type="submit"]:active {
-            transform: translateY(1px);
-            box-shadow: none;
-        }
-        #output {
-            width: 100%;
-            height: 500px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>ADMIN TERMINAL</h1>
-    <div id="query-form">
-        <form action="/execute_query" method="post">
-            <label for="sql_query">Enter your SQL query:</label><br>
-            <textarea id="sql_query" name="sql_query" rows="5" cols="50" placeholder="Enter your query here..."></textarea><br><br>
-            <input type="submit" value="Execute Query">
-        </form>
+    <h1 class="heading">ADMIN TERMINAL</h1>
+    <div class="container">
+        <div class="card">
+            <form action="/execute_query" method="post">
+                <h2 for="sql_query">Enter your SQL query:</h2><br><br>
+                <textarea id="sql_query" name="sql_query" rows="5" cols="50" placeholder="Enter your query here..."></textarea><br><br>
+                <input type="submit" value="Execute Query">
+            </form>
 
-        <p>To modify the admins, please write the following query:</p>
-        <p>Provide access: UPDATE Users SET admin_priveleges='yes' WHERE email=</p>
-        <p>Remove access: UPDATE Users SET admin_priveleges='no' WHERE email=</p>
+            <table>
+                <tr>
+                    <th>Action</th>
+                    <th>SQL Query</th>
+                </tr>
+                <tr>
+                    <td>Provide access</td>
+                    <td class="sql-query">UPDATE Users SET admin_priveleges='yes' WHERE email=</td>
+                </tr>
+                <tr>
+                    <td>Remove access</td>
+                    <td class="sql-query">UPDATE Users SET admin_priveleges='no' WHERE email=</td>
+                </tr>
+            </table>
+        </div>
     </div>
+</body>
 </html>
