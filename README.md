@@ -4,7 +4,8 @@
 [![My Skills](https://skillicons.dev/icons?i=flask,html,css,py,vscode,git,mysql)](https://skillicons.dev)  
 
 ## Design
-![Website Design](https://github.com/ayushmodi12/transport-management-system/assets/138511229/941a6b0a-66f2-4ae0-8116-646e6f1cdc78)
+![Website Design](https://github.com/ayushmodi12/transport-management-system/assets/138511229/68260c57-bf9f-4842-8a97-d58a617a78aa)
+
 
 ## Running the project
 Cuurently this project is supported in Windows devices only.  
