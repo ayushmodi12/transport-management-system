@@ -37,11 +37,11 @@ We can also create our own personal local network, and set up the server in one 
 Access the website by typing `http://tms.iitgn.ac.in:5000/` on the browser.  
 
 ## Screenshots of successful execution of the dynamic operations
-## INSERT Operation:
-## DELETE Operation:
-## UPDATE Operation:
-## RENAME Operation
-## Use of WHERE Clause:
+### INSERT Operation:
+### DELETE Operation:
+### UPDATE Operation:
+### RENAME Operation
+### Use of WHERE Clause:
 
 ## Contributors
 1) Mithil Pechimuthu
