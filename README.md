@@ -58,7 +58,9 @@ We can also execute custom update query in the admin terminal. Following is the 
 ### RENAME Operation:  
 
 ### Use of WHERE Clause:
-
+![Custom Update](https://drive.google.com/drive/folders/1QfaxhBmE9CQ-qvQuPxVABp2qfjspVDy4)
+We can also execute custom where where clause in the admin terminal. Following are the results.
+![Custom Update Out](https://drive.google.com/file/d/1TNkqqctD2VVRXgS0NJ98BKbMZg1HfX50/view?usp=sharing)
 ## Contributors
 1) Mithil Pechimuthu
 2) Ayush Modi
