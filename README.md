@@ -84,6 +84,11 @@ After (updating column name):
 ![rename_2_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/0998ab0d-0d36-4809-ab93-6c64afcc23ce)
 
 ### Use of WHERE Clause:
+Now, the WHERE clause has already been used in the above operations where we have performed UPDATE and DELETE. 
+The input field “Condition” in UPDATE and DELETE Operations takes the WHERE Clause as input and accordingly performs the operations. The screenshots for the operations have thus already been shown in the above sections. Below is the snippet of the code for the /update-values api, that creates the sql query for UPDATE operation using WHERE Clause:
+![whereclause_final](https://github.com/ayushmodi12/transport-management-system/assets/95853168/0a0ade02-f950-4c37-b2af-bc39eb91f43b)
+As we have already added screenshots above in UPDATE and DELETE, which also contain the WHERE Clause, we are not adding screenshots here.
+
 ![whereclause_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/200b4cac-dc7b-4a39-bf14-2ad54dcb9049)
 We can also execute custom where where clause in the admin terminal. Following are the results.
 ![whereclause_After](https://github.com/ayushmodi12/transport-management-system/assets/95853168/68a5f229-4a3c-4bb4-967a-42ff4b9e5ce6)
