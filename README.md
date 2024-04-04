@@ -56,6 +56,15 @@ We can also execute custom update query in the admin terminal. Following is the 
 ![Custom Update Out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/1077b33a-0149-44d2-b1c1-233efcad8067)
 
 ### RENAME Operation:  
+Before (updating table name):
+![rename_1_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/cdfc2347-fcb9-4c19-89d2-042e91f87c42)
+After (updating table name):
+![rename_1_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/c61178e2-79ad-4006-aac8-a2e146dc4084)
+
+Before (updating column name):
+![rename_2_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/e60cd51f-6d35-424c-8115-a001bb8e54c1)
+After (updating column name):
+![rename_2_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/0998ab0d-0d36-4809-ab93-6c64afcc23ce)
 
 ### Use of WHERE Clause:
 ![whereclause_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/200b4cac-dc7b-4a39-bf14-2ad54dcb9049)
