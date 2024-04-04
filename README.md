@@ -1,4 +1,4 @@
-# TRANSPORT MANAGEMENT SYSTEM
+![update_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/69b34ff6-a0c8-4100-8fef-18e9fdc7fbb3)![delete_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/f1dbef48-53c2-443c-8ea9-7b73c942e106)# TRANSPORT MANAGEMENT SYSTEM
 
 ## Tools and Skills Used
 [![My Skills](https://skillicons.dev/icons?i=flask,html,css,py,vscode,git,mysql)](https://skillicons.dev)  
@@ -38,6 +38,12 @@ Access the website by typing `http://tms.iitgn.ac.in:5000/` on the browser.
 
 ## Screenshots of successful execution of the dynamic operations
 ### INSERT Operation:
+Before (in webApp):
+![insert_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/285c6df4-3745-46ad-abca-e3431ebdecb9)
+After (in webApp)
+![insert_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/fe3a8b96-7ac0-4613-8856-5b4814c12da0)
+
+Now in Admin Terminal for different query:
 ![Booking a seat](https://github.com/ayushmodi12/transport-management-system/assets/119656326/55cc64bc-a2b0-4e04-b851-8320e6ea58e5)  
 We insert entries into the `booking` table upon successful booking.  
 
@@ -46,11 +52,23 @@ We can also execute custom insert query in the admin terminal. Following is the 
 ![Custom Insert Out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/3700abbf-8fba-40f3-82f3-5277e2a433ca)
 
 ### DELETE Operation:
+Before (in webApp):
+![insert_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/00bc9d3b-089e-4429-bc81-432f8bcb9429)
+After (in webApp)
+![delete_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/ac8ca8fd-1774-4ddb-95dc-a0988adedbe6)
+
+Now in Admin Terminal for different query:
 ![Custom Del](https://github.com/ayushmodi12/transport-management-system/assets/119656326/eef9be9a-88ee-43c9-8d61-19ef90614300)  
 We can also execute custom insert query in the admin terminal. Following is the result.  
 ![Custom Del out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/e56bb0d6-cc92-4e5a-95c5-9bcbe978a67d)
 
 ### UPDATE Operation:
+Before (in webApp):
+![update_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/16693cf7-0f07-413f-9f09-02733825832c)
+After (in webApp)
+![update_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/511ce72b-181e-4442-a1f5-556836f02da7)
+
+Now in Admin Terminal for different query:
 ![Custom Update](https://github.com/ayushmodi12/transport-management-system/assets/119656326/27bf73b7-d30b-4560-bae3-d232f390587c)  
 We can also execute custom update query in the admin terminal. Following is the result.  
 ![Custom Update Out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/1077b33a-0149-44d2-b1c1-233efcad8067)
