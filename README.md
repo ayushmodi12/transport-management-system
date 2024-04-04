@@ -1,4 +1,4 @@
-![update_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/69b34ff6-a0c8-4100-8fef-18e9fdc7fbb3)![delete_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/f1dbef48-53c2-443c-8ea9-7b73c942e106)# TRANSPORT MANAGEMENT SYSTEM
+# TRANSPORT MANAGEMENT SYSTEM
 
 ## Tools and Skills Used
 [![My Skills](https://skillicons.dev/icons?i=flask,html,css,py,vscode,git,mysql)](https://skillicons.dev)  
