@@ -21,7 +21,9 @@
             padding: 20px;
             border-radius: 10px;
             background-color: #ffffff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 100px 100px 100px 100px rgba(0, 0, 0, 0.1);
+            border: 1px solid black;
+            margin-top: 100px;
         }
 
         .logo {
@@ -31,12 +33,27 @@
             width: 50px;
             height: 50px;
             cursor: pointer;
+            /* padding: 20px; */
+            /* background-color: black;
+            color: yellowgreen; */
+            border: 2px solid black;
+            border-radius: 5px;
+            box-shadow: 100px 100px 100px 100px rgba(0, 0, 0, 0.1);
+
+        }
+        /* #prof { */
+            /* background-color: black; */
+            /* padding: 10px; */
+        /* } */
+        .container text-center{
+            margin-top: 200px;
+            /* padding-top: 200px; */
         }
     </style>
 </head>
 <body class="bg-gray-100">
-    <a onclick="location.href = 'userprofile'">
-        <img src="../static/images/user_image.jpg" alt="user_img" class="logo">
+    <a onclick="location.href = 'userprofile'" id="prof">
+        <img src="../static/images/user_image.jpg" alt="user_img" class="logo" style="display: block;">
     </a>
     <div class="container text-center">
         <h1 class="text-3xl font-bold mb-8">Welcome to Transport Management System</h1>

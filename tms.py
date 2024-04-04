@@ -168,7 +168,11 @@ def driver():
     branch = bank['branch_name']
     # print(info['user_img'][0][0])
     # image_format = 'png'
-    image = base64.b64encode(info['user_img'][0][0]).decode('utf-8')
+    if info['user_img'][0][0] == None:
+        image = open("static/images/driver3.jpg", "rb").read()
+        image = base64.b64encode(image).decode('utf-8')
+    else:
+        image = base64.b64encode(info['user_img'][0][0]).decode('utf-8')
     return render_template('driver.html', name = info['first_name']+' '+info['last_name'],number=info['phone_number'],
                            email_id = info['email_id'], join = info['date_of_joining'], license = info['driver_license_number'],
                            vehicles = vehicle_type+' '+'('+license_plate_number+')',
@@ -219,7 +223,7 @@ def login():
                 return redirect(url_for('admin'))  
         else:
             # User not found or credentials incorrect
-            # flash('Invalid email or password', 'error')
+            flash('Invalid email or password', 'error')
             return redirect(url_for('login'))
 
     return render_template('login.html')

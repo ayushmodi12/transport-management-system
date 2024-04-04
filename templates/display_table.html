@@ -198,7 +198,25 @@
         </div>
         {% endif %}
     </div>
-
+    <div class="note" style="text-align: center;">
+        {% if table_name == "allocatedparking" %}
+            <p style="font-weight: bold; font-size: 1.2em;">Note: Please enter values into Parking_space and Vehicle tables first before inserting it here. This is to satisfy the foreign key constraints.</p>
+        {% elif table_name == "drivenby" %}
+            <p style="font-weight: bold; font-size: 1.2em;">Note: Please enter values into Driver and Vehicle table first to satisfy the foreign key constraint.</p>
+        {% elif table_name == "goods" %}
+            <p style="font-weight: bold; font-size: 1.2em;">Note: Please enter values into the Shops table first to satisfy the foreign key constraint.</p>
+        {% elif table_name == "goodstransported" %}
+            <p style="font-weight: bold; font-size: 1.2em;">Note: Please enter values into the Vehicle table first to satisfy the foreign key constraint.</p>
+        {% elif table_name == "insurance" %}
+            <p style="font-weight: bold; font-size: 1.2em;">Note: Please enter values into the Vehicle table first to satisfy the foreign key constraint.</p>
+        {% elif table_name == "privateownership" %}
+            <p style="font-weight: bold; font-size: 1.2em;">Note: Please enter values into the Staff table first to satisfy the foreign key constraint.</p>
+        {% elif table_name == "shopvehicles" %}
+            <p style="font-weight: bold; font-size: 1.2em;">Note: Please enter values into the Shops table first to satisfy the foreign key constraint.</p>
+        {% elif table_name == "transportationlog" %}
+            <p style="font-weight: bold; font-size: 1.2em;">Note: Please enter values into the Vehicle and Route tables first to satisfy the foreign key constraint.</p>
+        {% endif %}
+    </div>
     <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" style="position: relative; left: 50%; transform: translateX(-50%); width: 170px; height: auto;">
 
 
