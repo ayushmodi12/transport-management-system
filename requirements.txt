@@ -5,3 +5,5 @@ mysql-connector-python
 sqlalchemy
 pymysql
 flask-mail
+difflib
+base64

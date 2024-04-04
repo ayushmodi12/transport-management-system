@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            border-right: 1px solid #ddd;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+        <img src="data:image/jpeg;base64,{{ image }}" alt="User Image" class="profile-img">
+
+        <form id="profileForm" action="/userprofile" method="POST">
+            <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                    <input type="file" name="profile_image" accept="image/*">
+            </div>
+            <table>
+                <tr>
+                    <th>First Name:</th>
+                    <td><input type="text" name="first_name" value="{{ user_data['first_name'] }}"></td>
+                </tr>
+                <tr>
+                    <th>Last Name:</th>
+                    <td><input type="text" name="last_name" value="{{ user_data['last_name'] }}"></td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td>{{ user_data['email'] }}</td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td> <input type="password" name="password" value="{% for char in user_data['password'] %}&ast;{% endfor %}"></td>
+                </tr>
+                <tr>
+                    <th>Admin Privileges</th>
+                    <td>{{ user_data['admin_priveleges'] }}</td>
+                </tr>
+                <tr>
+                    <th>Driver License</th>
+                    <td><input type="text" name="driver_license" value="{{ user_data['driver_license_number'] }}"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="button" value="Save Changes" onclick="saveChanges()"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        function saveChanges() {
+            var form = document.getElementById("profileForm");
+            var formData = new FormData(form);
+    
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/userprofile");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 5) {
+                    if (xhr.status === 200) {
+                        // Reload the page to reflect the updated details
+                        // location.reload();
+                        // Show an alert for successful update
+                        alert("Profile successfully updated.");
+                    } else {
+                        // Show an alert for failure
+                        alert("Failed to update profile. Please try again.");
+                    }
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>    
+</body>
+</html>

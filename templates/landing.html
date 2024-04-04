@@ -10,21 +10,9 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* background-image: url("../static/images/9.avif"); */
-            background-image: url("../static/images/13.webp");
-
-            /* background-image: url("../static/images/map2.jpg"); */
-            /* background-image: url("../static/images/13.webp"); */
-
-            /* background-image: url("../static/images/buscv.jpg"); */
+            background-image: url("../static/images/map2.jpg");
             background-attachment: fixed;
-  /* background-size: auto; */
-  /* background-size: contain; */
- background-size: cover;
- /* image-rendering: -webkit-optimize-contrast; */
- /* image-rendering: crisp-edges; */
- 
-
+            background-size: cover;
         }
         
         .container {
@@ -35,9 +23,21 @@
             background-color: #ffffff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
+        .logo {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
+    <a onclick="location.href = 'userprofile'">
+        <img src="../static/images/user_image.jpg" alt="user_img" class="logo">
+    </a>
     <div class="container text-center">
         <h1 class="text-3xl font-bold mb-8">Welcome to Transport Management System</h1>
         <ul class="text-lg">
@@ -46,6 +46,5 @@
         </ul>
     </div>
     <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 150px; height: auto;">
-
 </body>
 </html>

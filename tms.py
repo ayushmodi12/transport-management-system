@@ -36,8 +36,79 @@ def driver_details():
         else:
             print("NIMBA")
             return "No drivers found."
+        
+@app.route('/userprofile', methods=['GET', 'POST'])
+def userprofile():
+    if request.method == 'GET':
+        cur = mysql.connection.cursor()
+        email = session.get('emailID')
+        cur.execute("SELECT * FROM users WHERE email = %s", (email,))
+        user = cur.fetchone()
+        cur.close()
+        # print(user)
+        if(user[3]):  ## Please add the code for the exception case of a new user when they just sign in using username and password.
+            data = json.loads(user[3])
+            user = list(user)
+            last_name = data["last_name"]
+            first_name = data["first_name"]
+            driver_license_number = data["driver_license_number"]
+            user.append(last_name)
+            user.append(first_name)
+            user.append(driver_license_number)
+            del user[3]
+            keys = ['email', 'password', 'admin_priveleges', 'user_img', 'last_name', 'first_name', 'driver_license_number']
 
+            user_dict = dict(zip(keys, user))
+            if (user_dict['user_img'] == None):
+                user_dict['user_img'] = open("static/images/user_image.jpg", "rb").read()
 
+            image = base64.b64encode(user_dict['user_img']).decode('utf-8')
+            # print(user)
+            return render_template('userprofile.html',user_data = user_dict, image = image)
+        else:
+            user = list(user)
+            last_name = "NULL"
+            first_name = "NULL"
+            driver_license_number = "NULL"
+            user.append(last_name)
+            user.append(first_name)
+            user.append(driver_license_number)
+            del user[3]
+            keys = ['email', 'password', 'admin_priveleges', 'user_img', 'last_name', 'first_name', 'driver_license_number']
+            user_dict = dict(zip(keys, user))
+            if (user_dict['user_img'] == None):
+                user_dict['user_img'] = open("static/images/user_image.jpg", "rb").read()
+            image = base64.b64encode(user_dict['user_img']).decode('utf-8')
+            return render_template('userprofile.html',user_data = user_dict, image = image)
+
+    if request.method == 'POST':
+         # Fetch form data
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        # email = request.form['email']
+        driver_license = request.form['driver_license']
+        password = request.form['password']
+        profile_image = request.files['profile_image'] if 'profile_image' in request.files else None
+        cursor = mysql.connection.cursor()
+
+        cursor.execute("UPDATE users SET password = MD5(%s) WHERE email = %s", (password, session.get('emailID')))
+        cursor.execute("UPDATE users SET data_ = JSON_SET(data_, '$.driver_license_number', %s) WHERE email = %s;", (driver_license, session.get('emailID')))
+        cursor.execute("UPDATE users SET data_ = JSON_SET(data_, '$.first_name', %s) WHERE email = %s;", (first_name, session.get('emailID')))
+        cursor.execute("UPDATE users SET data_ = JSON_SET(data_, '$.last_name', %s) WHERE email = %s;", (last_name, session.get('emailID')))
+        
+        if profile_image:
+            # If an image is uploaded, store it in the database
+            image_data = profile_image.read()
+            cursor.execute("UPDATE users SET user_img = %s WHERE email = %s;", (image_data, session.get('emailID')))
+        mysql.connection.commit()
+
+        # Close cursor
+        cursor.close()
+
+        return redirect(url_for('landing'))
+
+    # return render_template('userprofile.html')
+    
 def vehicles_driven():
     info = driver_details()
     license=info['driver_license_number']
@@ -80,14 +151,13 @@ def driver():
     acc_no = bank['account_number']
     branch = bank['branch_name']
     # print(info['user_img'][0][0])
-    image_format = imghdr.what(None, info['user_img'][0][0])
     # image_format = 'png'
     image = base64.b64encode(info['user_img'][0][0]).decode('utf-8')
     return render_template('driver.html', name = info['first_name']+' '+info['last_name'],number=info['phone_number'],
                            email_id = info['email_id'], join = info['date_of_joining'], license = info['driver_license_number'],
                            vehicles = vehicle_type+' '+'('+license_plate_number+')',
                            ifsc = 'IFSC Code: '+ifsc,acc='Account Number: '+acc_no,branch='Branch: '+branch,
-                           image =image, image_format = image_format)
+                           image =image)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -113,27 +183,27 @@ def login():
         print(username, password)
         cur.execute("SELECT * FROM users WHERE email = %s AND password = MD5(%s)", (username, password))
         user = cur.fetchone()
-        print(user)
+        # print(user)
         cur.execute("SELECT * FROM Driver WHERE email_id = %s", (username,))
         driver = cur.fetchone()
-        print(driver)
+        # print(driver)
         # Close cursor
         cur.close()
         if (user):
             if user[2] == 'no':
                 # User found, redirect to dashboard or profile page
-                flash('Login Successful', 'success')
+                # flash('Login Successful', 'success')
                 session['emailID'] = username
                 if driver:
-                    flash('Welcome Driver', 'success')
+                    # flash('Welcome Driver', 'success')
                     return redirect(url_for('driver'))
                 return redirect(url_for('landing'))  # Replace 'dashboard' with your dashboard route
             elif user[2] == 'yes':
-                flash('Welcome Admin', 'success')
+                # flash('Welcome Admin', 'success')
                 return redirect(url_for('admin'))  
         else:
             # User not found or credentials incorrect
-            flash('Invalid email or password', 'error')
+            # flash('Invalid email or password', 'error')
             return redirect(url_for('login'))
 
     return render_template('login.html')
@@ -145,7 +215,7 @@ def signup():
         username = request.form['username']
         password = request.form['password']
         image = request.files['user_image'] if 'user_image' in request.files else None
-        print(request.files)
+        # print(request.files)
         # Cursor creation
         cursor = mysql.connection.cursor()
 
@@ -169,7 +239,7 @@ def signup():
         # Close cursor
         cursor.close()
 
-        flash('Signup Successful', 'success')
+        # flash('Signup Successful', 'success')
         return redirect(url_for('login'))
 
     return render_template('signup.html')
@@ -185,7 +255,7 @@ def booking2():
         date = request.form['date']
         time_slot = request.form['time_slot']
 
-        flash('Booking successful!', 'success')
+        # flash('Booking successful!', 'success')
         return redirect(url_for('landing'))
 
     return render_template('booking2.html')
@@ -211,6 +281,7 @@ def book_seats():
     print(data)
     selected_seat = data.get('selectedSeat')
     print(selected_seat)
+    
     
     # licence_plate_number = data.get('licencePlateNumber')
     date = data.get('_date')
@@ -504,13 +575,13 @@ def submit_values():
             cur.execute(sql, u)
             mysql.connection.commit()
             print("HORAAHH")
-            flash('Values successfully inserted into the database!', 'success')
+            # flash('Values successfully inserted into the database!', 'success')
         except Exception as e:
             mysql.connection.rollback()
             print("NAHHHHHHHHHHH")
             print(str(e))
             error = str(e)
-            flash(f'Error inserting values: {str(e)}', 'error')
+            # flash(f'Error inserting values: {str(e)}', 'error')
         # Execute the query
         cur.close()
         
@@ -542,7 +613,7 @@ def submit_values():
         #     cur.execute(sql, u)
         #     mysql.connection.commit()
         #     print("HORAAHH")
-        #     flash('Values successfully inserted into the database!', 'success')
+        #     # flash('Values successfully inserted into the database!', 'success')
         # except Exception as e:
         #     mysql.connection.rollback()
         #     print("NAHHHHHHHHHHH")
@@ -642,7 +713,7 @@ def update_values2():
             cur.execute(sql, u)
             mysql.connection.commit()
 
-            flash('Update operation successful', 'success')
+            # flash('Update operation successful', 'success')
             # return render_template('display_table.html', table_name=table_name, columns=columns2, values=values, oldvalues=oldvalues, error = error)
         
             # return redirect(url_for('some_route'))  # Redirect to some route after successful update
@@ -650,7 +721,7 @@ def update_values2():
         except Exception as e:
             mysql.connection.rollback()
             error = str(e)
-            flash(f'Error updating values: {str(e)}', 'error')
+            # flash(f'Error updating values: {str(e)}', 'error')
             # return redirect(url_for('some_route'))  # Redirect to some route after error
         
         cur = mysql.connection.cursor()
@@ -741,7 +812,7 @@ def delete_values2():
             cur.execute(sql)
             mysql.connection.commit()
 
-            flash('Delete operation successful', 'success')
+            # flash('Delete operation successful', 'success')
             # return render_template('display_table.html', table_name=table_name, columns=columns2, values=values, oldvalues=oldvalues, error = error)
         
             # return redirect(url_for('some_route'))  # Redirect to some route after successful update
@@ -749,7 +820,7 @@ def delete_values2():
         except Exception as e:
             mysql.connection.rollback()
             error = str(e)
-            flash(f'Error updating values: {str(e)}', 'error')
+            # flash(f'Error updating values: {str(e)}', 'error')
             # return redirect(url_for('some_route'))  # Redirect to some route after error
         
         cur = mysql.connection.cursor()
@@ -859,12 +930,12 @@ def rename_table2():
                 cur.execute(sql)
                 mysql.connection.commit()
 
-                flash('Delete operation successful', 'success')
+                # flash('Delete operation successful', 'success')
 
             except Exception as e:
                 mysql.connection.rollback()
                 error = str(e)
-                flash(f'Error updating values: {str(e)}', 'error')
+                # flash(f'Error updating values: {str(e)}', 'error')
         
         cur = mysql.connection.cursor()
         
