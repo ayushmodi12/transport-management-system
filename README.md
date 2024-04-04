@@ -1,4 +1,4 @@
-# TRANSPOORT MANAGEMENT SYSTEM
+# TRANSPORT MANAGEMENT SYSTEM
 
 ## Tools and Skills Used
 [![My Skills](https://skillicons.dev/icons?i=flask,html,css,py,vscode,git,mysql)](https://skillicons.dev)  
@@ -37,10 +37,27 @@ Access the website by typing `http://tms.iitgn.ac.in:5000/` on the browser.
 
 ## Screenshots of successful execution of the dynamic operations
 ### INSERT Operation:
-Before (in webApp):
-![insert_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/285c6df4-3745-46ad-abca-e3431ebdecb9)
+Before inserting, viewing the table on workbench:
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/8296cec6-cdf7-4d1f-90ac-151388ef3307)
+
+Now, inserting a new value in the table:
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/4c0a2fd1-9346-4761-9c6e-e1651e425033)
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/02486ea2-cdcc-47ea-9fd0-7e19eb34fb05)
+
+New value inserted can be seen on workbench:
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/b2af0c63-f876-49c8-8528-825c3958f2d0)
+
+Showing the Updated and before states of the table on the website:
+
 After (in webApp)
 ![insert_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/fe3a8b96-7ac0-4613-8856-5b4814c12da0)
+Before (in webApp):
+![insert_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/285c6df4-3745-46ad-abca-e3431ebdecb9)
+
 
 Now in Admin Terminal for different query:
 ![Booking a seat](https://github.com/ayushmodi12/transport-management-system/assets/119656326/55cc64bc-a2b0-4e04-b851-8320e6ea58e5)  
@@ -51,21 +68,56 @@ We can also execute custom insert query in the admin terminal. Following is the 
 ![Custom Insert Out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/3700abbf-8fba-40f3-82f3-5277e2a433ca)
 
 ### DELETE Operation:
-Before (in webApp):
-![insert_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/00bc9d3b-089e-4429-bc81-432f8bcb9429)
-After (in webApp)
-![delete_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/ac8ca8fd-1774-4ddb-95dc-a0988adedbe6)
+Before Deleting, viewing the table on workbench:
 
-Now in Admin Terminal for different query:
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/aca95695-2f7f-4ae2-a671-6c42ddc1a40e)
+
+Now, deleting the row where capacity = 20:
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/8cfdfbd2-4e7e-4b7b-8904-5c68b8bffa5b)
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/546ed208-2e47-4dce-af81-15e8f59212e1)
+
+We can see on workbench, that the row having capacity = 20 is deleted:
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/2a1c6cde-08d8-44e8-835f-bde563166a5f)
+
+Showing the Updated and before states of the table on the website:
+
+After (in webApp)
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/cb334506-165f-4e67-8b9b-a0b0eb785b72)
+Before (in webApp):
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/3beb56c0-192b-4c53-915a-6bbbaebb4a01)
+
+
+Now in Admin Terminal for **different** query:
 ![Custom Del](https://github.com/ayushmodi12/transport-management-system/assets/119656326/eef9be9a-88ee-43c9-8d61-19ef90614300)  
-We can also execute custom insert query in the admin terminal. Following is the result.  
+We can also execute custom delete query in the admin terminal. Following is the result.  
 ![Custom Del out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/e56bb0d6-cc92-4e5a-95c5-9bcbe978a67d)
 
 ### UPDATE Operation:
-Before (in webApp):
-![update_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/16693cf7-0f07-413f-9f09-02733825832c)
+Before updating, viewing the table on workbench:
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/f3595649-86a4-4b22-bc54-053f25a6b549)
+
+Now, updating the capacity to 60 in the row where location="Hostel Parking Area":
+NOTE: Only those input fields are to be filled for which we want to update the values, if the field is left empty, the value for that column will not be updated.
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/1eccd566-c97b-4bcd-aeb4-cbbb8ae17f6b)
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/b7196a7a-1ee2-4d7d-990c-cd46b5412b04)
+
+This updated row can be seen in the table on workbench:
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/ceb9f1a8-fea7-452b-a29e-afb861c0573f)
+
+Showing the Updated and before states of the table on the website:
+
 After (in webApp)
 ![update_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/511ce72b-181e-4442-a1f5-556836f02da7)
+Before (in webApp):
+![update_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/16693cf7-0f07-413f-9f09-02733825832c)
+
 
 Now in Admin Terminal for different query:
 ![Custom Update](https://github.com/ayushmodi12/transport-management-system/assets/119656326/27bf73b7-d30b-4560-bae3-d232f390587c)  
@@ -73,15 +125,43 @@ We can also execute custom update query in the admin terminal. Following is the 
 ![Custom Update Out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/1077b33a-0149-44d2-b1c1-233efcad8067)
 
 ### RENAME Operation:  
-Before (updating table name):
-![rename_1_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/cdfc2347-fcb9-4c19-89d2-042e91f87c42)
+Before renaming, viewing the current table on workbench:
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/91a85cc8-1971-40b0-92db-b6f6458bc331)
+
+Now, updating the table name to parking_space_new:
+NOTE: Only those input fields are to be filled for which we want to rename, for rest others, leave the input field empty:
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/9cd68679-e5d4-448b-b773-f8f70f3ff729)
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/0fb3c8c8-011a-431a-9c29-493b75523f0a)
+
+As we can see on workbench, the table name has been updated to parking_space_new:
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/90ea8130-3b03-4ac1-92e2-6c8ff8e4cf06)
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/dae9c2b1-52c9-4f49-a106-920f80ee0603)
+
+Showing the Updated and before states of the table on website:
+
 After (updating table name):
 ![rename_1_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/c61178e2-79ad-4006-aac8-a2e146dc4084)
+Before (updating table name):
+![rename_1_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/cdfc2347-fcb9-4c19-89d2-042e91f87c42)
 
-Before (updating column name):
-![rename_2_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/e60cd51f-6d35-424c-8115-a001bb8e54c1)
+Now, renaming the column **location** to **location_2**:
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/db01b24b-0d94-45c9-99ef-a074a08552f3)
+
+We can see in the workbench, the table name of location has been changed:
+
+![image](https://github.com/ayushmodi12/transport-management-system/assets/95853168/295bcf3d-8ea1-46e1-94b9-617dc2753335)
+
+Showing the Updated and before states of the table on the website:
 After (updating column name):
 ![rename_2_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/0998ab0d-0d36-4809-ab93-6c64afcc23ce)
+Before (updating column name):
+![rename_2_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/e60cd51f-6d35-424c-8115-a001bb8e54c1)
+
 
 ### Use of WHERE Clause:
 Now, the WHERE clause has already been used in the above operations where we have performed UPDATE and DELETE. 
