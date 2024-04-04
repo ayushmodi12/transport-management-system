@@ -58,9 +58,10 @@ We can also execute custom update query in the admin terminal. Following is the 
 ### RENAME Operation:  
 
 ### Use of WHERE Clause:
-![Custom Update](https://drive.google.com/drive/folders/1QfaxhBmE9CQ-qvQuPxVABp2qfjspVDy4)
+![whereclause_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/200b4cac-dc7b-4a39-bf14-2ad54dcb9049)
 We can also execute custom where where clause in the admin terminal. Following are the results.
-![Custom Update Out](https://drive.google.com/file/d/1TNkqqctD2VVRXgS0NJ98BKbMZg1HfX50/view?usp=sharing)
+![whereclause_After](https://github.com/ayushmodi12/transport-management-system/assets/95853168/68a5f229-4a3c-4bb4-967a-42ff4b9e5ce6)
+
 ## Contributors
 1) Mithil Pechimuthu
 2) Ayush Modi
