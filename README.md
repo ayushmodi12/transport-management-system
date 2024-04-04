@@ -7,7 +7,6 @@
 ![updated_flowchart](https://github.com/ayushmodi12/transport-management-system/assets/113369113/eb11aa59-78fe-40c7-a429-9d7630195c47)
 
 ## Running the project
-Currently, this project is supported in Windows devices only.  
 
 ## Setting up the Server
 First, change the working directory to `transport-management-system` after cloning this repository.  
@@ -34,6 +33,8 @@ We can also create our own personal local network, and set up the server in one 
 
 ### Access the Webpage
 Access the website by typing `http://tms.iitgn.ac.in:5000/` on the browser.  
+## For Non windows users
+Access the website by typing `http://127.0.0.1:5000/` on the browser.   
 
 ## Screenshots of successful execution of the dynamic operations
 ### INSERT Operation:
