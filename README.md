@@ -1,4 +1,4 @@
-# TRANSPRT MANAGEMENT SYSTEM
+# TRANSPORT MANAGEMENT SYSTEM
 
 ## Tools and Skills Used
 [![My Skills](https://skillicons.dev/icons?i=flask,html,css,py,vscode,git,mysql)](https://skillicons.dev)  
