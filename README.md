@@ -1,11 +1,10 @@
-# TRANSPORT MANAGEMENT SYSTEM
+# TRANSPOORT MANAGEMENT SYSTEM
 
 ## Tools and Skills Used
 [![My Skills](https://skillicons.dev/icons?i=flask,html,css,py,vscode,git,mysql)](https://skillicons.dev)  
 
 ## Design
-![Website Design](https://github.com/ayushmodi12/transport-management-system/assets/138511229/68260c57-bf9f-4842-8a97-d58a617a78aa)
-
+![updated_flowchart](https://github.com/ayushmodi12/transport-management-system/assets/113369113/eb11aa59-78fe-40c7-a429-9d7630195c47)
 
 ## Running the project
 Currently, this project is supported in Windows devices only.  
@@ -38,6 +37,12 @@ Access the website by typing `http://tms.iitgn.ac.in:5000/` on the browser.
 
 ## Screenshots of successful execution of the dynamic operations
 ### INSERT Operation:
+Before (in webApp):
+![insert_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/285c6df4-3745-46ad-abca-e3431ebdecb9)
+After (in webApp)
+![insert_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/fe3a8b96-7ac0-4613-8856-5b4814c12da0)
+
+Now in Admin Terminal for different query:
 ![Booking a seat](https://github.com/ayushmodi12/transport-management-system/assets/119656326/55cc64bc-a2b0-4e04-b851-8320e6ea58e5)  
 We insert entries into the `booking` table upon successful booking.  
 
@@ -46,18 +51,47 @@ We can also execute custom insert query in the admin terminal. Following is the 
 ![Custom Insert Out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/3700abbf-8fba-40f3-82f3-5277e2a433ca)
 
 ### DELETE Operation:
+Before (in webApp):
+![insert_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/00bc9d3b-089e-4429-bc81-432f8bcb9429)
+After (in webApp)
+![delete_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/ac8ca8fd-1774-4ddb-95dc-a0988adedbe6)
+
+Now in Admin Terminal for different query:
 ![Custom Del](https://github.com/ayushmodi12/transport-management-system/assets/119656326/eef9be9a-88ee-43c9-8d61-19ef90614300)  
 We can also execute custom insert query in the admin terminal. Following is the result.  
 ![Custom Del out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/e56bb0d6-cc92-4e5a-95c5-9bcbe978a67d)
 
 ### UPDATE Operation:
+Before (in webApp):
+![update_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/16693cf7-0f07-413f-9f09-02733825832c)
+After (in webApp)
+![update_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/511ce72b-181e-4442-a1f5-556836f02da7)
+
+Now in Admin Terminal for different query:
 ![Custom Update](https://github.com/ayushmodi12/transport-management-system/assets/119656326/27bf73b7-d30b-4560-bae3-d232f390587c)  
 We can also execute custom update query in the admin terminal. Following is the result.  
 ![Custom Update Out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/1077b33a-0149-44d2-b1c1-233efcad8067)
 
 ### RENAME Operation:  
+Before (updating table name):
+![rename_1_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/cdfc2347-fcb9-4c19-89d2-042e91f87c42)
+After (updating table name):
+![rename_1_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/c61178e2-79ad-4006-aac8-a2e146dc4084)
+
+Before (updating column name):
+![rename_2_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/e60cd51f-6d35-424c-8115-a001bb8e54c1)
+After (updating column name):
+![rename_2_after](https://github.com/ayushmodi12/transport-management-system/assets/95853168/0998ab0d-0d36-4809-ab93-6c64afcc23ce)
 
 ### Use of WHERE Clause:
+Now, the WHERE clause has already been used in the above operations where we have performed UPDATE and DELETE. 
+The input field “Condition” in UPDATE and DELETE Operations takes the WHERE Clause as input and accordingly performs the operations. The screenshots for the operations have thus already been shown in the above sections. Below is the snippet of the code for the /update-values api, that creates the sql query for UPDATE operation using WHERE Clause:
+![whereclause_final](https://github.com/ayushmodi12/transport-management-system/assets/95853168/0a0ade02-f950-4c37-b2af-bc39eb91f43b)
+As we have already added screenshots above in UPDATE and DELETE, which also contain the WHERE Clause, we are not adding screenshots here.
+
+![whereclause_before](https://github.com/ayushmodi12/transport-management-system/assets/95853168/200b4cac-dc7b-4a39-bf14-2ad54dcb9049)
+We can also execute custom where where clause in the admin terminal. Following are the results.
+![whereclause_After](https://github.com/ayushmodi12/transport-management-system/assets/95853168/68a5f229-4a3c-4bb4-967a-42ff4b9e5ce6)
 
 ## Contributors
 1) Mithil Pechimuthu
