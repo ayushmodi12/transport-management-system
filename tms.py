@@ -19,8 +19,8 @@ app.secret_key = 'your_secret_key'
 
 def driver_details():
     email = session.get('emailID')
-    print("HI")
-    print(email)
+    # print("HI")
+    # print(email)
     with engine.connect() as conn:
         query = text("SELECT * FROM driver WHERE email_id = :email")
         # print(email)
@@ -34,7 +34,7 @@ def driver_details():
             req_driver['user_img'] = image
             return req_driver
         else:
-            print("NIMBA")
+            # print("NIMBA")
             return "No drivers found."
         
 @app.route('/userprofile', methods=['GET', 'POST'])
@@ -45,7 +45,7 @@ def userprofile():
         cur.execute("SELECT * FROM users WHERE email = %s", (email,))
         user = cur.fetchone()
         cur.close()
-        # print(user)
+        print(user[:-1])
         if(user[3]):  ## Please add the code for the exception case of a new user when they just sign in using username and password.
             data = json.loads(user[3])
             user = list(user)
@@ -82,6 +82,7 @@ def userprofile():
             return render_template('userprofile.html',user_data = user_dict, image = image)
 
     if request.method == 'POST':
+        print("Hello")
          # Fetch form data
         first_name = request.form['first_name']
         last_name = request.form['last_name']
@@ -91,15 +92,30 @@ def userprofile():
         profile_image = request.files['profile_image'] if 'profile_image' in request.files else None
         cursor = mysql.connection.cursor()
 
-        cursor.execute("UPDATE users SET password = MD5(%s) WHERE email = %s", (password, session.get('emailID')))
-        cursor.execute("UPDATE users SET data_ = JSON_SET(data_, '$.driver_license_number', %s) WHERE email = %s;", (driver_license, session.get('emailID')))
-        cursor.execute("UPDATE users SET data_ = JSON_SET(data_, '$.first_name', %s) WHERE email = %s;", (first_name, session.get('emailID')))
-        cursor.execute("UPDATE users SET data_ = JSON_SET(data_, '$.last_name', %s) WHERE email = %s;", (last_name, session.get('emailID')))
-        
         if profile_image:
             # If an image is uploaded, store it in the database
             image_data = profile_image.read()
             cursor.execute("UPDATE users SET user_img = %s WHERE email = %s;", (image_data, session.get('emailID')))
+        
+        # Create a dictionary with all the data
+        data_dict = {
+            'driver_license_number': driver_license,
+            'first_name': first_name,
+            'last_name': last_name
+        }
+
+        # Convert the dictionary to a JSON string
+        data_json = json.dumps(data_dict)
+
+        # Execute the update query
+        cursor.execute("UPDATE users SET data_ = %s WHERE email = %s;", (data_json, session.get('emailID')))
+        # cursor.execute("UPDATE users SET data_ = JSON_SET(data_, '$.driver_license_number', %s) WHERE email = %s;", (driver_license, session.get('emailID')))
+        # cursor.execute("UPDATE users SET data_ = JSON_SET(data_, '$.first_name', %s) WHERE email = %s;", (first_name, session.get('emailID')))
+        # cursor.execute("UPDATE users SET data_ = JSON_SET(data_, '$.last_name', %s) WHERE email = %s;", (last_name, session.get('emailID')))
+        cursor.execute("UPDATE users SET password = MD5(%s) WHERE email = %s", (password, session.get('emailID')))
+
+        
+
         mysql.connection.commit()
 
         # Close cursor
@@ -180,7 +196,7 @@ def login():
         cur = mysql.connection.cursor()
 
         # Execute query
-        print(username, password)
+        # print(username, password)
         cur.execute("SELECT * FROM users WHERE email = %s AND password = MD5(%s)", (username, password))
         user = cur.fetchone()
         # print(user)
@@ -264,11 +280,11 @@ def booking2():
 def booking():
     # Fetch available buses from the database
     cur = mysql.connection.cursor()
-    print(cur)
+    # print(cur)
     cur.execute("SELECT * FROM Vehicle")
     buses = cur.fetchall()
-    print("HIIIIIIIIIIIIIIIIIIIIIIII")
-    print(buses)
+    # print("HIIIIIIIIIIIIIIIIIIIIIIII")
+    # print(buses)
     cur.close()
     
     # Render the template with the list of available buses
@@ -278,9 +294,9 @@ def booking():
 def book_seats():
     # Get selected seat from the request data
     data = request.json
-    print(data)
+    # print(data)
     selected_seat = data.get('selectedSeat')
-    print(selected_seat)
+    # print(selected_seat)
     
     
     # licence_plate_number = data.get('licencePlateNumber')
@@ -304,16 +320,16 @@ def book_seats():
     cur = mysql.connection.cursor()
     cur.execute("SELECT COUNT(*) FROM Booking WHERE _date = %s AND capacity = %s AND email_id = %s AND route = %s", (date, capacity, user_email, route))
     booking_count = cur.fetchone()[0]
-    print(booking_count)
+    # print(booking_count)
     cur.close()
 
     if booking_count > 0:
-        print("bdoneeee")
+        # print("bdoneeee")
         return jsonify({'error': 'You have already booked a ticket for this bus'}), 400
 
     # Get current date and time
     date_time = datetime.now()
-    print(date_time)
+    # print(date_time)
     booking_id = str(uuid4())
 
     # Insert booking details into the database
@@ -330,8 +346,8 @@ def book_seats():
         
         return jsonify({'message': 'Booking successful'}), 200
     except Exception as e:
-        print("ACHA")
-        print(e)
+        # print("ACHA")
+        # print(e)
         return jsonify({'error': str(e)}), 500
 
 
@@ -355,13 +371,13 @@ def fetch_booked_seats():
         cur = mysql.connection.cursor()
         cur.execute("SELECT booked_seat FROM Booking WHERE _date = %s AND route = %s AND capacity = %s", (date, route, capacity))  # Adjust this query as per your database schema
         booked_seats = cur.fetchall()
-        print("WORKKKKKKK")
-        print("CRAYYYYY")
-        print(booked_seats)
+        # print("WORKKKKKKK")
+        # print("CRAYYYYY")
+        # print(booked_seats)
         cur.close()
         return jsonify({'bookedSeats': booked_seats})
     else:
-        print("SEDDD")
+        # print("SEDDD")
         return jsonify({'error': 'Method not allowed'}), 405
 
 @app.route('/cancel-booking', methods=['POST'])
@@ -381,7 +397,7 @@ def cancel_booking():
         capacity = 56
     else:
         capacity = 29
-    print(user_email)
+    # print(user_email)
 
     try:
         cur = mysql.connection.cursor()
@@ -389,12 +405,12 @@ def cancel_booking():
         canceled_seat = cur.fetchall()
         # print("WORKKKKKKK")
         # print(booked_seats)
-        print(canceled_seat)
+        # print(canceled_seat)
         cur.close()
-        print("POPP")
+        # print("POPP")
         cur = mysql.connection.cursor()
         cur.execute("DELETE FROM Booking WHERE _date = %s AND email_id = %s AND route = %s AND capacity = %s", (date, user_email, route, capacity))
-        print("POPP2")
+        # print("POPP2")
         mysql.connection.commit()
         cur.close()
         
@@ -404,7 +420,7 @@ def cancel_booking():
         
         return jsonify({'canceledSeat': canceled_seat}), 200
     except Exception as e:
-        print("LOCHA")
+        # print("LOCHA")
         return jsonify({'error': str(e)}), 500
 
 
@@ -428,12 +444,12 @@ def fetch_users_booked_seat():
         cur = mysql.connection.cursor()
         cur.execute("SELECT booked_seat FROM Booking WHERE _date = %s AND route = %s AND capacity = %s AND email_id = %s", (date, route, capacity, user_email))  # Adjust this query as per your database schema
         booked_seats = cur.fetchall()
-        print("WORKKKKKKK")
-        print(booked_seats)
+        # print("WORKKKKKKK")
+        # print(booked_seats)
         cur.close()
         return jsonify({'bookedSeats': booked_seats})
     else:
-        print("SEDDD")
+        # print("SEDDD")
         return jsonify({'error': 'Method not allowed'}), 405
 
 @app.route('/seat-selection', methods=['GET', 'POST'])
@@ -463,8 +479,8 @@ def handle_operation():
     cur = mysql.connection.cursor()
     cur.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='transportmanagement'")  # Adjust this query as per your database schema
     table_names = cur.fetchall()
-    print("WORKKKKKKK")
-    print(table_names)
+    # print("WORKKKKKKK")
+    # print(table_names)
     cur.close()
     # return jsonify({'table_names': table_names})
     # print(j)
@@ -472,29 +488,29 @@ def handle_operation():
 
 @app.route('/view-tables', methods=['GET', 'POST'])
 def view_tables():
-    print("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
+    # print("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
     if request.method == 'POST':
         table_name = request.form['tableName']
-        print(table_name)
+        # print(table_name)
         # Query the database to fetch the data for the selected table
         # You can use your database access methods here
         # Example: data = query_database(table_name)
         # Pass the data to the template and render it
         cur = mysql.connection.cursor()
-        print("A")
+        # print("A")
         cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
         columns = cur.fetchall()
         # print("WORKKKKKKK")
         # print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTINGGGGGGGGGOAOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
-        print(columns)
-        print("B")
+        # print(columns)
+        # print("B")
         # cur.close()
         # cur = mysql.connection.cursor()
         cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
         values = cur.fetchall()
-        print("WORKKKKKKK")
-        print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTINGGGGGGGGGOAOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
-        print(values)
+        # print("WORKKKKKKK")
+        # print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTINGGGGGGGGGOAOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+        # print(values)
         
         cur.execute(f"select ORDINAL_POSITION from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
         ORDINAL_POSITION = cur.fetchall()
@@ -542,7 +558,7 @@ def insert_values():
 
 @app.route('/submit-values', methods=['POST'])
 def submit_values():
-    print("00000000000000000000000000000000000000000000000")
+    # print("00000000000000000000000000000000000000000000000")
     if request.method == 'POST':
         table_name = request.form['tableName']
         
@@ -553,40 +569,40 @@ def submit_values():
         
         
         cur = mysql.connection.cursor()
-        print("00000000000000000000000000000000000000000000000")
-        print(table_name)
-        print("1111111111111111111111111111111111111111111111111")
+        # print("00000000000000000000000000000000000000000000000")
+        # print(table_name)
+        # print("1111111111111111111111111111111111111111111111111")
         values = {key: request.form[key] for key in request.form if (key != 'tableName' and request.form[key]!='')}
         
         # Prepare the SQL query for insertion
         placeholders = ', '.join(['%s'] * len(values))
         columns = ', '.join(values.keys())
-        print(columns)
-        print(values)
+        # print(columns)
+        # print(values)
         u = tuple(values.values())
-        print(u)
+        # print(u)
         if table_name.lower() == 'users':
             values['password'] = f"MD5('{values['password']}')"
             
         sql = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
-        print(sql)
+        # print(sql)
         error = None
         try:
             cur.execute(sql, u)
             mysql.connection.commit()
-            print("HORAAHH")
+            # print("HORAAHH")
             # flash('Values successfully inserted into the database!', 'success')
         except Exception as e:
             mysql.connection.rollback()
-            print("NAHHHHHHHHHHH")
-            print(str(e))
+            # print("NAHHHHHHHHHHH")
+            # print(str(e))
             error = str(e)
             # flash(f'Error inserting values: {str(e)}', 'error')
         # Execute the query
         cur.close()
         
         
-        print("A")
+        # print("A")
         
         cur = mysql.connection.cursor()
         
@@ -606,9 +622,9 @@ def submit_values():
         
         cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
         values = cur.fetchall()
-        print("WORKKKKKKK")
-        print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTINGGGGGGGGGOAOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
-        print(values)
+        # print("WORKKKKKKK")
+        # print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTINGGGGGGGGGOAOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+        # print(values)
         # try:
         #     cur.execute(sql, u)
         #     mysql.connection.commit()
@@ -631,7 +647,7 @@ def update_values():
     if request.method == 'POST':
         table_name = request.form['tableName']
         cur = mysql.connection.cursor()
-        print("A")
+        # print("A")
         cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
         columns = cur.fetchall()
         
@@ -648,7 +664,7 @@ def update_values():
         
         cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
         values = cur.fetchall()
-        print(values)
+        # print(values)
         
         cur.close()
         
@@ -674,8 +690,8 @@ def update_values2():
         if (request.form['whereCondition']!=''):
             where_condition = request.form['whereCondition']
         
-        print(values)
-        print(where_condition)
+        # print(values)
+        # print(where_condition)
         
         # columns = ', '.join(values.keys())
         
@@ -685,7 +701,7 @@ def update_values2():
         # Construct the SET part of the SQL query
         set_clause = ", ".join([f"{col} = %s" for col in values.keys()])
         
-        print(set_clause)
+        # print(set_clause)
 
         # Construct the UPDATE query
         
@@ -696,16 +712,16 @@ def update_values2():
         else:
             sql = f"UPDATE {table_name} SET {set_clause}"
             
-        print(sql)
+        # print(sql)
         
 
         # Prepare the values for the SET clause
         set_values = values
         
         u = tuple(values.values())
-        print(u)
+        # print(u)
         
-        print(set_values)
+        # print(set_values)
         error = None
         try:
             # Execute the UPDATE query
@@ -753,7 +769,7 @@ def delete_values():
     if request.method == 'POST':
         table_name = request.form['tableName']
         cur = mysql.connection.cursor()
-        print("A")
+        # print("A")
         cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
         columns = cur.fetchall()
         
@@ -770,7 +786,7 @@ def delete_values():
         
         cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
         values = cur.fetchall()
-        print(values)
+        # print(values)
         
         cur.close()
         
@@ -792,7 +808,7 @@ def delete_values2():
         if (request.form['whereCondition']!=''):
             where_condition = request.form['whereCondition']
         
-        print(where_condition)
+        # print(where_condition)
         
         # Construct the UPDATE query
         
@@ -803,7 +819,7 @@ def delete_values2():
         else:
             sql = f"DELETE FROM {table_name}"
         
-        print(sql)
+        # print(sql)
         
         error = None
         try:
@@ -852,7 +868,7 @@ def rename_table():
     if request.method == 'POST':
         table_name = request.form['tableName']
         cur = mysql.connection.cursor()
-        print("A")
+        # print("A")
         cur.execute(f"select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{table_name}' AND TABLE_SCHEMA='transportmanagement';")  # Adjust this query as per your database schema
         columns = cur.fetchall()
         
@@ -869,7 +885,7 @@ def rename_table():
         
         cur.execute(f"SELECT * FROM {table_name}")  # Adjust this query as per your database schema
         values = cur.fetchall()
-        print(values)
+        # print(values)
         
         cur.close()
         
@@ -907,10 +923,10 @@ def rename_table2():
         if (request.form['newTableName']!=''): 
             newTableName = request.form['newTableName']
             
-        print(newTableName)
+        # print(newTableName)
         
         values = {key: request.form[key] for key in request.form if (key != 'newTableName' and key != 'tableName' and request.form[key]!='')}
-        print(values)
+        # print(values)
         for key, value in values.items():
             cur = mysql.connection.cursor()
             sql = f"ALTER TABLE {table_name} RENAME COLUMN {key} TO {value}"
@@ -922,7 +938,7 @@ def rename_table2():
     
         if (request.form['newTableName']!=''): 
             sql = f"ALTER TABLE {table_name} RENAME TO {newTableName}"
-            print(sql)
+            # print(sql)
             
             try:
                 # Execute the UPDATE query
@@ -984,7 +1000,7 @@ def execute_and_display():
                 if (table_name.lower() == "users"):
                     table_fields.remove('user_img')
                     before_query = after_query = f"SELECT email, password, admin_priveleges, data_ from {table_name}"
-                    print(table_fields)
+                    # print(table_fields)
                 
             else:
                 # GET the table fields from the query
@@ -1030,8 +1046,8 @@ def execute_and_display():
         cur = mysql.connection.cursor()
         cur.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='transportmanagement'")  # Adjust this query as per your database schema
         table_names = cur.fetchall()
-        print("WORKKKKKKK")
-        print(table_names)
+        # print("WORKKKKKKK")
+        # print(table_names)
         cur.close()
         # return jsonify({'table_names': table_names})
         # print(j)
@@ -1082,7 +1098,7 @@ def get_field_names(table_name):
         cursor.close()
         return field_names
     except:
-        print(f"Error getting field names")
+        # print(f"Error getting field names")
         return None
 
 def table_diff(before_file_path, after_file_path, diff_file_path):

@@ -1,4 +1,4 @@
-# TRANSPRT MANAGEMENT SYSTEM
+# TRANSPORT MANAGEMENT SYSTEM
 
 ## Tools and Skills Used
 [![My Skills](https://skillicons.dev/icons?i=flask,html,css,py,vscode,git,mysql)](https://skillicons.dev)  
@@ -38,9 +38,25 @@ Access the website by typing `http://tms.iitgn.ac.in:5000/` on the browser.
 
 ## Screenshots of successful execution of the dynamic operations
 ### INSERT Operation:
+![Booking a seat](https://github.com/ayushmodi12/transport-management-system/assets/119656326/55cc64bc-a2b0-4e04-b851-8320e6ea58e5)  
+We insert entries into the `booking` table upon successful booking.  
+
+![Custom Insert](https://github.com/ayushmodi12/transport-management-system/assets/119656326/5e93f7ab-3cb1-4d59-97e2-53035f855dc1)  
+We can also execute custom insert query in the admin terminal. Following is the result.  
+![Custom Insert Out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/3700abbf-8fba-40f3-82f3-5277e2a433ca)
+
 ### DELETE Operation:
+![Custom Del](https://github.com/ayushmodi12/transport-management-system/assets/119656326/eef9be9a-88ee-43c9-8d61-19ef90614300)  
+We can also execute custom insert query in the admin terminal. Following is the result.  
+![Custom Del out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/e56bb0d6-cc92-4e5a-95c5-9bcbe978a67d)
+
 ### UPDATE Operation:
-### RENAME Operation
+![Custom Update](https://github.com/ayushmodi12/transport-management-system/assets/119656326/27bf73b7-d30b-4560-bae3-d232f390587c)  
+We can also execute custom update query in the admin terminal. Following is the result.  
+![Custom Update Out](https://github.com/ayushmodi12/transport-management-system/assets/119656326/1077b33a-0149-44d2-b1c1-233efcad8067)
+
+### RENAME Operation:  
+
 ### Use of WHERE Clause:
 
 ## Contributors

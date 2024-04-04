@@ -146,15 +146,6 @@ CREATE table if not exists Booking
   primary key (booking_id)
 );
 
-
--- CREATE table if not exists Seats
--- (
---   bus_license_plate_number  varchar(16)  NOT NULL,
---   seats_booked varchar(16)  DEFAULT NULL,
---   booking_created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
---   primary key (bus_license_plate_number, booking_created)
--- );
-
 CREATE table if not exists ShopVehicles
 (
   name_of_shop  varchar(50)  NOT NULL,
@@ -269,13 +260,6 @@ INSERT INTO Driver VALUES
 ('0123456789012345', 'sophia_taylor@iitgn.ac.in', 'Sophia', 'Taylor', '2345678901', '2021-05-20','{"account_number":"0123456780534647","ifsc_code":"0123456785487890","branch_name":"Houston"}');
 
 
--- To query data from the UDDT
--- SELECT JSON_EXTRACT(bank_details, '$.account_number') AS Account_Number,
---        JSON_EXTRACT(bank_details, '$.ifsc_code') AS IFSC_Code,
---        JSON_EXTRACT(bank_details, '$.branch_name') AS Branch_Name
--- FROM Driver;
-
-
 INSERT INTO Faculty VALUES 
 ('faculty_A@iitgn.ac.in', 'First_A', 'Last_A', '9876543211'),
 ('faculty_B@iitgn.ac.in', 'First_B', 'Last_B', '8765432110'),
@@ -302,16 +286,6 @@ INSERT INTO Vehicle VALUES
 ('GJ10ST0123', 6, 'Alessandro', 'Carso', 'Van'),
 ('RJ07MN0245', 35, 'Max', 'Verstappen', 'Bus'),
 ('GJ09QT6969', 35, 'Lewis', 'Hamilton', 'Bus');
-
--- INSERT INTO Booking(license_plate_number, email_id, booking_id, booked_seat, booking_created, route_id) VALUES
--- ('RJ07MN0245','studentA@iitgn.ac.in', '001', '1', '2021-10-16 22:15:13', '1'),
--- ('RJ07MN0245','studentB@iitgn.ac.in', '002', '5', '2021-10-17 23:15:13', '4'),
--- ('RJ07MN0245','studentD@iitgn.ac.in', '003', '9', '2021-10-19 05:15:13', '2');
-
--- INSERT INTO Seats(bus_license_plate_number, seats_booked, booking_created) VALUES
--- ('GJ09QR6789', NULL, '2021-10-17 20:15:13'),
--- ('RJ07MN0245', '3', '2021-10-17 23:15:13'),
--- ('GJ09QT6969', '2,9,6,5', '2021-10-17 23:15:13');
 
 
 INSERT INTO Students (email_id, first_name, last_name, phone_number, guardian_name)
@@ -467,34 +441,6 @@ VALUES
 ('GJ10ST0123', 'IITGN Campus', 'Ankleshwar');
 
 
--- Insert entries from Faculty table
--- INSERT INTO Users (username, password, data_, user_img) VALUES
--- ('First_A', MD5('First_A@123'), '{"first_name": "First_A", "last_name": "Last_A", "email_id": "faculty_A@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('First_B', MD5('First_B@123'), '{"first_name": "First_B", "last_name": "Last_B", "email_id": "faculty_B@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('First_C', MD5('First_C@123'), '{"first_name": "First_C", "last_name": "Last_C", "email_id": "faculty_C@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('First_D', MD5('First_D@123'), '{"first_name": "First_D", "last_name": "Last_D", "email_id": "faculty_D@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('First_E', MD5('First_E@123'), '{"first_name": "First_E", "last_name": "Last_E", "email_id": "faculty_E@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('First_F', MD5('First_F@123'), '{"first_name": "First_F", "last_name": "Last_F", "email_id": "faculty_F@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('First_G', MD5('First_G@123'), '{"first_name": "First_G", "last_name": "Last_G", "email_id": "faculty_G@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('First_H', MD5('First_H@123'), '{"first_name": "First_H", "last_name": "Last_H", "email_id": "faculty_H@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('First_I', MD5('First_I@123'), '{"first_name": "First_I", "last_name": "Last_I", "email_id": "faculty_I@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('First_J', MD5('First_J@123'), '{"first_name": "First_J", "last_name": "Last_J", "email_id": "faculty_J@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"));
-
-
--- Insert entries from Students table
--- INSERT INTO Users (username, password, data_, user_img) VALUES
--- ('Stu_First_A', MD5('Stu_First_A@123'), '{"first_name": "Stu_First_A", "last_name": "Stu_Last_A", "email_id": "studentA@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('Stu_First_B', MD5('Stu_First_B@123'), '{"first_name": "Stu_First_B", "last_name": "Stu_Last_B", "email_id": "studentB@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('Stu_First_C', MD5('Stu_First_C@123'), '{"first_name": "Stu_First_C", "last_name": "Stu_Last_C", "email_id": "studentC@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('Stu_First_D', MD5('Stu_First_D@123'), '{"first_name": "Stu_First_D", "last_name": "Stu_Last_D", "email_id": "studentD@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('Stu_First_E', MD5('Stu_First_E@123'), '{"first_name": "Stu_First_E", "last_name": "Stu_Last_E", "email_id": "studentE@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('Stu_First_F', MD5('Stu_First_F@123'), '{"first_name": "Stu_First_F", "last_name": "Stu_Last_F", "email_id": "studentF@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('Stu_First_G', MD5('Stu_First_G@123'), '{"first_name": "Stu_First_G", "last_name": "Stu_Last_G", "email_id": "studentG@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('Stu_First_H', MD5('Stu_First_H@123'), '{"first_name": "Stu_First_H", "last_name": "Stu_Last_H", "email_id": "studentH@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('Stu_First_I', MD5('Stu_First_I@123'), '{"first_name": "Stu_First_I", "last_name": "Stu_Last_I", "email_id": "studentI@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('Stu_First_J', MD5('Stu_First_J@123'), '{"first_name": "Stu_First_J", "last_name": "Stu_Last_J", "email_id": "studentJ@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"));
-
-
 -- Insert entries from Driver table
 INSERT INTO Users (email, password, admin_priveleges, data_, user_img) VALUES
 ('kumaramit@iitgn.ac.in', MD5('Amit@123'), 'yes', '{"first_name": "Amit", "last_name": "Kumar", "driver_license_number": "1234567890123456"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"));
@@ -510,30 +456,6 @@ INSERT INTO Users (email, password, data_, user_img) VALUES
 ('olivia_anderson@iitgn.ac.in', MD5('Olivia@123'), '{"first_name": "Olivia", "last_name": "Anderson", "driver_license_number": "9012345678901234"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
 ('sophia_taylor@iitgn.ac.in', MD5('Sophia@123'), '{"first_name": "Sophia", "last_name": "Taylor", "driver_license_number": "0123456789012345"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"));
 
-
--- Insert entries from Staff table
--- INSERT INTO Users (username, password, data_, user_img) VALUES
--- ('Staff_First_A', MD5('Staff_First_A@123'), '{"first_name": "Staff_First_A", "last_name": "Staff_Last_A", "email_id": "staffA@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- ('Staff_First_B', MD5('Staff_First_B@123'), '{"first_name": "Staff_First_B", "last_name": "Staff_Last_B", "email_id": "staffB@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png")),
--- Staff_First_C, MD5('Staff_First_C@123'), '{"first_name": "Staff_First_C", "last_name": "Staff_Last_C", "email_id": "staffC@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"),
--- Staff_First_D, MD5('Staff_First_D@123'), '{"first_name": "Staff_First_D", "last_name": "Staff_Last_D", "email_id": "staffD@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"),
--- Staff_First_E, MD5('Staff_First_E@123'), '{"first_name": "Staff_First_E", "last_name": "Staff_Last_E", "email_id": "staffE@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"),
--- Staff_First_F, MD5('Staff_First_F@123'), '{"first_name": "Staff_First_F", "last_name": "Staff_Last_F", "email_id": "staffF@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"),
--- Staff_First_G, MD5('Staff_First_G@123'), '{"first_name": "Staff_First_G", "last_name": "Staff_Last_G", "email_id": "staffG@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"),
--- Staff_First_H, MD5('Staff_First_H@123'), '{"first_name": "Staff_First_H", "last_name": "Staff_Last_H", "email_id": "staffH@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"),
--- Staff_First_I, MD5('Staff_First_I@123'), '{"first_name": "Staff_First_I", "last_name": "Staff_Last_I", "email_id": "staffI@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"),
--- Staff_First_J, MD5('Staff_First_J@123'), '{"first_name": "Staff_First_J", "last_name": "Staff_Last_J", "email_id": "staffJ@iitgn.ac.in"}', load_file("D:\Books & Assignments 3rdYear\Sem6\DBMS\Assignment2\icons8-male-user-material-rounded\icons8-male-user-96.png"),
-
--- To query data from the UDDT
--- SELECT JSON_EXTRACT(data_, '$.first_name') AS First_Name,
---          JSON_EXTRACT(data_, '$.last_name') AS Last_Name,
---          CASE
---              WHEN JSON_CONTAINS_PATH(data_,'one','$.email_id') THEN JSON_EXTRACT(data_, '$.email_id')
---              WHEN JSON_CONTAINS_PATH(data_,'one','$.driver_license_number') THEN JSON_EXTRACT(data_, '$.driver_license_number')
---          END AS Identifier
--- FROM Users;
-
--- Insert entries into TransportationLog
 INSERT INTO TransportationLog
 VALUES 
 ('GJ01AB1234', 'IITGN Campus', 'Ahmedabad Railway Station', '08:00:00', 'Amit','Kumar', 25, 'exit'),
