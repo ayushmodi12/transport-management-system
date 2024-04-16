@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cancelButton = document.getElementById('cancel-button');
     const bdisplay = document.getElementById('bDisplay');
     const selectedSeats = new Set();
-    const timeSlotSelect = document.getElementById('time_slot');
+    // const timeSlotSelect = document.getElementById('time_slot');
     var allow = true
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchBookedSeats();
         fetchUsersBookedSeat();
         location.reload();
-        alert("Booking Succesful!");
+        // alert("Booking Succesful!");
     });
 
         // Function to handle cancellation of booking
