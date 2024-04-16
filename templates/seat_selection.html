@@ -12,6 +12,22 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 
         }
+        /* #cont {
+            position: relative;
+            margin-left:50px ;
+        }
+        #bigb,
+        #date-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 90%;
+        } */
+        /* #date-text {
+            margin-top: 150px;
+            padding-left: 50px;
+            text-align: center;
+        } */
         #bigb {
             background-color: azure;
             margin-left: 40px;
@@ -73,6 +89,7 @@
              /* background-color: #f0f0f0; */
             /* flex-wrap: wrap; */
             margin-left: 29%;
+            /* margin-left: 27vw; */
             /* padding-left: 40px; */
             /* justify-content: center; */
             /* margin-top: 20px; */
@@ -86,6 +103,8 @@
             padding-top: 10px;
             padding-bottom: 10px;
             width: 40%;
+            width: 41%;
+            width: 38vw;
             border-radius: 20px;
             box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.1);
 
@@ -119,7 +138,10 @@
             font-size: smaller;
             width: 40px;
             height: 40px;
+            width: 2.6vw;
+            height: 2.6vw;
             margin: 5px;
+            margin: 0.33vw;
             /* border: 1px solid black; */
             border: 1px solid #555;
             border-radius: 5px;
@@ -138,6 +160,9 @@
             width: 40px;
             height: 40px;
             margin: 5px;
+            width: 2.6vw;
+            height: 2.6vw;
+            margin: 0.33vw;
             /* border: 1px solid black; */
             border: 1px solid #555;
             border-radius: 5px;
@@ -156,6 +181,9 @@
             width: 40px;
             height: 40px;
             margin: 5px;
+            width: 2.6vw;
+            height: 2.6vw;
+            margin: 0.33vw;
             /* border: 1px solid black; */
             border: 1px solid #555;
             border-radius: 5px;
@@ -180,16 +208,25 @@
         }
         .gap {
             display: inline-block;
+            font-size: smaller;
+
             width: 30px;
-            text-align: center;
+            /* text-align: center; */
             height: 30px;
             margin: 5px;
+            width: 1.9vw;
+            height: 1.9vw;
+            margin: 0.3vw;
+            /* width: 2.6vw;
+            height: 2.6vw;
+            margin: 0.33vw; */
             /* border: 2px solid black; */
 
         }
 
         #book-button{
             margin-left: 545px;
+            margin-left: 35.2vw;
             margin-top: 30px;
             margin-bottom: 40px;
             margin-right: 5px;
@@ -227,15 +264,23 @@
         #cancel-button:hover {
             background-color: olivedrab;
         }
-
+        /* #date-text{
+            position
+            font-size: large;
+            text-align: center;
+            justify-content: center;
+            
+        } */
+       
     </style>
 </head>
 <body>
     <h1> Choose Your Seat</h1>
-
     <div id="bigb">
     <h2 id="route-title">Select Your Seat</h2>
+
     <h2 id="date-text"></h2>
+
     <h2 id="capac"></h2>
     <div id="bus-layout">
         <!-- Bus layout will be generated dynamically here -->
@@ -252,7 +297,6 @@
 
     <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" style="position: relative; left: 50%; transform: translateX(-50%); width: 170px; height: auto;">
 
-
     <script>
         // Access logged-in user's email (username) from Flask session
         var logged_in_user_email = "{{ logged_in_user_email }}";
@@ -261,7 +305,6 @@
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
-        // Function to extract URL parameters
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
             var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
@@ -269,18 +312,21 @@
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
-        // Get route and date parameters from URL
         var route = getUrlParameter('route_id');
         var date = getUrlParameter('date');
         c = route[0];
-
         time = route.slice(4, 12);
         route = route.slice(14,);
-        // c = route[1];
 
-        // Update HTML elements with route and date information
         document.getElementById('route-title').textContent = 'Route: ' + route;
+
+
+        // document.write('<h2 id="date-text">Date: ' + date + ', Time: ' + time + '</h2>')
+
+
         document.getElementById('date-text').textContent = 'Date: ' + date + ', Time: ' + time;
+
+
         if (c==0){
             document.getElementById('capac').textContent = "56 Seater Bus";
             document.getElementById("bus-layout2").remove();

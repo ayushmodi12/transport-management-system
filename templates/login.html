@@ -35,6 +35,21 @@
             /* margin-bottom: 10px; */
             /* margin-right: 60px; */
         }
+        .SignUpButton {
+            border-radius: 5px;
+            padding: 10px 20px;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background-color 0.3s;
+            margin-left: 105px;
+            margin-bottom: 20px;
+        }
+        .SignUpButton:hover {
+            background-color: #3367D6;
+        }
     </style>
 </head>
 <body>
@@ -54,6 +69,7 @@
             {% endif %}
         {% endwith %}
         <form method="POST" action="/login">
+            <button type="button" class="SignUpButton" onclick="redirectToGoogle()">Login/Signup with Google</button>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
@@ -61,7 +77,20 @@
             <button type="submit">Login</button>
         </form>
     </div>
-    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 150px; height: auto;">
+    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" style="position: relative; bottom: 20px; left: 50%; transform: translateX(-50%); width: 150px; height: auto;">
 
 </body>
+<script>
+    function redirectToGoogle() {
+        // Redirect the user to the Google authentication page
+        window.location.href = "/login/google";
+    }
+
+    setTimeout(function() {
+            var flashMessage = document.querySelector('.alert');
+            if (flashMessage) {
+                flashMessage.style.display = 'none';
+            }
+        }, 3000);
+</script>
 </html>

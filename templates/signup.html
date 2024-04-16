@@ -6,7 +6,7 @@
     <title>Signup</title>
     <link rel="stylesheet" href="../static/css/login_styles.css">
     <style>
-        body {
+         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-image: url("../static/images/b.jpg");
             background-attachment: fixed;
@@ -29,64 +29,99 @@
             /* padding-left:  auto; */
             transform: translate(90px,-28px);
         }
-        #logo {
+        .logo {
             position: fixed;
-            margin-top: 50px;
+            padding-top:-200px;
+            /* margin-top: 100px; */
             bottom: 0px;
             left: 50%;
             transform: translate(-75px,50px);
             width: 150px;
             height: auto;
+            pointer-events: none; /* This will make the logo non-interactable */
+            background-color: transparent; /* Set background color to transparent */
+            /* z-index: -1; */
+        }
+        .SignUpButton {
+            border-radius: 5px;
+            padding: 10px 20px;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background-color 0.3s;
+            margin-left: 125px;
+        }
+        .SignUpButton:hover {
+            background-color: #3367D6;
+        }
+        .OR {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px; /* Adjust as needed */
         }
     </style>
 </head>
 <body>
     <div class="container">
         <img src="../static/images/IITGNlogo.png" alt="Italian Trulli" class="IITGNlogo">
-
         <h2>Signup</h2>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <form method="POST" action="/signup" enctype="multipart/form-data">
+        <form method="POST" action="/signup" onsubmit="return validateForm()" enctype="multipart/form-data">
+            <!-- <button type="button" class="SignUpButton" onclick="redirectToGoogle()">Sign Up With Google</button>
+            <div class="OR">
+                <p>OR</p> -->
+            <!-- </div> -->
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
-            
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            
+            <input type="password" id="password" name="password" onkeyup="checkPasswordMatch()" required>
             <label for="re_password">Re-enter Password:</label>
-            <input type="password" id="re_password" name="re_password" required>
-            
-            <label for="user_image">User Image:</label>
+            <input type="password" id="re_password" name="re_password" onkeyup="checkPasswordMatch()" required>
+            <p id="password_match_message" style="display: none; color: red;">Passwords do not match</p>
+            <label for="user_image" >User Image:</label>
             <input type="file" id="user_image" name="user_image" accept="image/*" class="upload-img">
-            
             <button type="submit">Signup</button>
         </form>
-        
     </div>
-    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" id = "logo">
+    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" class="logo">
     <script>
         function validateForm() {
             var password = document.getElementById("password").value;
             var re_password = document.getElementById("re_password").value;
-            var error_message = document.getElementById("error_message");
-    
-            if (password !== re_password) {
-                error_message.textContent = "Passwords do not match";
+
+            if (password !== re_password && re_password !== "") {
+                // error_message.textContent = "Passwords do not match";
                 alert("Passwords do not match");
                 return false;
             } else {
-                error_message.textContent = "";
+                // error_message.textContent = "";
                 return true;
             }
         }
+        function checkPasswordMatch() {
+            var password = document.getElementById("password").value;
+            var re_password = document.getElementById("re_password").value;
+            var messageElement = document.getElementById("password_match_message");
+
+            if (password !== re_password && re_password !== "") {
+                messageElement.style.display = "block"; // Show the message
+                document.getElementById("password").style.borderColor = "red";
+                document.getElementById("re_password").style.borderColor = "red";
+            } else {
+                messageElement.style.display = "none"; // Hide the message
+                document.getElementById("password").style.borderColor = "";
+                document.getElementById("re_password").style.borderColor = "";
+            }
+        }
+        setTimeout(function() {
+        var flashMessage = document.querySelector('.alert');
+        if (flashMessage) {
+            flashMessage.style.display = 'none';
+        }
+        }, 3000);
+     
     </script>
 </body>
 </html>

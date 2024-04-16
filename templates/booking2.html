@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,14 +18,32 @@
  image-rendering: crisp-edges;
 
         }
+
         .container {
-            max-width: 500px;
-            margin: 10% 100px;
+            /* max-width: 500px; */
+            max-width: 30vw;
+            max-height: 50vh;
+            /* margin: 10% 100px; */
             padding: 20px;
+            /* padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 15px;
+            padding-bottom: 15px; */
+            /* padding-left: 2vh;
+            padding-right: 2vh;
+            padding-top: 2vh;
+            padding-bottom: 2vh; */
             background-color: #fff;
+            /* margin: 10%; */
+            margin-top: 10vh;
+            margin-bottom: 2vh;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            /* margin-right: 5vw; */
+            margin-left: 2vw;
+            overflow: auto;
         }
+
         .heading {
             font-size: 2rem;
             font-weight: bold;
@@ -32,12 +51,14 @@
             color: #333; /* Set heading color */
         }
         .form-container {
-            padding: 20px;
+            /* height: 30vh; */
+            /* margin-top: 10vh; */
+            /* padding: 20px; */
             background-color: #f9fafb; /* Set form background color */
             border-radius: 10px;
         }
         .form-label {
-            font-size: 1rem;
+            /* font-size: 1rem; */
             font-weight: bold;
             color: #555; /* Set label color */
         }
@@ -78,43 +99,48 @@
         }
 
         .images-container {
-            position: absolute;
-            top: 50%;
-            right: 5%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+            /* position: absolute; */
+            /* top: 50vh; */
+            /* right: 5vw; */
+            /* transform: translateY(-50%); */
+            /* display: flex; */
+            margin-left: 5vw;
+            /* margin-top: ; */
+            /* flex-direction: column; */
+            /* align-items: flex-end; */
         }
+
         .images-container img {
-            width: 800px;
-            margin-bottom: 20px;
+            /* width: 800px; */
+            /* width: 52%; */
+            width: 52vw;
+            /* width: 52lvw; */
+            /* margin-bottom: 20px; */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
 
-        /* .images-container {
+        #uppercont {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
+            margin-left:5vw;
+            margin-right:5vw;
+            margin-top: 17vh;
+            margin-bottom: 5vh;
         }
-        .images-container img {
-            width: 45%;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        } */
+
+        .hidden{
+            display: none;
+        }
+
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
 </head>
 <body>
+    <div id="uppercont">
     <div class="container">
         <h1 class="heading">Book a Bus</h1>
-        <div class="images-container">
-            <!-- <img src="../static/images/Screenshot (7).png" alt="Schedule"> -->
-            <!-- <img src="../static/images/Screenshot (8).png" alt="Map Image"> -->
-        </div>
         <div class="form-container">
             <form method="POST" action="/seat-selection" class="space-y-4">
                 <div>
@@ -128,7 +154,27 @@
                         });
                     </script>
                 </div>
-                <div>
+
+                <div id="search_bus_by" class="flex flex-col items-start space-y-2">
+                    <label for="searchType" class="form-label">Search Bus By:</label>
+                    <select id="searchType" name="searchType" required class="form-select">
+                        <option value="" disabled selected>Select</option>
+                        <option value="destination">Location</option>
+                        <option value="availableRoutes">Available Routes</option>
+                    </select>
+                </div>
+                
+                <div id="searchByLocation" class="">
+                    <label for="select_location" class="form-label">Location:</label>
+                    <select id="select_location" name="select_location" required class="form-select">
+                        <option value="" disabled selected>Select</option>
+                        <option value="IITGN">IITGN</option>
+                        <option value="kudasan">Kudasan</option>
+                        <option value="visat">Visat Circle</option>
+                    </select>
+                </div>
+
+                <div id="searchByRoutes" class="">
                     <label for="time_slot" class="form-label">Select Route & Time Slot:</label>
                     <select id="time_slot" name="time_slot" required class="form-select">
                         <option value="" disabled selected>Select Route & Time Slot</option>
@@ -153,19 +199,157 @@
                             </optgroup>
                     </select>
                 </div>
+
+                <div id="location_search_IITGN" class="" name="location_search">
+                    <label for="time_slot_IITGN" class="form-label">Select Route & Time Slot:</label>
+                    <select id="time_slot_IITGN" name="time_slot_IITGN"  required class="form-select">
+                        <option value="" disabled selected>Select Route & Time Slot</option>
+                        <optgroup label="To IITGN:">
+                            <option value="0(V) 7:00AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 7:00AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN</option>
+                            <option value="0(V) 8:45AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 8:45AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN</option>
+                            <option value="0(V) 6:00PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 6:00PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN </option>
+                            <option value="0(V) 7:30PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 7:30PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN </option>
+                            <option value="1(K) 7:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 7:30PM : Kudasan―Rakshashakti Circle―IITGN </option>
+                            <option value="1(K) 8:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 8:30PM : Kudasan―Rakshashakti Circle―IITGN </option>
+                            <option value="0(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN</option>
+                            <option value="1(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN</option>
+                        </optgroup>
+                        <optgroup label="From IITGN:">
+                            <option value="0(V) 8:00AM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle">(V) 8:00AM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle </option>
+                            <option value="0(V) 5:15PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle">(V) 5:15PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle </option>
+                            <option value="0(V) 6:45PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle">(V) 6:45PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle </option>
+                            <option value="0(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan">(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div id="location_search_kudasan" class="" name="location_search">
+                    <label for="time_slot_kudasan" class="form-label">Select Route & Time Slot:</label>
+                    <select id="time_slot_kudasan" name="time_slot_kudasan" required class="form-select">
+                        <option value="" disabled selected>Select Route & Time Slot</option>
+                        <optgroup label="To Kudasan:">
+                            <option value="1(K) 6:45PM : IITGN―Rakshashakti Circle―Kudasan">(K) 6:45PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                            <option value="1(K) 8:00PM : IITGN―Rakshashakti Circle―Kudasan">(K) 8:00PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                            <option value="0(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan">(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                            <option value="1(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan">(K) 9:00PM : IITGN―Rakshashakti Circle―Kudasan </option>
+                        </optgroup>
+                        <optgroup label="From Kudasan:">
+                            <option value="1(K) 7:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 7:30PM : Kudasan―Rakshashakti Circle―IITGN </option>
+                            <option value="1(K) 8:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 8:30PM : Kudasan―Rakshashakti Circle―IITGN </option>
+                            <option value="0(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN</option>
+                            <option value="1(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN">(K) 10:30PM : Kudasan―Rakshashakti Circle―IITGN</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div id="location_search_visat" class="" name="location_search">
+                    <label for="time_slot_visat" class="form-label">Select Route & Time Slot:</label>
+                    <select id="time_slot_visat" name="time_slot_visat" required class="form-select">
+                        <option value="" disabled selected>Select Route & Time Slot</option>
+                        <optgroup label="To Visat:">
+                            <option value="0(V) 8:00AM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle">(V) 8:00AM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle </option>
+                            <option value="0(V) 5:15PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle">(V) 5:15PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle </option>
+                            <option value="0(V) 6:45PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle">(V) 6:45PM : IITGN―Rakshashakti Circle―VGEC Gate―Visat Circle </option>
+                        </optgroup>
+                        <optgroup label="From Visat:">
+                            <option value="0(V) 7:00AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 7:00AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN</option>
+                            <option value="0(V) 8:45AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 8:45AM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN</option>
+                            <option value="0(V) 6:00PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 6:00PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN </option>
+                            <option value="0(V) 7:30PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN">(V) 7:30PM : Visat Circle―VGEC Gate―Rakshashakti Circle―IITGN </option>
+                        </optgroup>
+                    </select>
+                </div>
+
                 <button type="submit" class="form-button">Book</button>
             </form>
         </div>
     </div>
-    <!-- Company logo -->
-    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" class="company-logo">
 
     <div class="images-container">
         <!-- <img src="../static/images/Screenshot (7).png" alt="Schedule"> -->
         <img src="../static/images/Screenshot (8).png" alt="Map Image">
     </div>
+    </div>
+    <!-- Company logo -->
+    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" class="company-logo">
+    <!-- <input type="hidden" name="emailID" value="{{ emailID }}"> -->
+
+    
+    <script>
+        // checking for the the type of search (route select or by location)
+
+        // rendering through the div id
+        const search_bus_by = document.getElementById('search_bus_by');
+        const searchByLocation = document.getElementById('searchByLocation');
+        const searchByRoutes = document.getElementById('searchByRoutes');
+        const location_search_IITGN = document.getElementById('location_search_IITGN');
+        const location_search_kudasan = document.getElementById('location_search_kudasan');
+        const location_search_visat = document.getElementById('location_search_visat');
+
+        // rendering through select id
+        const searchType = document.getElementById('searchType');
+        const select_location = document.getElementById('select_location')
+        const time_slot = document.getElementById('time_slot')
+        const time_slot_IITGN = document.getElementById('time_slot_IITGN')
+        const time_slot_kudasan = document.getElementById('time_slot_kudasan')
+        const time_slot_visat = document.getElementById('time_slot_visat')
+
+        searchByLocation.classList.add('hidden');
+        searchByRoutes.classList.add('hidden');
+        location_search_IITGN.classList.add('hidden');
+        location_search_kudasan.classList.add('hidden');
+        location_search_visat.classList.add('hidden');
+
+        searchType.addEventListener('input', function () {
+            if(searchType.value==='destination'){
+                searchByLocation.classList.remove('hidden');
+                searchByRoutes.classList.add('hidden');
+                time_slot.removeAttribute('required');                              // Remove required if hidden
+                select_location.addEventListener('input', function () {
+                    if(select_location.value === "IITGN"){
+                        location_search_IITGN.classList.remove('hidden');
+                        location_search_kudasan.classList.add('hidden');
+                        location_search_visat.classList.add('hidden');
+                        time_slot_kudasan.removeAttribute('required');              // Remove required if hidden
+                        time_slot_visat.removeAttribute('required');                // Remove required if hidden
+                        time_slot_IITGN.setAttribute('required','');
+                    } else if(select_location.value === "kudasan"){
+                        location_search_kudasan.classList.remove('hidden');
+                        location_search_IITGN.classList.add('hidden');
+                        location_search_visat.classList.add('hidden');
+                        time_slot_kudasan.setAttribute('required','');
+                        time_slot_IITGN.removeAttribute('required');                // Remove required if hidden
+                        time_slot_visat.removeAttribute('required');                // Remove required if hidden
+                    } else if(select_location.value === "visat"){
+                        location_search_visat.classList.remove('hidden');
+                        location_search_kudasan.classList.add('hidden');
+                        location_search_IITGN.classList.add('hidden');
+                        time_slot_visat.setAttribute('required','');
+                        time_slot_IITGN.removeAttribute('required');                // Remove required if hidden
+                        time_slot_kudasan.removeAttribute('required');              // Remove required if hidden
+                    }
+                });
+                select_location.setAttribute('required','');
+            } else{
+                searchByRoutes.classList.remove('hidden');
+                searchByLocation.classList.add('hidden');
+                location_search_IITGN.classList.add('hidden');
+                location_search_kudasan.classList.add('hidden');
+                location_search_visat.classList.add('hidden');
+                // time_slot.setAttribute('required','');
+                time_slot_IITGN.removeAttribute('required');                // Remove required if hidden
+                time_slot_kudasan.removeAttribute('required');              // Remove required if hidden
+                time_slot_visat.removeAttribute('required');                // Remove required if hidden
+                select_location.removeAttribute('required');                // Remove required if hidden
+            }
+        });
 
 
+
+    </script>
+
+    <iframe src="https://www.google.com/maps/d/embed?mid=1lOiH-iz5cQK5OLkk6S_9gcmCC57wcC8&ehbc=2E312F&noprof=1" width="100%"
+        height="480"></iframe>
 
 </body>
 </html>

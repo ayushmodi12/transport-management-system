@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // Function to display an alert with the message and redirect after the alert is dismissed
+        function showAlertAndRedirect() {
+            var message = "{{ message }}"; // Get the message passed from the server
+            alert(message); // Display the message in an alert box
+            window.location.href = "/signup"; // Redirect to the signup page after the alert is dismissed
+        }
+        
+        // Call the showAlertAndRedirect function when the page loads
+        window.onload = showAlertAndRedirect;
+    </script>
+</head>
+<body>
+    <p>Please wait while we redirect you to the signup page...</p>
+</body>
+</html>

@@ -121,6 +121,9 @@
         <form action="/custom-query" method="get">
             <button type="submit" class="btn"><i class="fas fa-pen"></i>Write Custom Query</button>
         </form>
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit" class="btn">Logout</button>
+        </form>
     </div>
     <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 150px; height: auto;">
     <!-- <footer>

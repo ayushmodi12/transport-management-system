@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="../static/css/login_styles.css">
+    <style>
+         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("../static/images/b.jpg");
+            background-attachment: fixed;
+            background-size: cover;
+            background-size: contain;
+
+        }
+        .container {
+            box-shadow: 0px 0px 30px 20px rgba(0, 0, 0, 0.1);
+            transform: translate(0px,-35px);
+        }
+        .IITGNlogo {
+            height:200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .upload-img {
+            transform: translate(90px,-28px);
+        }
+        .logo {
+            position: fixed;
+            bottom: 0px;
+            left: 50%;
+            transform: translate(-75px,50px);
+            width: 150px;
+            height: auto;
+            pointer-events: none;
+            background-color: transparent;
+        }
+        .SignUpButton {
+            border-radius: 5px;
+            padding: 10px 20px;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background-color 0.3s;
+            margin-left: 125px;
+        }
+        .SignUpButton:hover {
+            background-color: #3367D6;
+        }
+        .OR {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="../static/images/IITGNlogo.png" alt="Italian Trulli" class="IITGNlogo">
+        <h2>Additional Details Required for Signup</h2>
+        <form method="POST" action="/additionaldetails" enctype="multipart/form-data">
+            <label for="driver_license_number">Driver's License Number:</label>
+            <input type="text" id="driver_license_number" name="driver_license_number" required>
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required>
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required>
+            <label for="user_image">User Image:</label>
+            <input type="file" id="user_image" name="user_image" accept="image/*" class="upload-img">
+            <button type="submit">Signup</button>
+        </form>
+    </div>
+    <img src="../static/images/logo.png" alt="Moon Macrosystems Logo" class="logo">
+    <script>
+        function redirectToGoogle() {
+            window.location.href = "/login/authorized";
+        }
+    </script>
+</body>
+</html>

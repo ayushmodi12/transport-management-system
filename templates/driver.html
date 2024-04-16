@@ -40,6 +40,11 @@
                 <p class="bank-item">{{acc}}</p>
                 <p class="bank-item">{{ifsc}}</p>
                 <p class="bank-item">{{branch}}</p>
+            
+                <form action="{{ url_for('logout') }}" method="post">
+                    <button type="submit">Logout</button>
+                </form>
+
             </div>
         </div>
     </div>
