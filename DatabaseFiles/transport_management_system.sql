@@ -10,7 +10,7 @@ CREATE TABLE if not exists Driver
   email_id varchar(50) NOT NULL,
   first_name varchar(20) NOT NULL,
   last_name varchar(20),
-  phone_number varchar(10) NOT NULL UNIQUE,
+  phone_number varchar(10) NOT NULL UNIQUE CHECK (phone_number REGEXP '^[0-9]+$'),
   date_of_joining  date,
   bank_details JSON,
   primary key (driver_license_number)
@@ -21,7 +21,7 @@ CREATE TABLE if not exists Faculty
   email_id varchar(50) NOT NULL,
   first_name varchar(20) NOT NULL,
   last_name varchar(20),
-  phone_number varchar(10) NOT NULL UNIQUE,
+  phone_number varchar(10) NOT NULL UNIQUE CHECK (phone_number REGEXP '^[0-9]+$'),
   primary key (email_id)
 );
 
@@ -41,7 +41,7 @@ CREATE table if not exists Students
   email_id varchar(50) NOT NULL,
   first_name varchar(20) NOT NULL,
   last_name varchar(20),
-  phone_number varchar(10) NOT NULL UNIQUE,
+  phone_number varchar(10) NOT NULL UNIQUE CHECK (phone_number REGEXP '^[0-9]+$'),
   guardian_name varchar(10),
   primary key (email_id)
 );
@@ -51,7 +51,7 @@ CREATE table if not exists Staff
   email_id varchar(50) NOT NULL,
   first_name varchar(20) NOT NULL,
   last_name varchar(20),
-  phone_number varchar(10) NOT NULL UNIQUE,
+  phone_number varchar(10) NOT NULL UNIQUE CHECK (phone_number REGEXP '^[0-9]+$'),
   primary key(email_id)
 );
 
@@ -143,7 +143,7 @@ CREATE table if not exists Booking
   capacity varchar(20) NOT NULL,
   route varchar(100)  NOT NULL,
   _date varchar(20)  NOT NULL,
-  primary key (booking_id)
+  primary key (booked_seat, capacity, route, _date)
 );
 
 CREATE table if not exists ShopVehicles
@@ -473,5 +473,5 @@ VALUES
 CREATE INDEX user_index
  on Users (email);
 
-create index booking_index on booking(email_id);
+-- create index booking_index on booking(email_id);
 create index translog_index on transportationlog(license_plate_number);
