@@ -423,7 +423,8 @@ def additionaldetails():
             # Close cursor
         cur.close()
         # print("TES",email)
-        return render_template('landing.html')
+        # return render_template('landing.html')
+        return redirect(url_for('landing'))
 
 
 @app.route('/login/google')
@@ -760,13 +761,15 @@ def insert_values():
         values = cur.fetchall()
         
         cur.close()
-        file_name = f"./usr/{"".join(session.get('emailID').split())}_columns.pkl"
+        j = "".join(session.get('emailID').split())
+        file_name = f"./usr/{j}_columns.pkl"
         print(">>>>>>>","".join(session.get('emailID').split()))
         with open(file_name, 'wb') as file:
             pickle.dump(columns, file)
         
         print(">>>>>>>","".join(session.get('emailID').split()))
-        values_file_name = f"./usr/{"".join(session.get('emailID').split())}_values.pkl"
+        q = "".join(session.get('emailID').split())
+        values_file_name = f"./usr/{q}_values.pkl"
         with open(values_file_name, 'wb') as values_file:
             pickle.dump(values, values_file)  
         # print(">>>>>>",values)
@@ -871,13 +874,14 @@ def update_values():
         # print(values)
         
         cur.close()
-        file_name = f"./usr/{"".join(session.get('emailID').split())}_columns.pkl"
+        r = "".join(session.get('emailID').split())
+        file_name = f"./usr/{r}_columns.pkl"
         print(">>>>>>>","".join(session.get('emailID').split()))
         with open(file_name, 'wb') as file:
             pickle.dump(columns, file)
         
         print(">>>>>>>","".join(session.get('emailID').split()))
-        values_file_name = f"./usr/{"".join(session.get('emailID').split())}_values.pkl"
+        values_file_name = f"./usr/{r}_values.pkl"
         with open(values_file_name, 'wb') as values_file:
             pickle.dump(values, values_file)  
         return render_template('update_form.html', columns=columns, table_name=table_name, values = values)
@@ -994,13 +998,14 @@ def delete_values():
         # print(values)
         
         cur.close()
-        file_name = f"./usr/{"".join(session.get('emailID').split())}_columns.pkl"
+        r = "".join(session.get('emailID').split())
+        file_name = f"./usr/{r}_columns.pkl"
         print(">>>>>>>","".join(session.get('emailID').split()))
         with open(file_name, 'wb') as file:
             pickle.dump(columns, file)
         
         print(">>>>>>>","".join(session.get('emailID').split()))
-        values_file_name = f"./usr/{"".join(session.get('emailID').split())}_values.pkl"
+        values_file_name = f"./usr/{''.join(session.get('emailID').split())}_values.pkl"
         with open(values_file_name, 'wb') as values_file:
             pickle.dump(values, values_file)  
         return render_template('delete_form.html', columns=columns, table_name=table_name, values = values)
@@ -1109,13 +1114,13 @@ def rename_table():
         # print(values)
         
         cur.close()
-        file_name = f"./usr/{"".join(session.get('emailID').split())}_columns.pkl"
+        file_name = f"./usr/{''.join(session.get('emailID').split())}_columns.pkl"
         print(">>>>>>>","".join(session.get('emailID').split()))
         with open(file_name, 'wb') as file:
             pickle.dump(columns, file)
         
         print(">>>>>>>","".join(session.get('emailID').split()))
-        values_file_name = f"./usr/{"".join(session.get('emailID').split())}_values.pkl"
+        values_file_name = f"./usr/{''.join(session.get('emailID').split())}_values.pkl"
         with open(values_file_name, 'wb') as values_file:
             pickle.dump(values, values_file)  
 
