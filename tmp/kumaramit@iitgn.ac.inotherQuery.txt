@@ -1,0 +1,22 @@
++-------------------------------+
+| Tables_in_transportmanagement |
++-------------------------------+
+|        allocatedparking       |
+|            booking            |
+|            drivenby           |
+|             driver            |
+|            faculty            |
+|             goods             |
+|        goodstransported       |
+|           insurance           |
+|         parking_space         |
+|        privateownership       |
+|             route             |
+|             shops             |
+|          shopvehicles         |
+|             staff             |
+|            students           |
+|       transportationlog       |
+|             users             |
+|            vehicle            |
++-------------------------------+

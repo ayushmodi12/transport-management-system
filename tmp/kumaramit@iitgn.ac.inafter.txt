@@ -1,10 +1,10 @@
 +-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+
 |            email            |             password             | admin_priveleges |                                             data_                                              |
 +-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+
-|            admin2           | c84258e9c39059a89ab77d846ddab909 |       yes        |                                              None                                              |
 |   briana_kirk@iitgn.ac.in   | 3bbd1873056226d83e6371a24d340340 |        no        |   {"last_name": "Kirk", "first_name": "Briana", "driver_license_number": "7890123456789012"}   |
 |  bryson_greene@iitgn.ac.in  | 889211b122daa7f9f917d3d3b3475514 |        no        |  {"last_name": "Greene", "first_name": "Bryson", "driver_license_number": "6789012345678901"}  |
 |  daniel_wilson@iitgn.ac.in  | e7f84ff145ced31368756c41af7fef9c |        no        |  {"last_name": "Wilson", "first_name": "Daniel", "driver_license_number": "8901234567890123"}  |
+|       dummy@dummy.com       | 275876e34cf609db118f3d84b799a790 |        no        |                                              None                                              |
 |   emily_brown@iitgn.ac.in   | f6244d2fc24ec05bedfbf7a84a42ddd4 |        no        |   {"last_name": "Brown", "first_name": "Emily", "driver_license_number": "5678901234567890"}   |
 |     john_doe@iitgn.ac.in    | 6d40e095b7f43848dc76ec017592da29 |        no        |    {"last_name": "Doe", "first_name": "John", "driver_license_number": "2345678901234567"}     |
 |    koramassey@iitgn.ac.in   | fdec10f5e0fc93e0dadc8c53b9802623 |        no        |   {"last_name": "Massey", "first_name": "Kora", "driver_license_number": "4567890123456789"}   |
@@ -12,5 +12,8 @@
 |  max_verstappen@iitgn.ac.in | f5f75389bdbeddbbd70ac31c0245e42e |        no        | {"last_name": "Verstappen", "first_name": "Max", "driver_license_number": "3456789012345678"}  |
 | olivia_anderson@iitgn.ac.in | 6fe76ed19c9386c1389512a53aaaa6c6 |        no        | {"last_name": "Anderson", "first_name": "Olivia", "driver_license_number": "9012345678901234"} |
 |  sophia_taylor@iitgn.ac.in  | 4d4cc5ce3071ce7dbb117a1e5503a3be |        no        |  {"last_name": "Taylor", "first_name": "Sophia", "driver_license_number": "0123456789012345"}  |
-|          Test user          | be092a414817ff761949e046f4adf169 |        no        |                                              None                                              |
+|    test.user.1@gmail.com    | 098f6bcd4621d373cade4e832627b4f6 |       yes        |                                              None                                              |
+|              u1             | e4774cdda0793f86414e8b9140bb6db4 |        no        |                                              None                                              |
+|              u2             | 270c1b084f3f146eb5787075158d9c53 |        no        |                                              None                                              |
+|       user1@yahoo.com       | 24c9e15e52afc47c225b757e7bee1f9d |        no        |                                              None                                              |
 +-----------------------------+----------------------------------+------------------+------------------------------------------------------------------------------------------------+
