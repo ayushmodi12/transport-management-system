@@ -431,10 +431,11 @@ def additionaldetails():
 def login_google():
     google = oauth.create_client('google')  # create the google oauth client
     redirect_uri = url_for('authorized', _external=True)
+    print(redirect_uri)
     return google.authorize_redirect(redirect_uri)
 
 @app.route('/login/authorized')
-def authorized():
+def authorized():   
 
     google = oauth.create_client('google')
     print(google)
@@ -457,13 +458,14 @@ def authorized():
 
     username = user.get('email')
     print(username)
-
+    
     # print(user)
 
     # Check if the user is signing up with their IITGN email ID
     
     if domain == 'iitgn.ac.in':
         print("HLLOOO")
+        session['emailID'] = username
         ##check if the user already exists 
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM users WHERE email = %s", (username,))
@@ -471,6 +473,7 @@ def authorized():
         if output is None:
             return render_template('additionaldetails.html')
         print("GOOO")
+       
         # return render_template('landing.html')
         return redirect(url_for('landing'))
         ## if exists go to landing page
